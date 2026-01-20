@@ -63,18 +63,17 @@ class SchedulerService:
         if adjustment:
              try:
                 self.bot.fill_timesheet_entry(adjustment)
-                self.send_telegram(f" Ajuste de jornada registrado: {adjustment['duration_min']} min para completar 8h. Hay que proceder a mentir")
+                self.send_telegram(f" Ajuste de jornada registrado: {adjustment['duration_min']} min para completar 8h.")
              except Exception as e:
                 self.send_telegram(f" Error registrando ajuste: {e}")
         else:
-            self.send_telegram(" jornada completa. No mentimos porque es malo")
+            self.send_telegram(" Jornada completa. No se requiere ajuste.")
             
-        # Reset for next day? 
-        # Usually process restart handles this, but for long running script:
-        # We might want to clear processed tickets if date changes?
-        # But 'processed_tickets.pkl' is persistent. 
-        # TODO: Logic to prune old tickets from pickle or reset daily?
-        # For this logic, we keep it simple.
+        # Limpieza para el próximo día
+        print("Limpiando tickets procesados para el nuevo día...")
+        self.processed_tickets = set()
+        self._save_processed()
+        self.timer.reset_daily_cursor()
 
     def run(self):
         # Schedule Routine A every 2 hours

@@ -17,7 +17,7 @@ class TimeManager:
         return now.replace(hour=h, minute=m, second=0, microsecond=0)
 
     def _format_time(self, dt):
-        return dt.strftime("%H:%M")
+        return dt.strftime("%d.%m.%Y %H:%M")
 
     def reset_daily_cursor(self):
         self.current_cursor = self.work_start

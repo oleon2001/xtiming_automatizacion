@@ -1,0 +1,415 @@
+<!DOCTYPE html><html lang="es" style="height: auto; min-height: 100%;"><head>
+            <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    
+    <script src="/build/runtime.b8e7bb04.js"></script><script src="/build/app.adae4b3b.js"></script><style>.swal2-popup.swal2-toast{flex-direction:column;align-items:stretch;width:auto;padding:1.25em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row;padding:0}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-loading{justify-content:center}.swal2-popup.swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}.swal2-popup.swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;margin:0 .625em;padding:0;font-size:1em;text-align:initial}.swal2-popup.swal2-toast .swal2-html-container{padding:.625em 0 0}.swal2-popup.swal2-toast .swal2-html-container:empty{padding:0}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0 .5em 0 0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex:1;flex-basis:auto!important;align-self:stretch;width:auto;height:2.2em;height:auto;margin:0 .3125em;margin-top:.3125em;padding:0}.swal2-popup.swal2-toast .swal2-styled{margin:.125em .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(100,150,200,.5)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:5px;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center;padding:0 1.8em}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0;padding:0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#2778c4;color:#fff;font-size:1em}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#d14529;color:#fff;font-size:1em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#757575;color:#fff;font-size:1em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0 1.6em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{flex-shrink:0;margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto}.swal2-validation-message{align-items:center;justify-content:center;margin:0 -2.7em;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:"!";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;border-color:#000;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}</style>
+    <link rel="shortcut icon" type="image/x-icon" href="/isotipo_xtiming_app_color.png">
+<link rel="icon" type="image/x-icon" href="/isotipo_xtiming_app_color.png">
+<link rel="icon" type="image/png" href="/isotipo_xtiming_app_color.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/isotipo_xtiming_app_color.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-title" content="Kimai 2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Kimai 2">
+<meta name="msapplication-config" content="/browserconfig.xml">
+        
+    <title>XTiming – Control de tiempo</title>
+            <link rel="stylesheet" href="/build/app.dd7cccf4.css">
+        <style type="text/css">/* START [login] plain-black-bg */    .layout-boxed body, .layout-boxed html, body, html { background: #0a0a0a; }  .login-page, .register-page { background: none; }  body.login-page .login-actions a:hover {color:#00BFB3!important;}  body.login-page .login-box-body a{color:#00BFB3!important;}  body.login-page .login-box-body {box-shadow:none;}  body.login-page .login-box-body .btn {background:#00BFB3!important;}  /* END [login] plain-black-bg */  /* START [general] switch-submit-cancel-reset-button */  .modal-footer button[type=submit], .box-footer input[type=submit] {       background:#00BCB5!important;  }    .modal-footer .btn-cancel, .box-footer input[type=reset] {      color:#00BCB5!important;  }  /* END [general] switch-submit-cancel-reset-button */    .skin-blue .main-header .navbar {background:#00BFB3!important;}  .skin-blue .main-header .logo {background:#00BFB3!important;}  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {  background:#00BFB3!important;  border-color:#00BFB3!important;  }    .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{  background:#00BFB3!important;  border-color:#00BFB3!important;    }    .btn-primary {  background:#00BFB3!important;  border-color:#00BFB3!important;    }  /* START [general] responsive-data-tables */  /*  this allows horizontal scrolling on all data-tables */    .box .dataTables_wrapper > .row {      margin-left: 0;      margin-right: 0;  }  .box .dataTables_wrapper > .row > .col-sm-12 {      padding-left: 0;      padding-right: 0;  }    @media screen and (min-width: 1367px) {.dataTables_wrapper {overflow: auto;min-height: 50%;max-height: 755px;height: 755px;}}@media screen and (max-width: 1366px) and (min-width: 768px){.dataTables_wrapper {overflow: auto;min-height: 50%;max-height: 446px;height: 446px;}}@media screen and (max-width: 767px) {.dataTables_wrapper {overflow: auto;min-height: 50%;max-height: 50px;height: 50px;}}    /* END [general] responsive-data-tables */</style>
+</head>
+<body data-title="XTiming – Control de tiempo" class="skin-blue skin-blue fixed sidebar-mini sidebar-mini-expand-feature" style="height: auto; min-height: 100%;">
+    <div class="modal" id="remote_form_modal" tabindex="-1" role="dialog" aria-labelledby="remote_form_modal_label">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+                        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="remote_form_modal_label"></h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+                    </div>
+    </div>
+</div>
+    <div class="wrapper" style="height: auto; min-height: 100%;">
+
+    <header class="main-header">
+        <a href="/index.php/es/homepage" class="logo">
+            <span class="logo-mini">
+                                <img src="/isotipo_xtiming_app_white.png" style="max-width: 50px;">
+                </span>
+            <span class="logo-lg">
+                               <img src="/Logotipo_xtiming_app_white.png" style="max-width: 250px;">
+                </span>
+        </a>
+
+        <nav class="navbar navbar-static-top" role="navigation">
+                        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Activar la navegación</span>
+            </a>
+                        <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                                
+                                                                                                                                                                                                                                                                                  <li class="dropdown user-menu">
+        <a href="#" class="dropdown-toggle ddt-small" data-toggle="dropdown">
+                                <span class="avatar " style="background-color: #b60205; color: #ffffff">
+            <span class="initials">OA</span>
+        </span>
+    
+        </a>
+        <ul class="dropdown-menu">
+                                            <li>
+                    <a href="/index.php/es/profile/oleon@intelix.biz">
+                        <h4 class="control-sidebar-subheading">
+                            <i class="fas fa-user"></i>
+                            Mi perfil
+                        </h4>
+                    </a>
+                </li>
+                                                                <li>
+                    <a href="/index.php/es/logout">
+                        <h4 class="control-sidebar-subheading">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Salir
+                        </h4>
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+                                                                                                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 670px;"><section class="sidebar" style="overflow: hidden; width: auto; height: 670px;">
+            
+            
+                                                    <ul class="sidebar-menu tree" data-widget="tree">
+                            <li id="dashboard" class="  ">
+            <a href="/index.php/es/dashboard/">
+                 <i class="fas fa-tachometer-alt"></i>                                                 <span>Página principal</span>
+            </a>
+
+                    </li>
+    
+                            <li id="timesheet" class=" active ">
+            <a href="/index.php/es/timesheet/">
+                 <i class="fas fa-clock"></i>                                                 <span>Mis horas</span>
+            </a>
+
+                    </li>
+    
+                            <li id="calendar" class="  ">
+            <a href="/index.php/es/calendar/">
+                 <i class="far fa-calendar-alt"></i>                                                 <span>Calendario</span>
+            </a>
+
+                    </li>
+    
+                            <li id="admin" class="header">
+                <i class=""></i>
+    <span>Administración</span>
+    
+        </li>
+    
+                            <li id="timesheet_admin" class="  ">
+            <a href="/index.php/es/team/timesheet/">
+                 <i class="fas fa-user-clock"></i>                                                 <span>Partes de horas</span>
+            </a>
+
+                    </li>
+    
+                            <li id="reporting" class="  ">
+            <a href="/index.php/es/reporting/">
+                 <i class="far fa-chart-bar"></i>                                                 <span>Informes</span>
+            </a>
+
+                    </li>
+    
+    </ul>
+                                    </section><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 670px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+    </aside>
+
+    <div class="content-wrapper" style="min-height: 720px;">
+        <section class="content-header">
+            <h1>
+                Mis horas                <small></small>
+            </h1>
+
+                                    <div class="breadcrumb">
+        <div class="box-tools">
+                <div class="btn-group"><a class="btn btn-default btn-help" href="https://www.kimai.org/documentation/timesheet.html" target="_blank" accesskey="h"><i class="far fa-question-circle"></i></a>    </div>
+
+        </div>
+    </div>
+            </section>
+
+                
+    <div class="no-print">
+            </div>
+
+        <section class="content">
+                                    
+                    <div class="box box-primary">
+        <form name="timesheet_edit_form" method="post" action="/index.php/es/timesheet/create" data-form-event="kimai.timesheetUpdate" data-msg-success="action.update.success" data-msg-error="action.update.error">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Crear
+                            <a href="https://www.kimai.org/documentation/timesheet.html" target="_blank"><i class="far fa-question-circle"></i></a>
+                    </h3>
+    </div>
+    <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                        <div class="form-group">        <label class="control-label required" for="timesheet_edit_form_begin">Desde</label>
+ <div class="input-group">
+        <div class="input-group-addon">
+            <a href="#" onclick="if (!jQuery('#timesheet_edit_form_begin').is(':disabled')) { jQuery('#timesheet_edit_form_begin').val(moment().format('DD.MM.YYYY HH:mm')).change(); }return false;"><i class="far fa-calendar-alt"></i></a>
+        </div>
+        <input type="text" id="timesheet_edit_form_begin" name="timesheet_edit_form[begin]" required="required" data-datetimepicker="on" autocomplete="off" placeholder="DD.MM.YYYY HH:MM" data-format="DD.MM.YYYY HH:mm" data-time-picker-increment="1" class="form-control" value="20.01.2026 14:21">
+    </div>      </div> 
+                    </div>
+                                                    <div class="col-md-5">
+                        <div class="form-group">        <label class="control-label required" for="timesheet_edit_form_end">Hasta</label>
+ <div class="input-group">
+        <div class="input-group-addon">
+            <a href="#" onclick="if (!jQuery('#timesheet_edit_form_end').is(':disabled')) { jQuery('#timesheet_edit_form_end').val(moment().format('DD.MM.YYYY HH:mm')).change(); }return false;"><i class="far fa-calendar-alt"></i></a>
+        </div>
+        <input type="text" id="timesheet_edit_form_end" name="timesheet_edit_form[end]" required="required" data-datetimepicker="on" autocomplete="off" placeholder="DD.MM.YYYY HH:MM" data-format="DD.MM.YYYY HH:mm" data-time-picker-increment="1" class="form-control">
+    </div>      </div> 
+                    </div>
+                                                    <div class="col-md-2">
+                        <div class="form-group">            <a href="https://www.kimai.org/documentation/duration-format.html" target="_blank"><i class="far fa-question-circle"></i></a>
+        <label class="control-label required" for="timesheet_edit_form_duration">Duración</label>
+             <input type="text" id="timesheet_edit_form_duration" name="timesheet_edit_form[duration]" required="required" placeholder="0:00" autofocus="autofocus" class="duration-input form-control">
+          </div> 
+                    </div>
+                            </div>
+                                        <div class="timesheet_edit_form_row_customer form-group">        <label class="control-label required" for="timesheet_edit_form_customer">Cliente</label>
+                                                                                                             
+    <select id="timesheet_edit_form_customer" name="timesheet_edit_form[customer]" required="required" class="selectpicker form-control select2-hidden-accessible" data-width="100%" data-form-prefix="timesheet_edit_form" data-related-select="timesheet_edit_form_project" data-api-url="/index.php/api/projects?customer=%25customer%25&amp;visible=1&amp;start=%25begin%25&amp;end=%25end%25" data-empty-url="/index.php/api/projects?visible=1&amp;start=%25begin%25&amp;end=%25end%25" data-option-pattern="{name}" data-select2-id="timesheet_edit_form_customer" tabindex="-1" aria-hidden="true"><option value="" selected="selected" data-select2-id="2"></option><option value="19" data-currency="USD">Bamerica</option><option value="18" data-currency="USD">Comercializadoras EPA</option><option value="5" data-currency="USD">EPA CR</option><option value="6" data-currency="USD">EPA GT</option><option value="7" data-currency="USD">EPA SV</option><option value="8" data-currency="USD">EPA VE</option><option value="15" data-currency="USD">Intelix</option></select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" data-select2-id="1" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-timesheet_edit_form_customer-container"><span class="select2-selection__rendered" id="select2-timesheet_edit_form_customer-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+      </div> 
+                                        <div class="timesheet_edit_form_row_project form-group">        <label class="control-label required" for="timesheet_edit_form_project">Tipo de servicio</label>
+                                                                                                             
+    <select id="timesheet_edit_form_project" name="timesheet_edit_form[project]" required="required" class="selectpicker form-control select2-hidden-accessible" data-width="100%" data-form-prefix="timesheet_edit_form" data-related-select="timesheet_edit_form_activity" data-api-url="/index.php/api/activities?project=%25project%25&amp;visible=1" data-empty-url="/index.php/api/activities?globals=true&amp;visible=1" data-option-pattern="{name} - {parentTitle}" data-select2-id="timesheet_edit_form_project" tabindex="-1" aria-hidden="true"><option value="" selected="selected" data-select2-id="4"></option><optgroup label="Bamerica">
+                <option value="191" data-customer="19" data-currency="USD">Consultoría - Bamerica</option><option value="178" data-customer="19" data-currency="USD">Continuidad de Aplicaciones - Bamerica</option><option value="192" data-customer="19" data-currency="USD">Continuidad de Arquitectura y Despliegue - Bamerica</option><option value="189" data-customer="19" data-currency="USD">Continuidad de Operaciones - Bamerica</option><option value="190" data-customer="19" data-currency="USD">Continuidad de Seguridad - Bamerica</option><option value="193" data-customer="19" data-currency="USD">Gestión - Bamerica</option></optgroup><optgroup label="Comercializadoras EPA">
+                <option value="184" data-customer="18" data-currency="USD">Consultoría - Comercializadoras EPA</option><option value="177" data-customer="18" data-currency="USD">Continuidad de Aplicaciones - Comercializadoras EPA</option><option value="185" data-customer="18" data-currency="USD">Continuidad de Arquitectura y Despliegue - Comercializadoras EPA</option><option value="182" data-customer="18" data-currency="USD">Continuidad de Operaciones - Comercializadoras EPA</option><option value="183" data-customer="18" data-currency="USD">Continuidad de Seguridad - Comercializadoras EPA</option><option value="186" data-customer="18" data-currency="USD">Gestión - Comercializadoras EPA</option></optgroup><optgroup label="EPA CR">
+                <option value="109" data-customer="5" data-currency="USD">Consultoría - EPA CR</option><option value="19" data-customer="5" data-currency="USD">Continuidad de Aplicaciones - EPA CR</option><option value="138" data-customer="5" data-currency="USD">Gestión - EPA CR</option><option value="23" data-customer="5" data-currency="USD">Mantenimientos / Proyectos - EPA CR</option></optgroup><optgroup label="EPA GT">
+                <option value="154" data-customer="6" data-currency="USD">Consultoría - EPA GT</option><option value="24" data-customer="6" data-currency="USD">Continuidad de Aplicaciones - EPA GT</option><option value="139" data-customer="6" data-currency="USD">Gestión - EPA GT</option></optgroup><optgroup label="EPA SV">
+                <option value="153" data-customer="7" data-currency="USD">Consultoría - EPA SV</option><option value="29" data-customer="7" data-currency="USD">Continuidad de Aplicaciones - EPA SV</option><option value="137" data-customer="7" data-currency="USD">Gestión - EPA SV</option></optgroup><optgroup label="EPA VE">
+                <option value="112" data-customer="8" data-currency="USD">Consultoría - EPA VE</option><option value="34" data-customer="8" data-currency="USD">Continuidad de Aplicaciones - EPA VE</option><option value="136" data-customer="8" data-currency="USD">Gestión - EPA VE</option></optgroup><optgroup label="Intelix">
+                <option value="142" data-customer="15" data-currency="USD">Actividades del Colaborador - Intelix</option><option value="66" data-customer="15" data-currency="USD">Ausencias / Permisos / Vacaciones - Intelix</option><option value="72" data-customer="15" data-currency="USD">Desarrollo - Intelix</option><option value="150" data-customer="15" data-currency="USD">Gerencia de Aplicaciones - Intelix</option><option value="148" data-customer="15" data-currency="USD">Gestión - Intelix</option></optgroup></select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" data-select2-id="3" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-timesheet_edit_form_project-container"><span class="select2-selection__rendered" id="select2-timesheet_edit_form_project-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+      </div> 
+                                        <div class="timesheet_edit_form_row_activity form-group">        <label class="control-label required" for="timesheet_edit_form_activity">Actividad</label>
+                                                             
+    <select id="timesheet_edit_form_activity" name="timesheet_edit_form[activity]" required="required" class="selectpicker form-control select2-hidden-accessible" data-width="100%" data-option-pattern="{name} - {comment}" data-select2-id="timesheet_edit_form_activity" tabindex="-1" aria-hidden="true"><option value="" selected="selected" data-select2-id="6"></option></select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" data-select2-id="5" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-timesheet_edit_form_activity-container"><span class="select2-selection__rendered" id="select2-timesheet_edit_form_activity-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+      </div> 
+                                        <div class="timesheet_edit_form_row_description form-group">        <label class="control-label required" for="timesheet_edit_form_description">Descripción</label>
+ <textarea id="timesheet_edit_form_description" name="timesheet_edit_form[description]" required="required" class="form-control"></textarea>      </div> 
+                                        <div class="timesheet_edit_form_row_tags form-group">        <label class="control-label required" for="timesheet_edit_form_tags">Etiquetas</label>
+                                                             
+    <select id="timesheet_edit_form_tags" name="timesheet_edit_form[tags][]" required="required" class="selectpicker form-control select2-hidden-accessible" size="1" data-width="100%" multiple="" data-select2-id="timesheet_edit_form_tags" tabindex="-1" aria-hidden="true"><option value="123">Adiestramiento</option><option value="1">Análisis</option><option value="662">Auditoria externa</option><option value="661">Auditoria interna</option><option value="2">Ausencias</option><option value="3">Cierre</option><option value="651">Clima Laboral</option><option value="4">Configuración</option><option value="5">Consultoría</option><option value="7">Desarrollo</option><option value="8">Despliegue</option><option value="9">Diseño</option><option value="10">Documentación</option><option value="11">Ejecución</option><option value="12">Errores</option><option value="13">Errores de Usuario</option><option value="646">Feriado</option><option value="15">Gestión</option><option value="659">Google Calendar</option><option value="16">Implementación</option><option value="17">Incidencia</option><option value="18">Inicio/Definición</option><option value="19">Investigación</option><option value="672">La Carabobeña</option><option value="20">Mantenimiento</option><option value="643">Maratón Programación</option><option value="21">Mejoras</option><option value="22">Monitoreo</option><option value="657">Optimización</option><option value="644">Permiso</option><option value="642">Plan Estratégico</option><option value="27">Planificación</option><option value="28">Proceso del Cliente</option><option value="29">Pruebas</option><option value="663">PST</option><option value="660">Rendimiento</option><option value="30">Replicación</option><option value="666">Reportes BI</option><option value="658">Reunión</option><option value="655">Revisión</option><option value="31">Seguimiento</option><option value="32">Seguridad</option><option value="68">Soporte</option><option value="34">Vacaciones</option></select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" data-select2-id="7" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+      </div> 
+                                                                                                                                                <div class="form-group">        
+ <div id="timesheet_edit_form_metaFields_ticket_glpi"><div class="form-group">        <label class="control-label" for="timesheet_edit_form_metaFields_ticket_glpi_value">Ticket GLPI</label>
+ <textarea id="timesheet_edit_form_metaFields_ticket_glpi_value" name="timesheet_edit_form[metaFields][ticket_glpi][value]" data-name="ticket_glpi" class="form-control"></textarea>      </div> </div>      </div> 
+                                                    <div id="timesheet_edit_form" data-form-event="kimai.timesheetUpdate" data-msg-success="action.update.success" data-msg-error="action.update.error">    <input type="hidden" id="timesheet_edit_form__token" name="timesheet_edit_form[_token]" class=" form-control" value="HfEzHtJE8SMKfbBguaKgoSXvD8tsydN0T2dNHlBy1CQ"></div>
+            </div>
+    <div class="box-footer">
+                    <input type="submit" data-loading-text="Guardar…" value="Guardar" class="btn btn-primary">
+                            <a href="/index.php/es/timesheet/" class="btn btn-link">Atrás</a>
+                            <input type="reset" value="Restablecer" class="btn btn-link pull-right">
+            </div>
+    </form>
+                                                <script type="text/javascript">
+                    jQuery('body').on('change', '#timesheet_edit_form_begin', function(ev) {
+                        changedBegin(jQuery(this).val());
+                    });
+
+                    jQuery('body').on('change', '#timesheet_edit_form_end', function(ev) {
+                        changedEnd(jQuery(this).val());
+                    });
+
+                    jQuery('body').on('change', '#timesheet_edit_form_duration', function(ev) {
+                        changedDuration();
+                    });
+
+                    function getDurationField()
+                    {
+                        return document.getElementById('timesheet_edit_form_duration');
+                    }
+
+                    
+                    function changedBegin(value)
+                    {
+                        var endField = document.getElementById('timesheet_edit_form_end');
+                        var format = endField.dataset.format;
+                        var momentDuration = getParsedDuration();
+
+                        var momentBegin = moment(value, format);
+                        if (!momentBegin.isValid()) {
+                            setDurationAsString(null);
+                        }
+
+                        if (endField.value === '' && momentDuration.asSeconds() > 0) {
+                            applyDateToField(endField, momentBegin, format);
+                        }
+
+                        var momentEnd = moment(endField.value, format);
+                        if (!momentEnd.isValid()) {
+                            return;
+                        }
+                        
+                        if (momentEnd.isBefore(momentBegin)) {
+                            applyDateToField(endField, momentBegin.add(momentDuration), format);
+                        }
+
+                        momentBegin = moment(value, format);
+                        momentEnd = moment(endField.value, format);
+                        
+                        var durationMoment = moment.duration(momentEnd.diff(momentBegin));
+
+                        setDurationAsString(durationMoment);
+                    }
+
+                    
+                    function changedEnd(value)
+                    {
+                        var beginField = document.getElementById('timesheet_edit_form_begin');
+                        var format = beginField.dataset.format;
+                        var momentDuration = getParsedDuration();
+
+                        var momentEnd = moment(value, format);
+                        if (!momentEnd.isValid()) {
+                            setDurationAsString(null);
+                        }
+
+                        if (beginField.value === '') {
+                            applyDateToField(beginField, momentEnd, format);
+                        }
+
+                        var momentBegin = moment(beginField.value, format);
+                        if (!momentBegin.isValid()) {
+                            return;
+                        }
+
+                        if (momentEnd.isBefore(momentBegin)) {
+                            applyDateToField(beginField, momentEnd.subtract(momentDuration), format);
+                        }
+
+                        momentBegin = moment(beginField.value, format);
+                        momentEnd = moment(value, format);
+
+                        var durationMoment = moment.duration(momentEnd.diff(momentBegin));
+
+                        setDurationAsString(durationMoment);
+                    }
+
+                    
+                    function changedDuration()
+                    {
+                        var momentDuration = getParsedDuration();
+                        if (!momentDuration.isValid()) {
+                            return;
+                        }
+                        
+                        var beginField = document.getElementById('timesheet_edit_form_begin');
+                        var endField = document.getElementById('timesheet_edit_form_end');
+                        var format = endField.dataset.format;
+                        var begin = beginField.value;
+                        var end = endField.value;
+                        var duration = momentDuration.asSeconds();
+
+                        if (begin === '' && end === '') {
+                            applyDateToField(beginField, moment(), format);
+                            applyDateToField(endField, moment(beginField.value, format).add(duration, 'seconds'), format); 
+                        } else if (begin === '' && end !== '') {
+                            applyDateToField(beginField, moment(end, format).subtract(duration, 'seconds'), format);
+                        } else if (begin !== '' && duration > 0) {
+                            applyDateToField(endField, moment(beginField.value, format).add(duration, 'seconds'), format); 
+                        }
+                    }
+
+                                        function setDurationAsString(durationMoment)
+                    {
+                        if (durationMoment === null) {
+                            getDurationField().value = '';
+                            return;
+                        }
+
+                        if (!durationMoment.isValid()) {
+                            return;
+                        }
+
+                        var hours = Math.floor(durationMoment.asHours());
+                        if (hours < 10) {
+                            hours = '0' + hours;
+                        }
+
+                        getDurationField().value = hours + ':' + ('0' + durationMoment.minutes()).slice(-2);
+                    }
+
+                                        function getParsedDuration()
+                    {
+                        var duration = getDurationField().value.toUpperCase();
+                        var momentDuration = moment.duration(NaN);
+
+                        if (duration.indexOf(':') !== -1) {
+                            momentDuration = moment.duration(duration);
+                        } else if (duration.indexOf('.') !== -1 || duration.indexOf(',') !== -1) {
+                            duration = duration.replace(/,/, '.');
+                            duration = parseFloat(duration) * 3600;
+                            momentDuration = moment.duration('PT' + duration + 'S');
+                        } else if (duration.indexOf('H') !== -1 || duration.indexOf('M') !== -1 || duration.indexOf('S') !== -1) {
+                                                        momentDuration = moment.duration('PT' + duration);
+                        } else {
+                            let c = parseInt(duration);
+                            let d = parseInt(duration).toFixed();
+                            if (!isNaN(c) && duration === d) {
+                                duration = c * 3600;
+                                momentDuration = moment.duration('PT' + duration + 'S');
+                            }
+                        }
+
+                        return momentDuration;
+                    }
+
+                    function applyDateToField(field, momentObj, format)
+                    {
+                        field.value = momentObj.format(format);
+                        if (jQuery(field).data('daterangepicker') !== undefined) {
+                            jQuery(field).data('daterangepicker').setStartDate(momentObj);
+                            jQuery(field).data('daterangepicker').setEndDate(momentObj);
+                                                        jQuery('#timesheet_edit_form_customer').trigger('change');
+                        }
+                    }
+                </script>
+                    </div>        
+                    </section>
+
+                    
+    </div>
+
+        <!-- Page rendered on 20.01.2026 14:21 -->
+                
+</div>
+
+                    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            const loader = new KimaiWebLoader({formatDuration:'%h:%m h',formatDate:'DD.MM.YYYY',defaultColor:'#00BCB5',twentyFourHours:true,updateBrowserTitle:true,login:'/index.php/es/login',locale:'es',first_dow_iso:1,autoComplete:3},{'confirm': 'Confirmar','cancel': 'Cancelar','today': 'Hoy','yesterday': 'Ayer','lastWeek': 'La\u0020semana\u0020pasada','thisWeek': 'Esta\u0020semana','lastMonth': 'El\u0020mes\u0020pasado','thisMonth': 'Este\u0020mes','lastYear': 'El\u0020a\u00F1o\u0020pasado','thisYear': 'Este\u0020a\u00F1o','customRange': 'Intervalo\u0020personalizado','timesheet.start.success': 'Registro\u0020de\u0020tiempo\u0020iniciado','timesheet.start.error': 'No\u0020se\u0020pudo\u0020iniciar\u0020el\u0020registro\u0020de\u0020tiempo','timesheet.start.exceeded_limit': 'Se\u0020ha\u0020alcanzado\u0020el\u0020limite\u0020de\u0020registro\u0020activos,\u0020por\u0020favor\u0020detenga\u0020uno\u0020de\u0020los\u0020registros\u0020en\u0020marcha\u0020primero.','timesheet.stop.success': 'El\u0020registro\u0020de\u0020tiempo\u0020ha\u0020sido\u0020detenido','timesheet.stop.error': 'No\u0020se\u0020pudo\u0020detener\u0020el\u0020registro\u0020del\u0020tiempo','action.update.success': 'Cambios\u0020guardados','action.update.error': 'No\u0020se\u0020pudieron\u0020guardar\u0020los\u0020cambios\u003A\u0020\u0025reason\u0025','action.delete.success': 'Registro\u0020eliminado','action.delete.error': 'No\u0020se\u0020pudo\u0020eliminar\u0020el\u0020registro\u003A\u0020\u0025reason\u0025','confirm.delete': '\u00BFRealmente\u0020quiere\u0020eliminarlo\u003F','delete': 'Eliminar','login.required': 'Sin\u0020permisos.\u0020\u00BFVolver\u0020al\u0020inicio\u0020de\u0020sesi\u00F3n\u003F','modal.dirty': 'El\u0020formulario\u0020ha\u0020cambiado.\u0020Pulse\u0020en\u0020\u00ABGuardar\u00BB\u0020para\u0020guardar\u0020los\u0020cambios\u0020o\u0020en\u0020\u00ABCerrar\u00BB\u0020para\u0020cancelar.'});
+            window.kimai = loader.getKimai();
+        });
+    </script>
+
+        
+
+
+
+<div class="daterangepicker ltr single opensright"><div class="ranges"></div><div class="drp-calendar left single" style="display: block;"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-calendar right" style="display: none;"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-buttons"><span class="drp-selected">20.01.2026 14:21 - 20.01.2026 14:21</span><button class="cancelBtn btn btn-sm btn-default" type="button">Cancelar</button><button class="applyBtn btn btn-sm btn-primary" disabled="disabled" type="button">Confirmar</button> </div></div><div class="daterangepicker ltr single opensright"><div class="ranges"></div><div class="drp-calendar left single" style="display: block;"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-calendar right" style="display: none;"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-buttons"><span class="drp-selected"></span><button class="cancelBtn btn btn-sm btn-default" type="button">Cancelar</button><button class="applyBtn btn btn-sm btn-primary" disabled="disabled" type="button">Confirmar</button> </div></div></body></html>
