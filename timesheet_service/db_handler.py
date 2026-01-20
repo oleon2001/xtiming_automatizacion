@@ -13,16 +13,12 @@ class DBHandler:
                 "database": os.getenv("GLPI_DB_NAME"),
             }
         except Exception as e:
-            raise Exception(f"Error loading DB config: {str(e)}")
+            raise Exception(f"Error cargando la configuracion de la base de datos: {str(e)}")
 
     def get_connection(self):
         return mysql.connector.connect(**self.config)
 
     def fetch_closed_tickets_today(self):
-        """
-        Fetches tickets closed today (solvedate).
-        Groups by technician.
-        """
         query = """
         SELECT 
             gt.id AS ticket_id,
