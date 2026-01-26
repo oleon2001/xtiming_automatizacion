@@ -1,0 +1,160 @@
+2026-01-22 11:14:01,684 - Main - INFO - Starting Timesheet Automation Service v2.1
+2026-01-22 11:14:01,688 - Main - INFO - Configuration loaded from C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\config.json
+2026-01-22 11:14:01,689 - TimeManager - INFO - Iniciando nuevo ciclo diario (Estado reseteado).
+2026-01-22 11:14:01,690 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-01-22 11:14:01,691 - Scheduler - INFO - Ejecutando Rutina A (Procesamiento de Tickets)...
+2026-01-22 11:14:01,946 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-22 11:14:01,948 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-22 11:14:01,962 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-22 11:14:24,448 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-22 11:14:27,676 - WebBot - INFO - Login exitoso.
+2026-01-22 11:14:27,677 - WebBot - INFO - Registrando: Fwd: Solicitud de Privilegios para cambio de tasa en Registro en CP - Cofersa [22.01.2026 08:30 - 22.01.2026 09:00]
+2026-01-22 11:14:35,545 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-22 11:14:36,196 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601210188
+2026-01-22 11:14:37,627 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-22 11:14:40,786 - WebBot - INFO - Login exitoso.
+2026-01-22 11:14:40,787 - WebBot - INFO - Registrando: Usuario Khai Mirely Gutiérrez [22.01.2026 09:00 - 22.01.2026 09:30]
+2026-01-22 11:14:48,451 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-22 11:14:48,977 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601210205
+2026-01-22 11:14:50,132 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-22 11:14:54,058 - WebBot - INFO - Login exitoso.
+2026-01-22 11:14:54,059 - WebBot - INFO - Registrando: Código externo mal asociado 0946004 BANCO DOS PELDANOS [22.01.2026 09:30 - 22.01.2026 10:00]
+2026-01-22 11:15:01,863 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-22 11:15:02,581 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601210245
+2026-01-22 11:15:03,892 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-22 11:15:07,283 - WebBot - INFO - Login exitoso.
+2026-01-22 11:15:07,284 - WebBot - INFO - Registrando: Desbloquear usuario windows  [22.01.2026 10:00 - 22.01.2026 10:30]
+2026-01-22 11:15:15,071 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-22 11:15:15,668 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601210228
+2026-01-22 11:15:16,815 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-22 11:15:18,701 - WebBot - ERROR - Excepción durante login: Page.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("input[name='_username']")
+    - locator resolved to <input value="" type="text" name="_username" class="form-control" placeholder="Nombre de usuario"/>
+    - fill("oleon@intelix.biz")
+  - attempting fill action
+    - waiting for element to be visible, enabled and editable
+
+2026-01-22 11:15:18,702 - WebBot - ERROR - Error en automatización web: Page.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("input[name='_username']")
+    - locator resolved to <input value="" type="text" name="_username" class="form-control" placeholder="Nombre de usuario"/>
+    - fill("oleon@intelix.biz")
+  - attempting fill action
+    - waiting for element to be visible, enabled and editable
+
+2026-01-22 11:15:19,220 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601210199
+2026-01-22 11:15:19,417 - Main - INFO - Service stopped by user.
+2026-01-22 11:15:19,451 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-233' coro=<Connection.run.<locals>.init() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:309> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-01-23 13:32:41,469 - Main - INFO - Starting Timesheet Automation Service v2.1
+2026-01-23 13:32:41,471 - Main - INFO - Configuration loaded from C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\config.json
+2026-01-23 13:32:41,472 - TimeManager - INFO - Iniciando nuevo ciclo diario (Estado reseteado).
+2026-01-23 13:32:41,473 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-01-23 13:32:41,474 - Scheduler - INFO - Ejecutando Rutina A (Procesamiento de Tickets)...
+2026-01-23 13:32:41,657 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-23 13:32:41,658 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-23 13:32:41,663 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-23 13:33:05,845 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-23 13:33:08,712 - WebBot - INFO - Login exitoso.
+2026-01-23 13:33:08,713 - WebBot - INFO - Registrando: Ventas si replicar [23.01.2026 08:30 - 23.01.2026 09:00]
+2026-01-23 13:33:16,143 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-23 13:33:16,667 - Scheduler - WARNING - Fallo lógico al registrar ticket 2601220235
+2026-01-23 13:35:05,248 - Main - INFO - Service stopped by user.
+2026-01-23 13:38:00,257 - Main - INFO - Starting Timesheet Automation Service v2.1
+2026-01-23 13:38:00,257 - Main - INFO - Configuration loaded from C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\config.json
+2026-01-23 13:38:00,258 - TimeManager - INFO - Restaurando estado de sesión anterior del mismo día.
+2026-01-23 13:38:00,258 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-01-23 13:38:00,258 - Scheduler - INFO - Ejecutando Rutina A (Procesamiento de Tickets)...
+2026-01-23 13:38:00,480 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-23 13:38:00,481 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-23 13:38:00,484 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-23 13:38:03,288 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-01-23 13:38:06,031 - WebBot - INFO - Login exitoso.
+2026-01-23 13:38:06,032 - WebBot - INFO - Registrando: Ventas si replicar [23.01.2026 09:00 - 23.01.2026 09:30]
+2026-01-23 13:38:13,483 - WebBot - ERROR - No se redireccionó tras guardar. Posible error de validación.
+2026-01-23 13:38:48,171 - Scheduler - ERROR - Excepción procesando ticket 2601220235: Browser.close: Connection closed while reading from the driver
+Traceback (most recent call last):
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\scheduler_service.py", line 108, in routine_a
+    success = self.bot.fill_timesheet_entry(item)
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\web_automator.py", line 145, in fill_timesheet_entry
+    browser.close()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\sync_api\_generated.py", line 14335, in close
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.close(reason=reason)))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_browser.py", line 241, in close
+    raise e
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_browser.py", line 238, in close
+    await self._channel.send("close", None, {"reason": reason})
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+Exception: Browser.close: Connection closed while reading from the driver
+2026-01-23 13:38:50,207 - Main - INFO - Service stopped by user.
+2026-01-23 13:40:16,126 - Main - INFO - Starting Timesheet Automation Service v2.1
+2026-01-23 13:40:16,126 - Main - INFO - Configuration loaded from C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\config.json
+2026-01-23 13:40:16,138 - TimeManager - INFO - Restaurando estado de sesiÃ³n anterior del mismo dÃ­a.
+2026-01-23 13:40:16,139 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-01-23 13:40:16,140 - Scheduler - INFO - Ejecutando Rutina A (Procesamiento de Tickets)...
+2026-01-23 13:40:16,310 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-23 13:40:16,311 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-23 13:40:16,312 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-23 13:40:17,995 - WebBot - INFO - Iniciando sesiÃ³n para usuario oleon@intelix.biz...
+2026-01-23 13:40:21,023 - WebBot - INFO - Login exitoso.
+2026-01-23 13:40:21,024 - WebBot - INFO - Registrando: Ventas si replicar [23.01.2026 09:30 - 23.01.2026 10:00]
+2026-01-23 13:40:29,850 - WebBot - ERROR - No se redireccionÃ³ tras guardar. Posible error de validaciÃ³n.
+2026-01-23 13:40:29,851 - WebBot - WARNING - !!! DEPURACION: El navegador permanecerÃ¡ abierto 60 segundos. POR FAVOR MIRA LA PANTALLA Y REVISA QUE CAMPO ESTA EN ROJO.
+2026-01-23 13:41:24,841 - Main - INFO - Service stopped by user.
+2026-01-23 13:41:24,874 - asyncio - ERROR - Future exception was never retrieved
+future: <Future finished exception=TargetClosedError('Target page, context or browser has been closed')>
+playwright._impl._errors.TargetClosedError: Target page, context or browser has been closed
+2026-01-23 13:43:18,271 - Main - INFO - Starting Timesheet Automation Service v2.1
+2026-01-23 13:43:18,271 - Main - INFO - Configuration loaded from C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\config.json
+2026-01-23 13:43:18,299 - TimeManager - INFO - Restaurando estado de sesiÃ³n anterior del mismo dÃ­a.
+2026-01-23 13:43:18,301 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-01-23 13:43:18,301 - Scheduler - INFO - Ejecutando Rutina A (Procesamiento de Tickets)...
+2026-01-23 13:43:18,519 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-01-23 13:43:18,520 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-01-23 13:43:18,524 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-01-23 13:43:19,971 - WebBot - INFO - Iniciando sesiÃ³n para usuario oleon@intelix.biz...
+2026-01-23 13:43:22,491 - WebBot - INFO - Login exitoso.
+2026-01-23 13:43:22,492 - WebBot - INFO - Registrando: Ventas si replicar [23.01.2026 10:00 - 23.01.2026 10:30]
+2026-01-23 13:43:36,052 - WebBot - WARNING - No se pudo hacer click en opciÃ³n para 'Caja Registradora', intentando Enter.
+2026-01-23 13:43:39,569 - WebBot - ERROR - No se redireccionÃ³ tras guardar. Posible error de validaciÃ³n.
+2026-01-23 13:43:39,570 - WebBot - WARNING - !!! DEPURACION: El navegador permanecerÃ¡ abierto 60 segundos. POR FAVOR MIRA LA PANTALLA Y REVISA QUE CAMPO ESTA EN ROJO.
+2026-01-23 13:44:00,656 - Scheduler - ERROR - ExcepciÃ³n procesando ticket 2601220235: Browser.close: Connection closed while reading from the driver
+Traceback (most recent call last):
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\scheduler_service.py", line 108, in routine_a
+    success = self.bot.fill_timesheet_entry(item)
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\web_automator.py", line 160, in fill_timesheet_entry
+    browser.close()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\sync_api\_generated.py", line 14335, in close
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.close(reason=reason)))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_browser.py", line 241, in close
+    raise e
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_browser.py", line 238, in close
+    await self._channel.send("close", None, {"reason": reason})
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+Exception: Browser.close: Connection closed while reading from the driver
+2026-01-23 13:44:02,119 - Main - INFO - Service stopped by user.

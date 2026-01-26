@@ -1,0 +1,26 @@
+{
+    "app": {
+        "log_level": "INFO",
+        "log_file": "app.log",
+        "headless_browser": false
+    },
+    "schedule": {
+        "work_start": "08:30",
+        "lunch_start": "11:30",
+        "lunch_end": "12:30",
+        "target_hours": 8,
+        "slot_duration_minutes": 30
+    },
+    "entity_map": {
+        "150": "SV",
+        "155": "GT",
+        "123": "VE",
+        "142": "CR"
+    },
+    "defaults": {
+        "client_fallback": "Comercializadoras EPA",
+        "project_fallback": "Continuidad de Aplicaciones - Comercializadoras EPA",
+        "activity": "Caja Registradora",
+        "tag": "Soporte"
+    }
+}

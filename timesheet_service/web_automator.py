@@ -1,47 +1,101 @@
 from playwright.sync_api import sync_playwright
 import os
 import time
+import logging
+
+logger = logging.getLogger("WebBot")
 
 class WebAutomator:
-    def __init__(self):
+    def __init__(self, config=None):
+        self.config = config or {}
         self.user = os.getenv("XTIMING_USER")
         self.password = os.getenv("XTIMING_PASSWORD")
         self.base_url = "https://xtiming.intelix.biz/index.php/es"
-        # Valores por defecto desde .env
-        self.default_client = os.getenv("DEFAULT_CLIENT", "Intelix")
-        self.default_project = os.getenv("DEFAULT_PROJECT", "Gestión - Intelix")
-        self.default_activity = os.getenv("DEFAULT_ACTIVITY", "Soporte")
-        self.default_tag = os.getenv("DEFAULT_TAG", "Soporte")
         
+        # Configuración de navegador
+        self.headless = self.config.get("app", {}).get("headless_browser", False)
+
+        # Defaults (por si no vienen en entry_data)
+        defaults = self.config.get("defaults", {})
+        self.default_client = defaults.get("client_fallback", "Intelix")
+        self.default_project = defaults.get("project_fallback", "Gestión - Intelix")
+        self.default_activity = defaults.get("activity", "Soporte")
+        self.default_tag = defaults.get("tag", "Soporte")
+
     def login(self, page):
-        print(f"Iniciando sesión para {self.user}...")
-        page.goto(f"{self.base_url}/login")
-        page.fill("input[name='_username']", self.user)
-        page.fill("input[name='_password']", self.password)
-        page.click("button[type='submit']")
-        page.wait_for_load_state('networkidle')
-        
-        if "login" in page.url:
-             raise Exception("Fallo en el login. Verifique credenciales.")
-        print(" Login exitoso.")
+        logger.info(f"Iniciando sesión para usuario {self.user}...")
+        try:
+            page.goto(f"{self.base_url}/login")
+            page.fill("input[name='_username']", self.user)
+            page.fill("input[name='_password']", self.password)
+            page.click("button[type='submit']")
+            page.wait_for_load_state('networkidle')
+            
+            # Validación mejorada
+            if page.locator(".user-menu").is_visible() or "login" not in page.url:
+                logger.info("Login exitoso.")
+                return True
+            else:
+                logger.error("Fallo en login: Seguimos en la página de login.")
+                raise Exception("Credenciales inválidas o error de carga.")
+                
+        except Exception as e:
+            logger.error(f"Excepción durante login: {e}")
+            raise
+
+    def _select_select2(self, page, select_id, label_text):
+        if not label_text: return
+
+        try:
+            logger.debug(f"Seleccionando '{label_text}' en {select_id}")
+            clean_id = select_id.lstrip('#')
+            container_selector = f"#select2-{clean_id}-container"
+            
+            if page.is_visible(container_selector):
+                page.click(container_selector)
+            else:
+                page.click(f"#{clean_id} + .select2 .select2-selection")
+
+            search_input = ".select2-container--open .select2-search__field"
+            page.wait_for_selector(search_input, state="visible", timeout=3000)
+            
+            # 3. Escribir y seleccionar
+            page.fill(search_input, label_text)
+            time.sleep(1.5) # Espera para que el JS filtre los resultados
+            
+            # Estrategia Robusta: Click en la opción resaltada
+            # Select2 marca la opción seleccionada con la clase .select2-results__option--highlighted
+            option_selector = ".select2-results__option--highlighted"
+            
+            try:
+                page.wait_for_selector(option_selector, state="visible", timeout=2000)
+                page.click(option_selector)
+            except:
+                # Fallback: Si no encuentra el selector específico, intenta Enter
+                logger.warning(f"No se pudo hacer click en opción para '{label_text}', intentando Enter.")
+                page.press(search_input, "Enter")
+            
+            # Breve pausa para asegurar que la selección se procese antes de mover el foco
+            time.sleep(0.5)
+
+        except Exception as e:
+            logger.warning(f"Error select2 '{label_text}': {e}. Intentando fallback nativo.")
+            try:
+                page.select_option(select_id, label=label_text)
+            except:
+                logger.error(f"Fallback también falló para {label_text}")
 
     def fill_timesheet_entry(self, entry_data):
-        """
-        entry_data dict:
-          - title
-          - start_time (DD.MM.YYYY HH:MM)
-          - end_time (DD.MM.YYYY HH:MM)
-          - ticket_id (opcional)
-        """
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False) 
+            # Usar configuración headless
+            browser = p.chromium.launch(headless=self.headless) 
             context = browser.new_context()
             page = context.new_page()
             
             try:
                 self.login(page)
                 
-                print(f"Registrando: {entry_data['title']} [{entry_data['start_time']} - {entry_data['end_time']}]")
+                logger.info(f"Registrando: {entry_data['title']} [{entry_data['start_time']} - {entry_data['end_time']}]")
                 page.goto(f"{self.base_url}/timesheet/create")
                 page.wait_for_load_state('networkidle')
 
@@ -52,65 +106,58 @@ class WebAutomator:
                 page.fill("#timesheet_edit_form_end", entry_data['end_time'])
                 page.press("#timesheet_edit_form_end", "Enter")
 
-                # 2. Selección de Cliente (Select2)
-                # Kimai usa Select2, a veces select_option funciona directamente sobre el select oculto
-                page.select_option("#timesheet_edit_form_customer", label=self.default_client)
-                
-                # 3. Selección de Proyecto (Depende del cliente, hay que esperar a que cargue)
-                time.sleep(1) # Pequeña espera para que el API de Kimai cargue los proyectos
-                page.select_option("#timesheet_edit_form_project", label=self.default_project)
+                # Valores
+                target_client = entry_data.get('client', self.default_client)
+                target_project = entry_data.get('project', self.default_project)
+                target_activity = entry_data.get('activity', self.default_activity)
+                target_tags = entry_data.get('tags', self.default_tag)
 
-                # 4. Selección de Actividad (Depende del proyecto)
-                time.sleep(1)
-                page.select_option("#timesheet_edit_form_activity", label=self.default_activity)
+                # Selectores
+                self._select_select2(page, "#timesheet_edit_form_customer", target_client)
+                time.sleep(1.5) 
+                self._select_select2(page, "#timesheet_edit_form_project", target_project)
+                time.sleep(3.0)
+                self._select_select2(page, "#timesheet_edit_form_activity", target_activity)
 
-                # 5. Descripción
                 page.fill("#timesheet_edit_form_description", entry_data['title'])
 
-                # 6. Etiquetas (Multiselect)
-                try:
-                    page.select_option("#timesheet_edit_form_tags", label=self.default_tag)
-                except:
-                    print("Warn: No se pudo seleccionar la etiqueta por defecto.")
+                time.sleep(0.5)
+                if isinstance(target_tags, list):
+                    for tag in target_tags:
+                        self._select_select2(page, "#timesheet_edit_form_tags", tag)
+                else:
+                    self._select_select2(page, "#timesheet_edit_form_tags", target_tags)
+                
+                page.click("#timesheet_edit_form_description") # Cerrar dropdown
 
-                # 7. Campo personalizado: Ticket GLPI
+                # Ticket GLPI
                 if 'ticket_id' in entry_data and entry_data['ticket_id']:
                     selector_glpi = "#timesheet_edit_form_metaFields_ticket_glpi_value"
                     if page.is_visible(selector_glpi):
                         page.fill(selector_glpi, str(entry_data['ticket_id']))
 
-                # 8. Guardar
-                # Buscamos el botón de submit
-                page.click("input[type='submit']")
+                # Guardar
+                if page.locator("#form_modal_save").is_visible():
+                    page.click("#form_modal_save")
+                else:
+                    page.click(".box-footer .btn-primary")
                 
-                # Esperar a que la URL cambie o aparezca mensaje de éxito
                 page.wait_for_load_state('networkidle')
                 
                 if "create" in page.url:
-                    # Si seguimos en la página de creación, algo falló (quizás campos requeridos)
-                    print(f" Error al guardar: La página no redireccionó. Revisar campos.")
-                    # Tomar screenshot para debug si es necesario
-                    # page.screenshot(path="error.png")
+                    logger.error("No se redireccionó tras guardar. Posible error de validación.")
+                    logger.warning("!!! DEPURACION: El navegador permanecerá abierto 60 segundos. POR FAVOR MIRA LA PANTALLA Y REVISA QUE CAMPO ESTA EN ROJO.")
+                    time.sleep(60) # Pausa para depuración visual
                     return False
 
-                print(f"Entrada registrada con éxito.")
+                logger.info("Entrada registrada con éxito.")
                 return True
 
             except Exception as e:
-                print(f" Error en la automatización web: {e}")
-                raise e
+                logger.error(f"Error en automatización web: {e}")
+                return False # Retornar False en lugar de lanzar excepción para que el Scheduler siga
             finally:
                 browser.close()
 
 if __name__ == "__main__":
-    # Test rápido
-    from dotenv import load_dotenv
-    load_dotenv()
-    
-    svc = WebAutomator()
-    svc.fill_timesheet_entry({
-        "title": "Test de Automatización",
-        "start_time": "20.01.2026 08:30",
-        "end_time": "20.01.2026 09:00",
-        "ticket_id": "12345"
-    })
+    pass
