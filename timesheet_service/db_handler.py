@@ -30,6 +30,7 @@ class DBHandler:
             gt.solvedate,
             gt.entities_id,
             ge.name AS entity_name,
+            ge.completename AS entity_fullname,
             CONCAT(gu.realname, ' ', gu.firstname) AS technician_name,
             gu.id AS technician_id
         FROM glpi_tickets gt

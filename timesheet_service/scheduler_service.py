@@ -12,15 +12,43 @@ logger = logging.getLogger("Scheduler")
 
 class SchedulerService:
     def __init__(self, config):
+        self._validate_config(config)
         self.config = config
         self.db = db_handler.DBHandler()
-        # Pasamos config al TimeManager y WebAutomator
         self.timer = time_manager.TimeManager(config)
         self.bot = web_automator.WebAutomator(config)
         
-        # Mapeos desde config
         self.entity_map = config.get("entity_map", {})
         self.defaults = config.get("defaults", {})
+        
+        self.pending_file = "pending_tickets.json"
+
+    def _validate_config(self, config):
+        """Validación básica de estructura de configuración."""
+        required_sections = ["app", "schedule", "defaults", "entity_map"]
+        missing = [s for s in required_sections if s not in config]
+        if missing:
+            raise ValueError(f"Configuración inválida. Faltan secciones: {', '.join(missing)}")
+        
+        if not isinstance(config["schedule"].get("target_hours"), (int, float)):
+             logger.warning("Config 'target_hours' debería ser numérico. Se usará default.")
+
+    def _load_pending_tickets(self):
+        if not os.path.exists(self.pending_file):
+            return []
+        try:
+            with open(self.pending_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error cargando tickets pendientes: {e}")
+            return []
+
+    def _save_pending_tickets(self, tickets):
+        try:
+            with open(self.pending_file, "w") as f:
+                json.dump(tickets, f, default=str)
+        except Exception as e:
+            logger.error(f"Error guardando tickets pendientes: {e}")
 
     def send_telegram(self, msg):
         token = os.getenv("TG_BOT_TOKEN")
@@ -36,10 +64,9 @@ class SchedulerService:
         """
         Determina cliente/proyecto usando configuración externa.
         """
-        title_lower = ticket_data.get('ticket_title', '').lower() # Nota: db_handler devuelve 'ticket_title'
-        entity_name = ticket_data.get('entity_name', '')
+        title_lower = ticket_data.get('ticket_title', '').lower()
         entity_id = str(ticket_data.get('entities_id', ''))
-        entity_upper = entity_name.upper() if entity_name else ""
+        fullname_upper = ticket_data.get('entity_fullname', '').upper()
         
         meta = {
             "activity": self.defaults.get("activity", "Soporte"),
@@ -51,20 +78,23 @@ class SchedulerService:
             suffix = self.entity_map[entity_id]
             meta["client"] = f"EPA {suffix}"
             meta["project"] = f"Continuidad de Aplicaciones - EPA {suffix}"
-            meta["activity"] = "Caja Registradora" # Regla específica mantenida
+            meta["activity"] = "Caja Registradora" 
             return meta
 
-        # 2. Heurística de respaldo basada en Nombre (EPA)
-        if "EPA" in entity_upper:
-            # Intentar extraer sufijo (SV, GT, etc)
-            for suffix in ["SV", "GT", "CR", "VE"]:
-                if suffix in entity_upper:
-                    meta["client"] = f"EPA {suffix}"
-                    meta["project"] = f"Continuidad de Aplicaciones - EPA {suffix}"
-                    meta["activity"] = "Caja Registradora"
-                    return meta
+        # 2. Heurística usando Complete Name
+        if "EPA" in fullname_upper:
+            if "EPAVE" in fullname_upper or "EPA VE" in fullname_upper: suffix = "VE"
+            elif "EPAGT" in fullname_upper or "EPA GT" in fullname_upper: suffix = "GT"
+            elif "EPACR" in fullname_upper or "EPA CR" in fullname_upper: suffix = "CR"
+            elif "EPASV" in fullname_upper or "EPA SV" in fullname_upper: suffix = "SV"
+            else: suffix = None
+
+            if suffix:
+                meta["client"] = f"EPA {suffix}"
+                meta["project"] = f"Continuidad de Aplicaciones - EPA {suffix}"
+                meta["activity"] = "Caja Registradora"
+                return meta
             
-            # Fallback genérico EPA
             meta["client"] = self.defaults.get("client_fallback", "Comercializadoras EPA")
             meta["project"] = self.defaults.get("project_fallback")
             return meta
@@ -82,84 +112,98 @@ class SchedulerService:
         return meta
 
     def routine_a(self):
-        logger.info("Ejecutando Rutina A (Procesamiento de Tickets)...")
+        logger.info("Ejecutando Rutina A (Recolección de Tickets)...")
         try:
-            tickets = self.db.fetch_closed_tickets_today()
-            if not tickets:
-                logger.info("No se encontraron tickets cerrados hoy.")
+            # 1. Obtener tickets nuevos de DB
+            new_tickets = self.db.fetch_closed_tickets_today()
+            if not new_tickets:
+                logger.info("No hay tickets nuevos en GLPI.")
                 return
 
-            # Calcular slots (excluyendo ya procesados internamente por TimeManager)
-            schedule_plan = self.timer.calculate_ticket_slots(tickets)
+            # 2. Cargar pendientes actuales
+            pending = self._load_pending_tickets()
+            pending_ids = {str(t['ticket_id']) for t in pending}
             
-            if not schedule_plan:
-                logger.info("Hay tickets, pero todos ya fueron procesados.")
-                return
-
-            for item in schedule_plan:
-                try:
-                    # Enriquecer con metadatos
-                    # 'raw_ticket' viene del TimeManager
-                    raw_data = item.get('raw_ticket', {})
-                    inferred_meta = self._determine_ticket_metadata(raw_data)
-                    item.update(inferred_meta)
-                    
-                    # Ejecutar automatización
-                    success = self.bot.fill_timesheet_entry(item)
-                    
-                    if success:
-                        self.timer.mark_as_processed(item['ticket_id'])
-                        log_msg = f"Ticket registrado: {item['title']} ({item['duration_min']} min)"
-                        logger.info(log_msg)
-                        self.send_telegram(f"✅ {log_msg}")
-                    else:
-                        logger.warning(f"Fallo lógico al registrar ticket {item['ticket_id']}")
-
-                except Exception as e:
-                    logger.error(f"Excepción procesando ticket {item['ticket_id']}: {e}", exc_info=True)
-                    self.send_telegram(f" Error registrando ticket {item['ticket_id']}: {e}")
+            # 3. Filtrar: No procesados HOY y No en cola pendiente
+            # Nota: time_manager.processed_ids tiene lo que YA se envió a la web
+            added_count = 0
+            for ticket in new_tickets:
+                tid = str(ticket['ticket_id'])
+                if tid not in self.timer.processed_ids and tid not in pending_ids:
+                    pending.append(ticket)
+                    pending_ids.add(tid)
+                    added_count += 1
+            
+            # 4. Guardar cola
+            if added_count > 0:
+                self._save_pending_tickets(pending)
+                msg = f"📥 Se encolaron {added_count} tickets nuevos. Total pendiente: {len(pending)}"
+                logger.info(msg)
+                self.send_telegram(msg)
+            else:
+                logger.info("Tickets encontrados ya estaban en cola o procesados.")
 
         except Exception as e:
-            logger.error(f"Error fatal en Rutina A: {e}", exc_info=True)
+            logger.error(f"Error en Rutina A: {e}", exc_info=True)
 
     def routine_b(self):
-        logger.info("Ejecutando Rutina B (Cierre Diario)...")
+        logger.info("Ejecutando Rutina B (Procesamiento Batch - 18:00)...")
         try:
-            adjustment = self.timer.calculate_adjustment_entry()
+            pending_tickets = self._load_pending_tickets()
             
-            if adjustment:
-                # Usar metadatos por defecto para el ajuste
-                adjustment.update({
-                    "client": self.defaults.get("client_fallback"),
-                    "project": self.defaults.get("project_fallback"),
-                    "activity": "Administración", # O lo que corresponda
-                    "tags": "Administrativo"
-                })
+            if not pending_tickets:
+                logger.info("No hay tickets pendientes para procesar.")
+                self.send_telegram("ℹ️ Fin de jornada: No hubo tickets para registrar.")
+                return
 
-                success = self.bot.fill_timesheet_entry(adjustment)
-                if success:
-                    msg = f"Ajuste de jornada: {adjustment['duration_min']} min para completar 8h."
-                    logger.info(msg)
-                    self.send_telegram(f"🏁 {msg}")
-                else:
-                    logger.error("Falló el registro del ajuste de jornada.")
-            else:
-                logger.info("Jornada completa. No se requiere ajuste.")
-                self.send_telegram(" Jornada completa. No se requiere ajuste.")
-                
-            # Nota: TimeManager se resetea solo al iniciar nuevo día, 
-            # no necesitamos forzar limpieza aquí, pero podríamos loguear el fin.
+            # 1. Calcular distribución perfecta (8 horas / N tickets)
+            schedule_plan = self.timer.calculate_distributed_slots(pending_tickets)
             
+            logger.info(f"Procesando lote final de {len(schedule_plan)} tickets...")
+            self.send_telegram(f"🚀 Iniciando carga masiva de {len(schedule_plan)} tickets distribuidos en 8h.")
+
+            try:
+                self.bot.start_browser()
+                success_count = 0
+                
+                for item in schedule_plan:
+                    try:
+                        # Enriquecer metadata
+                        raw_data = item.get('raw_ticket', {})
+                        item.update(self._determine_ticket_metadata(raw_data))
+                        
+                        # Enviar
+                        if self.bot.fill_timesheet_entry(item):
+                            self.timer.mark_as_processed(item['ticket_id'])
+                            success_count += 1
+                            logger.info(f"Registrado: {item['title']} ({item['duration_min']}m)")
+                        else:
+                            logger.error(f"Fallo al registrar {item['ticket_id']}")
+                            
+                    except Exception as e:
+                        logger.error(f"Error procesando item {item['ticket_id']}: {e}")
+
+                # Reporte final
+                self.send_telegram(f"✅ Jornada finalizada. Registrados {success_count}/{len(pending_tickets)} tickets.")
+                
+                # Limpiar cola (o dejar los fallidos? Por simplicidad, limpiamos todo para evitar loop infinito mañana)
+                # Idealmente deberíamos guardar los fallidos, pero asumimos intervención humana si falla.
+                self._save_pending_tickets([]) 
+
+            finally:
+                self.bot.close_browser()
+
         except Exception as e:
-            logger.error(f"Error en Rutina B: {e}", exc_info=True)
+            logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
+            self.send_telegram(f"⚠️ Error crítico en cierre de jornada: {e}")
 
     def run(self):
         schedule.every(2).hours.do(self.routine_a)
         schedule.every().day.at("18:00").do(self.routine_b)
         
-        logger.info("Scheduler iniciado. Esperando tareas...")
+        logger.info("Scheduler iniciado (Modo Batch). Esperando tareas...")
         
-        # Ejecución inicial al arrancar para atrapar lo pendiente
+        # Ejecución inicial de recolección
         self.routine_a()
         
         while True:
@@ -167,5 +211,4 @@ class SchedulerService:
             time.sleep(60)
 
 if __name__ == "__main__":
-    # Test simple si se corre directo (necesita config fake)
     pass

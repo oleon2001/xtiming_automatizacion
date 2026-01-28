@@ -2,7 +2,7 @@
     "app": {
         "log_level": "INFO",
         "log_file": "app.log",
-        "headless_browser": false
+        "headless_browser": true
     },
     "schedule": {
         "work_start": "08:30",
