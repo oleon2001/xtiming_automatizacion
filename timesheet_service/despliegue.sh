@@ -48,8 +48,14 @@ run_remote ssh ${REMOTE_USER}@${REMOTE_HOST} << EOF
     docker stop $PROJECT_NAME 2>/dev/null || true
     docker rm $PROJECT_NAME 2>/dev/null || true
     
-    # Limpiar directorio anterior si existe
+    # Limpiar directorio de código anterior
     rm -rf ~/$PROJECT_NAME
+    
+    # Crear directorio para datos persistentes si no existe
+    # (IMPORTANTE: Esto NO se debe borrar en cada deploy)
+    DATA_DIR=~/timesheet_data
+    mkdir -p \$DATA_DIR
+    echo "Directorio de datos persistentes: \$DATA_DIR"
     
     # Extraer el proyecto
     echo "Extrayendo archivos..."
@@ -64,11 +70,14 @@ run_remote ssh ${REMOTE_USER}@${REMOTE_HOST} << EOF
     
     # Ejecutar el contenedor
     echo "Iniciando contenedor..."
-    # Montamos el .env para poder editarlo en caliente si es necesario y persistir  cambios
+    # Montamos el .env y el directorio de data para persistencia
     docker run -d \\
         --name $PROJECT_NAME \\
         --restart unless-stopped \\
         -v \$(pwd)/.env:/app/.env \\
+        -v \$DATA_DIR:/app/data \\
+        -v /etc/timezone:/etc/timezone:ro \\
+        -v /etc/localtime:/etc/localtime:ro \\
         $PROJECT_NAME
     
     # Mostrar estado del contenedor

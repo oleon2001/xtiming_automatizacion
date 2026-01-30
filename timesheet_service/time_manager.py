@@ -10,10 +10,14 @@ class TimeManager:
     def __init__(self, config=None):
         schedule_config = config.get("schedule", {}) if config else {}
         
-        self.state_file = "time_manager_state.json"
-        self.processed_file = "processed_tickets.idx"
+        # Data directory configuration
+        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+        os.makedirs(self.data_dir, exist_ok=True)
         
-        self.work_start = self._parse_time(schedule_config.get("work_start", "08:30"))
+        self.state_file = os.path.join(self.data_dir, "time_manager_state.json")
+        self.processed_file = os.path.join(self.data_dir, "processed_tickets.idx")
+        
+        self.work_start = self._parse_time(schedule_config.get("work_start", "07:30"))
         self.lunch_start = self._parse_time(schedule_config.get("lunch_start", "11:30"))
         self.lunch_end = self._parse_time(schedule_config.get("lunch_end", "12:30"))
         self.target_hours = schedule_config.get("target_hours", 8)
@@ -194,6 +198,7 @@ class TimeManager:
         """
         Redistributes the target hours evenly across all provided tickets using integers only.
         Ensures the total sum is exactly target_hours * 60.
+        Splits tickets that overlap with lunch into two entries.
         """
         if not tickets:
             return []
@@ -205,9 +210,10 @@ class TimeManager:
         base_minutes = target_minutes // count
         remainder = target_minutes % count
         
-        logger.info(f"Redistribuyendo {target_minutes} min entre {count} tickets: {base_minutes} min base + {remainder} min de residuo.")
+        logger.info(f"PLANIFICANDO JORNADA: {target_minutes} min / {count} tickets = {base_minutes} min base (+{remainder} residual)")
+        logger.info(f"Rango Configurado: {self._format_time(self.work_start)} -> Fin (según carga) | Almuerzo: {self._format_time(self.lunch_start)}-{self._format_time(self.lunch_end)}")
         
-        schedule = []
+        schedule_list = []
         current_cursor = self.work_start
         
         for i, ticket in enumerate(tickets):
@@ -216,24 +222,72 @@ class TimeManager:
             
             start_dt = current_cursor
             
-            # Skip lunch if we are starting exactly on it
+            # CRITICAL: Always normalize start time before calculating end
+            # If start is inside lunch window [11:30, 12:30), jump to 12:30
             if self.lunch_start <= start_dt < self.lunch_end:
+                logger.debug(f"Salto de almuerzo detectado al inicio: {self._format_time(start_dt)} -> {self._format_time(self.lunch_end)}")
                 start_dt = self.lunch_end
 
-            end_dt = self._add_minutes_skipping_lunch(start_dt, duration)
+            tentative_end = start_dt + timedelta(minutes=duration)
             
-            schedule.append({
-                "ticket_id": ticket['ticket_id'],
-                "title": ticket['ticket_title'],
-                "start_time": self._format_time(start_dt),
-                "end_time": self._format_time(end_dt),
-                "duration_min": duration,
-                "raw_ticket": ticket
-            })
-            
-            current_cursor = end_dt
+            # Check for lunch overlap: Starts BEFORE lunch AND Ends AFTER lunch starts
+            # (Strict > check ensures we don't split if it ends EXACTLY at 11:30)
+            if start_dt < self.lunch_start and tentative_end > self.lunch_start:
+                # SPLIT LOGIC
+                logger.info(f"Ticket {ticket['ticket_id']} se divide por almuerzo.")
+                
+                # Part 1: Start to Lunch Start
+                duration_p1 = int((self.lunch_start - start_dt).total_seconds() / 60)
+                
+                # Part 2: Remainder
+                duration_p2 = duration - duration_p1
+                
+                # Entry 1
+                if duration_p1 > 0:
+                    schedule_list.append({
+                        "ticket_id": ticket['ticket_id'],
+                        "title": f"{ticket['ticket_title']} (Parte 1)",
+                        "start_time": self._format_time(start_dt),
+                        "end_time": self._format_time(self.lunch_start),
+                        "duration_min": duration_p1,
+                        "raw_ticket": ticket
+                    })
+                
+                # Entry 2 (starts after lunch)
+                start_dt_p2 = self.lunch_end
+                end_dt_p2 = start_dt_p2 + timedelta(minutes=duration_p2)
+                
+                if duration_p2 > 0:
+                    schedule_list.append({
+                        "ticket_id": ticket['ticket_id'],
+                        "title": f"{ticket['ticket_title']} (Parte 2)",
+                        "start_time": self._format_time(start_dt_p2),
+                        "end_time": self._format_time(end_dt_p2),
+                        "duration_min": duration_p2,
+                        "raw_ticket": ticket
+                    })
+                
+                # Actualizamos el cursor global al final de la parte 2
+                current_cursor = end_dt_p2
+                
+            else:
+                # LINEAR FLOW (No split)
+                schedule_list.append({
+                    "ticket_id": ticket['ticket_id'],
+                    "title": ticket['ticket_title'],
+                    "start_time": self._format_time(start_dt),
+                    "end_time": self._format_time(tentative_end),
+                    "duration_min": duration,
+                    "raw_ticket": ticket
+                })
+                current_cursor = tentative_end
 
-        return schedule
+        # Final Log Summary
+        if schedule_list:
+            last_entry = schedule_list[-1]
+            logger.info(f"Planificación finalizada. Jornada termina a las: {last_entry['end_time']}")
+
+        return schedule_list
 
     def mark_as_processed(self, ticket_id):
         t_id = str(ticket_id)

@@ -1,9 +1,10 @@
-import os
+import argparse
 import sys
 import json
 import logging
 from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
+import os
 
 # Ensure we can import modules from current directory
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,11 @@ except ImportError as e:
     sys.exit(1)
 
 def main():
+    # Argument parsing
+    parser = argparse.ArgumentParser(description="Xtiming Automation Service")
+    parser.add_argument("--now", action="store_true", help="Fuerza la ejecución inmediata de todas las rutinas (incluyendo el llenado de horas) al iniciar.")
+    args = parser.parse_args()
+
     # Load environment variables
     base_dir = os.path.dirname(os.path.abspath(__file__))
     env_path = os.path.join(base_dir, '.env')
@@ -55,10 +61,13 @@ def main():
         config_name=f" con {os.path.basename(config_path)}" if config_path else ""
     ))
 
+    if args.now:
+        logger.info("Modo manual activado: Se ejecutarán todas las tareas inmediatamente.")
+
     # Pasar la configuración al servicio
     service = SchedulerService(config)
     try:
-        service.run()
+        service.run(force_now=args.now)
     except KeyboardInterrupt:
         logger.info("Service stopped by user.")
     except Exception as e:

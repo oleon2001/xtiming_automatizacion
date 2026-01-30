@@ -1,12 +1,38 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext, Playwright
 import os
 import time
 import logging
+from typing import Dict, Any, Union, Optional, List
 
 logger = logging.getLogger("WebBot")
 
 class WebAutomator:
-    def __init__(self, config=None):
+    # Centralized Selectors for easier maintenance
+    SELECTORS = {
+        "login_user": "input[name='_username']",
+        "login_pass": "input[name='_password']",
+        "login_btn": "button[type='submit']",
+        "user_menu": ".user-menu",
+        
+        "ts_start_time": "#timesheet_edit_form_begin",
+        "ts_end_time": "#timesheet_edit_form_end",
+        
+        "ts_customer": "#timesheet_edit_form_customer",
+        "ts_project": "#timesheet_edit_form_project",
+        "ts_activity": "#timesheet_edit_form_activity",
+        "ts_description": "#timesheet_edit_form_description",
+        "ts_tags": "#timesheet_edit_form_tags",
+        
+        "ts_ticket_glpi": "#timesheet_edit_form_metaFields_ticket_glpi_value",
+        "ts_save_modal": "#form_modal_save",
+        "ts_save_footer": ".box-footer .btn-primary",
+        
+        "select2_search": ".select2-container--open .select2-search__field",
+        "select2_highlighted": ".select2-results__option--highlighted",
+        "select2_open_container": ".select2-container--open"
+    }
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
         self.user = os.getenv("XTIMING_USER")
         self.password = os.getenv("XTIMING_PASSWORD")
@@ -23,10 +49,10 @@ class WebAutomator:
         self.default_tag = defaults.get("tag", "Soporte")
 
         # Estado del navegador persistente
-        self.playwright = None
-        self.browser = None
-        self.context = None
-        self.page = None
+        self.playwright: Optional[Playwright] = None
+        self.browser: Optional[Browser] = None
+        self.context: Optional[BrowserContext] = None
+        self.page: Optional[Page] = None
 
     def start_browser(self):
         """Inicia una sesión de navegador persistente."""
@@ -58,17 +84,17 @@ class WebAutomator:
         self.browser = None
         self.playwright = None
 
-    def login(self, page):
+    def login(self, page: Page) -> bool:
         logger.info(f"Iniciando sesión para usuario {self.user}...")
         try:
             page.goto(f"{self.base_url}/login")
-            page.fill("input[name='_username']", self.user)
-            page.fill("input[name='_password']", self.password)
-            page.click("button[type='submit']")
+            page.fill(self.SELECTORS["login_user"], self.user)
+            page.fill(self.SELECTORS["login_pass"], self.password)
+            page.click(self.SELECTORS["login_btn"])
             page.wait_for_load_state('networkidle')
             
             # Validación mejorada
-            if page.locator(".user-menu").is_visible() or "login" not in page.url:
+            if page.locator(self.SELECTORS["user_menu"]).is_visible() or "login" not in page.url:
                 logger.info("Login exitoso.")
                 return True
             else:
@@ -79,7 +105,7 @@ class WebAutomator:
             logger.error(f"Excepción durante login: {e}")
             raise
 
-    def _select_select2(self, page, select_id, label_text):
+    def _select_select2(self, page: Page, select_id: str, label_text: str):
         if not label_text: return
 
         try:
@@ -91,38 +117,36 @@ class WebAutomator:
             if page.is_visible(container_selector):
                 page.click(container_selector)
             else:
+                # Fallback por si el container tiene otro ID dinámico, clickeamos el sibling visual
                 page.click(f"#{clean_id} + .select2 .select2-selection")
 
             # 2. Esperar input de búsqueda
-            search_input = ".select2-container--open .select2-search__field"
+            search_input = self.SELECTORS["select2_search"]
             page.wait_for_selector(search_input, state="visible", timeout=5000)
             
             # 3. Escribir y esperar resultados
             page.fill(search_input, label_text)
             
-            # Esperar a que aparezca al menos una opción resaltada o la opción específica
-            option_selector = ".select2-results__option--highlighted"
+            # Esperar a que aparezca al menos una opción resaltada
+            option_selector = self.SELECTORS["select2_highlighted"]
             page.wait_for_selector(option_selector, state="visible", timeout=5000)
             
             # 4. Click en la opción
             page.click(option_selector)
             
-            # 5. Esperar a que el container refleje el cambio (opcional, pero seguro)
-            # O simplemente esperar que el dropdown se cierre
-            page.wait_for_selector(".select2-container--open", state="hidden", timeout=2000)
+            # 5. Esperar a que el dropdown se cierre
+            page.wait_for_selector(self.SELECTORS["select2_open_container"], state="hidden", timeout=2000)
 
         except Exception as e:
             logger.warning(f"Error select2 '{label_text}': {e}. Intentando fallback nativo.")
             try:
                 # Fallback extremo: intentar forzar el valor en el select oculto
-                page.evaluate(f"""
-                    document.querySelector('{select_id}').value = '{label_text}'; # Esto suele requerir el ID del option, no el texto.
-                    # Mejor no hacer nada si falla el select2 visual.
-                """)
+                # Esto es arriesgado en SPAs reactivas, pero funciona en jQuery apps viejas
+                page.evaluate(f"document.querySelector('{select_id}').value = '{label_text}'")
             except:
                 pass
 
-    def fill_timesheet_entry(self, entry_data):
+    def fill_timesheet_entry(self, entry_data: Dict[str, Any]) -> bool:
         # Auto-start si no está iniciado
         if not self.page:
             self.start_browser()
@@ -135,11 +159,11 @@ class WebAutomator:
             page.wait_for_load_state('networkidle')
 
             # 1. Fechas y Horas
-            page.fill("#timesheet_edit_form_begin", entry_data['start_time'])
-            page.press("#timesheet_edit_form_begin", "Tab") # Tab es más seguro que Enter a veces
+            page.fill(self.SELECTORS["ts_start_time"], entry_data['start_time'])
+            page.press(self.SELECTORS["ts_start_time"], "Tab")
             
-            page.fill("#timesheet_edit_form_end", entry_data['end_time'])
-            page.press("#timesheet_edit_form_end", "Tab")
+            page.fill(self.SELECTORS["ts_end_time"], entry_data['end_time'])
+            page.press(self.SELECTORS["ts_end_time"], "Tab")
 
             # Valores
             target_client = entry_data.get('client', self.default_client)
@@ -147,35 +171,36 @@ class WebAutomator:
             target_activity = entry_data.get('activity', self.default_activity)
             target_tags = entry_data.get('tags', self.default_tag)
 
-            # Selectores Robustos
-            self._select_select2(page, "#timesheet_edit_form_customer", target_client)
-            page.wait_for_timeout(500) # Pequeña pausa para que cargue el siguiente select dependiente
+            # Selectores Robustos con Select2
+            self._select_select2(page, self.SELECTORS["ts_customer"], target_client)
+            page.wait_for_timeout(500) # Yield al UI
             
-            self._select_select2(page, "#timesheet_edit_form_project", target_project)
+            self._select_select2(page, self.SELECTORS["ts_project"], target_project)
             page.wait_for_timeout(500)
             
-            self._select_select2(page, "#timesheet_edit_form_activity", target_activity)
+            self._select_select2(page, self.SELECTORS["ts_activity"], target_activity)
 
-            page.fill("#timesheet_edit_form_description", entry_data['title'])
+            page.fill(self.SELECTORS["ts_description"], entry_data['title'])
 
             if isinstance(target_tags, list):
                 for tag in target_tags:
-                    self._select_select2(page, "#timesheet_edit_form_tags", tag)
+                    self._select_select2(page, self.SELECTORS["ts_tags"], tag)
             else:
-                self._select_select2(page, "#timesheet_edit_form_tags", target_tags)
+                self._select_select2(page, self.SELECTORS["ts_tags"], target_tags)
             
-            # Cerrar dropdown de tags si quedó abierto (click afuera)
-            page.click("#timesheet_edit_form_description") 
+            # Cerrar dropdown de tags si quedó abierto (click afuera en descripción)
+            page.click(self.SELECTORS["ts_description"]) 
 
             # Ticket GLPI
             if 'ticket_id' in entry_data and entry_data['ticket_id']:
-                selector_glpi = "#timesheet_edit_form_metaFields_ticket_glpi_value"
-                if page.is_visible(selector_glpi):
-                    page.fill(selector_glpi, str(entry_data['ticket_id']))
+                if page.is_visible(self.SELECTORS["ts_ticket_glpi"]):
+                    page.fill(self.SELECTORS["ts_ticket_glpi"], str(entry_data['ticket_id']))
 
             # Guardar
-            save_btn = "#form_modal_save" if page.is_visible("#form_modal_save") else ".box-footer .btn-primary"
-            page.click(save_btn)
+            if page.is_visible(self.SELECTORS["ts_save_modal"]):
+                page.click(self.SELECTORS["ts_save_modal"])
+            else:
+                page.click(self.SELECTORS["ts_save_footer"])
             
             page.wait_for_load_state('networkidle')
             

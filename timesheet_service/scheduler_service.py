@@ -1,6 +1,7 @@
 import time
 import schedule
 import os
+import json
 import logging
 import requests
 from datetime import datetime
@@ -21,7 +22,11 @@ class SchedulerService:
         self.entity_map = config.get("entity_map", {})
         self.defaults = config.get("defaults", {})
         
-        self.pending_file = "pending_tickets.json"
+        # Data directory configuration
+        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+        os.makedirs(self.data_dir, exist_ok=True)
+        
+        self.pending_file = os.path.join(self.data_dir, "pending_tickets.json")
 
     def _validate_config(self, config):
         """Validación básica de estructura de configuración."""
@@ -34,7 +39,7 @@ class SchedulerService:
              logger.warning("Config 'target_hours' debería ser numérico. Se usará default.")
 
     def _load_pending_tickets(self):
-        if not os.path.exists(self.pending_file):
+        if not os.path.exists(self.pending_file) or os.path.getsize(self.pending_file) == 0:
             return []
         try:
             with open(self.pending_file, "r") as f:
@@ -148,19 +153,21 @@ class SchedulerService:
 
     def routine_b(self):
         logger.info("Ejecutando Rutina B (Procesamiento Batch - 18:00)...")
+        successful_ids = set()
+        
         try:
             pending_tickets = self._load_pending_tickets()
             
             if not pending_tickets:
                 logger.info("No hay tickets pendientes para procesar.")
-                self.send_telegram("ℹ️ Fin de jornada: No hubo tickets para registrar.")
+                self.send_telegram("ℹ Fin de jornada: No hubo tickets para registrar.")
                 return
 
             # 1. Calcular distribución perfecta (8 horas / N tickets)
             schedule_plan = self.timer.calculate_distributed_slots(pending_tickets)
             
             logger.info(f"Procesando lote final de {len(schedule_plan)} tickets...")
-            self.send_telegram(f"🚀 Iniciando carga masiva de {len(schedule_plan)} tickets distribuidos en 8h.")
+            self.send_telegram(f"Iniciando carga masiva de {len(schedule_plan)} tickets distribuidos en 8h.")
 
             try:
                 self.bot.start_browser()
@@ -175,6 +182,7 @@ class SchedulerService:
                         # Enviar
                         if self.bot.fill_timesheet_entry(item):
                             self.timer.mark_as_processed(item['ticket_id'])
+                            successful_ids.add(str(item['ticket_id']))
                             success_count += 1
                             logger.info(f"Registrado: {item['title']} ({item['duration_min']}m)")
                         else:
@@ -184,27 +192,35 @@ class SchedulerService:
                         logger.error(f"Error procesando item {item['ticket_id']}: {e}")
 
                 # Reporte final
-                self.send_telegram(f"✅ Jornada finalizada. Registrados {success_count}/{len(pending_tickets)} tickets.")
-                
-                # Limpiar cola (o dejar los fallidos? Por simplicidad, limpiamos todo para evitar loop infinito mañana)
-                # Idealmente deberíamos guardar los fallidos, pero asumimos intervención humana si falla.
-                self._save_pending_tickets([]) 
+                self.send_telegram(f"Jornada finalizada. Registrados {success_count}/{len(pending_tickets)} tickets.")
 
             finally:
                 self.bot.close_browser()
+                
+                # CRITICO: Solo remover de pendientes los que REALMENTE se procesaron
+                remaining_tickets = [t for t in pending_tickets if str(t['ticket_id']) not in successful_ids]
+                self._save_pending_tickets(remaining_tickets)
+                
+                if remaining_tickets:
+                    logger.warning(f"Quedaron {len(remaining_tickets)} tickets pendientes por fallos.")
+                    self.send_telegram(f"Quedaron {len(remaining_tickets)} tickets sin registrar. Se reintentarán mañana.")
 
         except Exception as e:
             logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
-            self.send_telegram(f"⚠️ Error crítico en cierre de jornada: {e}")
+            self.send_telegram(f"Error crítico en cierre de jornada: {e}")
 
-    def run(self):
+    def run(self, force_now=False):
         schedule.every(2).hours.do(self.routine_a)
         schedule.every().day.at("18:00").do(self.routine_b)
         
         logger.info("Scheduler iniciado (Modo Batch). Esperando tareas...")
         
-        # Ejecución inicial de recolección
+        # Ejecución inicial de recolección (siempre se ejecuta al inicio)
         self.routine_a()
+
+        if force_now:
+            logger.info("FORZANDO EJECUCIÓN INMEDIATA (Argumento --now detectado)")
+            self.routine_b()
         
         while True:
             schedule.run_pending()
