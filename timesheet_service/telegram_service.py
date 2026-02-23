@@ -70,7 +70,7 @@ class TelegramService:
         today_pending = sum(1 for t in pending if t.get('target_date', '') == today_str or t.get('solvedate', '').startswith(today_str))
         
         msg = (
-            f"📊 *Estado del Sistema*\n"
+            f" *Estado del Sistema*\n"
             f"Tickets Pendientes Totales: `{pending_count}`\n"
             f"Pendientes para HOY: `{today_pending}`\n"
         )
@@ -84,14 +84,14 @@ class TelegramService:
             await update.message.reply_text("No hay nada pendiente, todo limpio.")
             return
 
-        msg = "📋 *Cola de Pendientes:*\n\n"
+        msg = " *Cola de Pendientes:*\n\n"
         for t in pending[:10]: # Limitar a 10 para no spammear
             tid = t.get('ticket_id')
             title = t.get('ticket_title', 'Sin titulo')[:30]
             date = t.get('target_date') or t.get('solvedate', '')[:10]
             source = t.get('source', 'glpi')
             
-            msg += f"🆔 `{tid}` ({source})\n📅 {date} | {title}...\n\n"
+            msg += f" `{tid}` ({source})\n📅 {date} | {title}...\n\n"
         
         if len(pending) > 10:
             msg += f"... y {len(pending)-10} más."
@@ -108,9 +108,9 @@ class TelegramService:
             
             ticket_id = context.args[0]
             if self.local_db.remove_pending_ticket(ticket_id):
-                await update.message.reply_text(f"✅ Ticket `{ticket_id}` eliminado de la cola.", parse_mode='Markdown')
+                await update.message.reply_text(f" Ticket `{ticket_id}` eliminado de la cola.", parse_mode='Markdown')
             else:
-                await update.message.reply_text(f"⚠️ No encontré el ticket `{ticket_id}` o ya se procesó.", parse_mode='Markdown')
+                await update.message.reply_text(f" No encontré el ticket `{ticket_id}` o ya se procesó.", parse_mode='Markdown')
         except Exception as e:
             await update.message.reply_text(f"Error borrando: {e}")
 
