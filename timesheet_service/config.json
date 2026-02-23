@@ -10,7 +10,7 @@
         "lunch_start": "11:30",
         "lunch_end": "12:30",
         "target_hours": 8,
-        "slot_duration_minutes": 30
+        "slot_duration_minutes": 60
     },
     "entity_map": {
         "150": "SV",

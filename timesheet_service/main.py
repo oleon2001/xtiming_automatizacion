@@ -30,6 +30,8 @@ def setup_logging(config):
 
 try:
     from scheduler_service import SchedulerService
+    from telegram_service import TelegramService
+    import threading
 except ImportError as e:
     print(f"Error importing modules: {e}")
     sys.exit(1)
@@ -38,6 +40,7 @@ def main():
     # Argument parsing
     parser = argparse.ArgumentParser(description="Xtiming Automation Service")
     parser.add_argument("--now", action="store_true", help="Fuerza la ejecución inmediata de todas las rutinas (incluyendo el llenado de horas) al iniciar.")
+    parser.add_argument("--sync-week", action="store_true", help="Busca y encola tickets no registrados de los últimos 7 días.")
     args = parser.parse_args()
 
     # Load environment variables
@@ -66,8 +69,18 @@ def main():
 
     # Pasar la configuración al servicio
     service = SchedulerService(config)
+
+    # Iniciar Bot de Telegram en un hilo separado
     try:
-        service.run(force_now=args.now)
+        tg_service = TelegramService(config)
+        tg_thread = threading.Thread(target=tg_service.run_bot, daemon=True)
+        tg_thread.start()
+        logger.info("Bot de Telegram lanzado en hilo secundario.")
+    except Exception as e:
+        logger.error(f"No se pudo iniciar el bot de Telegram: {e}")
+
+    try:
+        service.run(force_now=args.now, force_sync=args.sync_week)
     except KeyboardInterrupt:
         logger.info("Service stopped by user.")
     except Exception as e:

@@ -22,8 +22,9 @@ class SchedulerService:
         self.entity_map = config.get("entity_map", {})
         self.defaults = config.get("defaults", {})
         
-        # Data directory configuration
-        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+        # Configuración del directorio de datos (Carpeta hermana en despliegue)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.data_dir = os.path.abspath(os.path.join(base_dir, "..", "timesheet_data"))
         os.makedirs(self.data_dir, exist_ok=True)
         
         self.pending_file = os.path.join(self.data_dir, "pending_tickets.json")
@@ -42,7 +43,7 @@ class SchedulerService:
         if not os.path.exists(self.pending_file) or os.path.getsize(self.pending_file) == 0:
             return []
         try:
-            with open(self.pending_file, "r") as f:
+            with open(self.pending_file, "r", encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
             logger.error(f"Error cargando tickets pendientes: {e}")
@@ -50,8 +51,8 @@ class SchedulerService:
 
     def _save_pending_tickets(self, tickets):
         try:
-            with open(self.pending_file, "w") as f:
-                json.dump(tickets, f, default=str)
+            with open(self.pending_file, "w", encoding='utf-8') as f:
+                json.dump(tickets, f, default=str, ensure_ascii=False, indent=4)
         except Exception as e:
             logger.error(f"Error guardando tickets pendientes: {e}")
 
@@ -116,8 +117,42 @@ class SchedulerService:
         
         return meta
 
+    def routine_sync_backlog(self, days=7):
+        logger.info(f"Ejecutando Sincronizacion de Backlog ({days} dias)...")
+        try:
+            # 1. Obtener tickets del rango de la ultima semana
+            backlog_tickets = self.db.fetch_closed_tickets_range(days=days)
+            if not backlog_tickets:
+                logger.info("No se encontraron tickets en el periodo especificado.")
+                return
+
+            # 2. Cargar pendientes actuales y verificar procesados
+            pending = self._load_pending_tickets()
+            pending_ids = {str(t['ticket_id']) for t in pending}
+            
+            # 3. Filtrar: Solo los que no estan en procesados ni en la cola actual
+            added_count = 0
+            for ticket in backlog_tickets:
+                tid = str(ticket['ticket_id'])
+                if tid not in self.timer.processed_ids and tid not in pending_ids:
+                    pending.append(ticket)
+                    pending_ids.add(tid)
+                    added_count += 1
+            
+            # 4. Guardar cola actualizada
+            if added_count > 0:
+                self._save_pending_tickets(pending)
+                msg = f"Sincronizacion: Se recuperaron {added_count} tickets de la semana. Total pendiente: {len(pending)}"
+                logger.info(msg)
+                self.send_telegram(msg)
+            else:
+                logger.info("No se encontraron tickets faltantes en el periodo.")
+
+        except Exception as e:
+            logger.error(f"Error en Sincronizacion de Backlog: {e}", exc_info=True)
+
     def routine_a(self):
-        logger.info("Ejecutando Rutina A (Recolección de Tickets)...")
+        logger.info("Ejecutando Rutina A (Recoleccion de Tickets)...")
         try:
             # 1. Obtener tickets nuevos de DB
             new_tickets = self.db.fetch_closed_tickets_today()
@@ -130,7 +165,6 @@ class SchedulerService:
             pending_ids = {str(t['ticket_id']) for t in pending}
             
             # 3. Filtrar: No procesados HOY y No en cola pendiente
-            # Nota: time_manager.processed_ids tiene lo que YA se envió a la web
             added_count = 0
             for ticket in new_tickets:
                 tid = str(ticket['ticket_id'])
@@ -142,7 +176,7 @@ class SchedulerService:
             # 4. Guardar cola
             if added_count > 0:
                 self._save_pending_tickets(pending)
-                msg = f"📥 Se encolaron {added_count} tickets nuevos. Total pendiente: {len(pending)}"
+                msg = f"Se encolaron {added_count} tickets nuevos. Total pendiente: {len(pending)}"
                 logger.info(msg)
                 self.send_telegram(msg)
             else:
@@ -152,70 +186,117 @@ class SchedulerService:
             logger.error(f"Error en Rutina A: {e}", exc_info=True)
 
     def routine_b(self):
-        logger.info("Ejecutando Rutina B (Procesamiento Batch - 18:00)...")
+        logger.info("Ejecutando Rutina B (Procesamiento Batch)...")
         successful_ids = set()
         
         try:
             pending_tickets = self._load_pending_tickets()
-            
             if not pending_tickets:
                 logger.info("No hay tickets pendientes para procesar.")
-                self.send_telegram("ℹ Fin de jornada: No hubo tickets para registrar.")
+                self.send_telegram("Fin de jornada: No hubo tickets para registrar.")
                 return
 
-            # 1. Calcular distribución perfecta (8 horas / N tickets)
-            schedule_plan = self.timer.calculate_distributed_slots(pending_tickets)
-            
-            logger.info(f"Procesando lote final de {len(schedule_plan)} tickets...")
-            self.send_telegram(f"Iniciando carga masiva de {len(schedule_plan)} tickets distribuidos en 8h.")
+            # 1. Agrupar tickets por fecha (YYYY-MM-DD)
+            tickets_by_date = {}
+            for t in pending_tickets:
+                try:
+                    # Soporte para tickets de Telegram (target_date) o GLPI (solvedate)
+                    if t.get('source') == 'telegram':
+                        date_str = t.get('target_date', datetime.now().strftime("%Y-%m-%d"))
+                    else:
+                        sdate = t.get('solvedate')
+                        if not sdate:
+                             date_str = datetime.now().strftime("%Y-%m-%d")
+                        else:
+                             date_str = sdate[:10] if isinstance(sdate, str) else sdate.strftime("%Y-%m-%d")
+                except Exception as e:
+                    logger.warning(f"Error parseando fecha de ticket: {e}. Usando HOY.")
+                    date_str = datetime.now().strftime("%Y-%m-%d")
+                
+                if date_str not in tickets_by_date:
+                    tickets_by_date[date_str] = []
+                tickets_by_date[date_str].append(t)
+
+            logger.info(f"Se detectaron tickets para {len(tickets_by_date)} dias diferentes.")
+            self.send_telegram(f"Iniciando carga masiva. Dias a procesar: {', '.join(tickets_by_date.keys())}")
 
             try:
                 self.bot.start_browser()
-                success_count = 0
                 
-                for item in schedule_plan:
-                    try:
-                        # Enriquecer metadata
-                        raw_data = item.get('raw_ticket', {})
-                        item.update(self._determine_ticket_metadata(raw_data))
-                        
-                        # Enviar
-                        if self.bot.fill_timesheet_entry(item):
-                            self.timer.mark_as_processed(item['ticket_id'])
-                            successful_ids.add(str(item['ticket_id']))
-                            success_count += 1
-                            logger.info(f"Registrado: {item['title']} ({item['duration_min']}m)")
-                        else:
-                            logger.error(f"Fallo al registrar {item['ticket_id']}")
+                for date_str, daily_tickets in sorted(tickets_by_date.items()):
+                    logger.info(f"Procesando dia {date_str} ({len(daily_tickets)} tickets)...")
+                    
+                    # 2. Calcular distribucion para ESTE dia especifico
+                    schedule_plan = self.timer.calculate_distributed_slots(daily_tickets)
+                    
+                    success_count = 0
+                    for item in schedule_plan:
+                        ticket_id = item.get('ticket_id')
+                        try:
+                            # Enriquecer metadata
+                            raw_data = item.get('raw_ticket', {})
                             
-                    except Exception as e:
-                        logger.error(f"Error procesando item {item['ticket_id']}: {e}")
+                            if raw_data.get('source') == 'telegram':
+                                # Usar datos ya provistos por el usuario en Telegram
+                                item['client'] = raw_data.get('client')
+                                item['project'] = raw_data.get('project')
+                                item['activity'] = raw_data.get('activity')
+                                item['tags'] = raw_data.get('tags')
+                            else:
+                                # Enriquecer con heurísticas para GLPI
+                                item.update(self._determine_ticket_metadata(raw_data))
+                            
+                            # Enviar a la web
+                            if self.bot.fill_timesheet_entry(item):
+                                self.timer.mark_as_processed(ticket_id)
+                                successful_ids.add(str(ticket_id))
+                                success_count += 1
+                                logger.info(f"Registrado con exito [{date_str}]: {item['title']} (ID: {ticket_id})")
+                            else:
+                                logger.error(f"Fallo al registrar Ticket ID {ticket_id} en fecha {date_str}")
+                                
+                        except Exception as e:
+                            logger.error(f"Error critico procesando Ticket ID {ticket_id}: {str(e)}")
+                            continue
+                    
+                    logger.info(f"Completado dia {date_str}: {success_count}/{len(daily_tickets)} exitosos.")
 
-                # Reporte final
-                self.send_telegram(f"Jornada finalizada. Registrados {success_count}/{len(pending_tickets)} tickets.")
+                self.send_telegram(f"Proceso finalizado. Total IDs procesados: {len(successful_ids)}")
 
             finally:
                 self.bot.close_browser()
                 
-                # CRITICO: Solo remover de pendientes los que REALMENTE se procesaron
+                # Solo remover de pendientes los que REALMENTE se procesaron
                 remaining_tickets = [t for t in pending_tickets if str(t['ticket_id']) not in successful_ids]
                 self._save_pending_tickets(remaining_tickets)
                 
                 if remaining_tickets:
-                    logger.warning(f"Quedaron {len(remaining_tickets)} tickets pendientes por fallos.")
-                    self.send_telegram(f"Quedaron {len(remaining_tickets)} tickets sin registrar. Se reintentarán mañana.")
+                    logger.warning(f"Quedaron {len(remaining_tickets)} tickets pendientes.")
+                    self.send_telegram(f"Quedaron {len(remaining_tickets)} tickets sin registrar. Ver log.")
+
+        except Exception as e:
+            logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
+            self.send_telegram(f"Error critico en cierre de jornada: {e}")
 
         except Exception as e:
             logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
             self.send_telegram(f"Error crítico en cierre de jornada: {e}")
 
-    def run(self, force_now=False):
+    def run(self, force_now=False, force_sync=False):
+        # Programar tareas regulares
         schedule.every(2).hours.do(self.routine_a)
         schedule.every().day.at("18:00").do(self.routine_b)
         
-        logger.info("Scheduler iniciado (Modo Batch). Esperando tareas...")
+        # Sincronización semanal opcional (ej: todos los Lunes a las 08:00)
+        schedule.every().monday.at("08:00").do(self.routine_sync_backlog)
         
-        # Ejecución inicial de recolección (siempre se ejecuta al inicio)
+        logger.info("Scheduler iniciado. Esperando tareas...")
+        
+        # Ejecuciones iniciales si se solicitan
+        if force_sync:
+            logger.info("FORZANDO SINCRONIZACIÓN DE BACKLOG SEMANAL...")
+            self.routine_sync_backlog()
+
         self.routine_a()
 
         if force_now:

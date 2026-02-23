@@ -295,3 +295,264 @@ Exception: Browser.close: Connection closed while reading from the driver
 2026-01-30 16:34:37,041 - WebBot - INFO - Entrada registrada con éxito.
 2026-01-30 16:34:37,043 - Scheduler - INFO - Registrado: Diferencia en Conciliación 26-01-2026 (240m)
 2026-01-30 16:34:38,164 - WebBot - INFO - Cerrando navegador...
+2026-01-30 16:37:45,030 - Main - INFO - Service stopped by user.
+2026-02-03 15:23:01,128 - Main - INFO - Iniciando servicio con config.json...
+2026-02-03 15:23:01,160 - TimeManager - INFO - Loaded 2 processed tickets.
+2026-02-03 15:23:01,162 - Scheduler - INFO - Scheduler iniciado (Modo Batch). Esperando tareas...
+2026-02-03 15:23:01,162 - Scheduler - INFO - Ejecutando Rutina A (Recolección de Tickets)...
+2026-02-03 15:23:01,347 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-03 15:23:01,348 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-03 15:23:01,353 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-03 15:23:02,966 - Scheduler - INFO - 📥 Se encolaron 2 tickets nuevos. Total pendiente: 2
+2026-02-03 15:23:18,322 - Main - INFO - Service stopped by user.
+2026-02-13 10:23:36,290 - Main - INFO - Iniciando servicio con config.json...
+2026-02-13 10:23:36,291 - Main - INFO - Modo manual activado: Se ejecutarán todas las tareas inmediatamente.
+2026-02-13 10:23:36,327 - TimeManager - INFO - Loaded 2 processed tickets.
+2026-02-13 10:23:36,330 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-13 10:23:36,331 - Scheduler - INFO - FORZANDO SINCRONIZACIÓN DE BACKLOG SEMANAL...
+2026-02-13 10:23:36,332 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-13 10:23:36,499 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-13 10:23:36,500 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-13 10:23:36,506 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-13 10:23:40,649 - Scheduler - INFO - Sincronizacion: Se recuperaron 7 tickets de la semana. Total pendiente: 9
+2026-02-13 10:23:41,908 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-13 10:23:42,410 - Scheduler - INFO - Tickets encontrados ya estaban en cola o procesados.
+2026-02-13 10:23:42,411 - Scheduler - INFO - FORZANDO EJECUCIÓN INMEDIATA (Argumento --now detectado)
+2026-02-13 10:23:42,411 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch - 18:00)...
+2026-02-13 10:23:42,412 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 9 tickets = 53 min base (+3 residual)
+2026-02-13 10:23:42,413 - TimeManager - INFO - Rango Configurado: 13.02.2026 07:30 -> Fin (según carga) | Almuerzo: 13.02.2026 11:30-13.02.2026 12:30
+2026-02-13 10:23:42,414 - TimeManager - INFO - Ticket 2602080043 (Bloque 2) se divide por almuerzo.
+2026-02-13 10:23:42,415 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 13.02.2026 16:30
+2026-02-13 10:23:42,415 - Scheduler - INFO - Procesando lote final de 37 tickets...
+2026-02-13 10:23:44,173 - WebBot - INFO - Iniciando navegador...
+2026-02-13 10:24:03,501 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-13 10:24:15,827 - WebBot - INFO - Login exitoso.
+2026-02-13 10:24:15,828 - WebBot - INFO - Registrando: Error en acreencias 23-01-2026 (Bloque 1) [13.02.2026 07:30 - 13.02.2026 07:44]
+2026-02-13 10:24:21,822 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:21,824 - Scheduler - INFO - Registrado con exito: Error en acreencias 23-01-2026 (Bloque 1) (ID: 2601250028)
+2026-02-13 10:24:21,824 - WebBot - INFO - Registrando: Error en acreencias 23-01-2026 (Bloque 2) [13.02.2026 07:44 - 13.02.2026 07:58]
+2026-02-13 10:24:27,857 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:27,858 - Scheduler - INFO - Registrado con exito: Error en acreencias 23-01-2026 (Bloque 2) (ID: 2601250028)
+2026-02-13 10:24:27,859 - WebBot - INFO - Registrando: Error en acreencias 23-01-2026 (Bloque 3) [13.02.2026 07:58 - 13.02.2026 08:11]
+2026-02-13 10:24:34,284 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:34,285 - Scheduler - INFO - Registrado con exito: Error en acreencias 23-01-2026 (Bloque 3) (ID: 2601250028)
+2026-02-13 10:24:34,286 - WebBot - INFO - Registrando: Error en acreencias 23-01-2026 (Bloque 4) [13.02.2026 08:11 - 13.02.2026 08:24]
+2026-02-13 10:24:40,761 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:40,762 - Scheduler - INFO - Registrado con exito: Error en acreencias 23-01-2026 (Bloque 4) (ID: 2601250028)
+2026-02-13 10:24:40,763 - WebBot - INFO - Registrando: Recuperacion de trama (Bloque 1) [13.02.2026 08:24 - 13.02.2026 08:38]
+2026-02-13 10:24:47,325 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:47,326 - Scheduler - INFO - Registrado con exito: Recuperacion de trama (Bloque 1) (ID: 2601290200)
+2026-02-13 10:24:47,327 - WebBot - INFO - Registrando: Recuperacion de trama (Bloque 2) [13.02.2026 08:38 - 13.02.2026 08:52]
+2026-02-13 10:24:53,487 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:53,487 - Scheduler - INFO - Registrado con exito: Recuperacion de trama (Bloque 2) (ID: 2601290200)
+2026-02-13 10:24:53,488 - WebBot - INFO - Registrando: Recuperacion de trama (Bloque 3) [13.02.2026 08:52 - 13.02.2026 09:05]
+2026-02-13 10:24:59,246 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:24:59,247 - Scheduler - INFO - Registrado con exito: Recuperacion de trama (Bloque 3) (ID: 2601290200)
+2026-02-13 10:24:59,247 - WebBot - INFO - Registrando: Recuperacion de trama (Bloque 4) [13.02.2026 09:05 - 13.02.2026 09:18]
+2026-02-13 10:25:05,210 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:05,211 - Scheduler - INFO - Registrado con exito: Recuperacion de trama (Bloque 4) (ID: 2601290200)
+2026-02-13 10:25:05,212 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 1) [13.02.2026 09:18 - 13.02.2026 09:32]
+2026-02-13 10:25:11,009 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:11,012 - Scheduler - INFO - Registrado con exito: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 1) (ID: 2602050250)
+2026-02-13 10:25:11,013 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 2) [13.02.2026 09:32 - 13.02.2026 09:46]
+2026-02-13 10:25:17,003 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:17,004 - Scheduler - INFO - Registrado con exito: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 2) (ID: 2602050250)
+2026-02-13 10:25:17,004 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 3) [13.02.2026 09:46 - 13.02.2026 09:59]
+2026-02-13 10:25:23,639 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:23,640 - Scheduler - INFO - Registrado con exito: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 3) (ID: 2602050250)
+2026-02-13 10:25:23,640 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 4) [13.02.2026 09:59 - 13.02.2026 10:12]
+2026-02-13 10:25:30,200 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:30,201 - Scheduler - INFO - Registrado con exito: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 4) (ID: 2602050250)
+2026-02-13 10:25:30,202 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 1) [13.02.2026 10:12 - 13.02.2026 10:26]
+2026-02-13 10:25:36,729 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:36,732 - Scheduler - INFO - Registrado con exito: Datos de acreencias (Bloque 1) (ID: 2602060145)
+2026-02-13 10:25:36,733 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 2) [13.02.2026 10:26 - 13.02.2026 10:39]
+2026-02-13 10:25:43,382 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:43,382 - Scheduler - INFO - Registrado con exito: Datos de acreencias (Bloque 2) (ID: 2602060145)
+2026-02-13 10:25:43,383 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 3) [13.02.2026 10:39 - 13.02.2026 10:52]
+2026-02-13 10:25:49,856 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:49,856 - Scheduler - INFO - Registrado con exito: Datos de acreencias (Bloque 3) (ID: 2602060145)
+2026-02-13 10:25:49,857 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 4) [13.02.2026 10:52 - 13.02.2026 11:05]
+2026-02-13 10:25:56,292 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:25:56,292 - Scheduler - INFO - Registrado con exito: Datos de acreencias (Bloque 4) (ID: 2602060145)
+2026-02-13 10:25:56,293 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 1) [13.02.2026 11:05 - 13.02.2026 11:19]
+2026-02-13 10:26:02,679 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:02,682 - Scheduler - INFO - Registrado con exito: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 1) (ID: 2602080043)
+2026-02-13 10:26:02,683 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2.1) [13.02.2026 11:19 - 13.02.2026 11:30]
+2026-02-13 10:26:09,153 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:09,154 - Scheduler - INFO - Registrado con exito: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2.1) (ID: 2602080043)
+2026-02-13 10:26:09,155 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2.2) [13.02.2026 12:30 - 13.02.2026 12:32]
+2026-02-13 10:26:15,588 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:15,588 - Scheduler - INFO - Registrado con exito: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2.2) (ID: 2602080043)
+2026-02-13 10:26:15,589 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 3) [13.02.2026 12:32 - 13.02.2026 12:45]
+2026-02-13 10:26:22,173 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:22,174 - Scheduler - INFO - Registrado con exito: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 3) (ID: 2602080043)
+2026-02-13 10:26:22,175 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 4) [13.02.2026 12:45 - 13.02.2026 12:58]
+2026-02-13 10:26:28,686 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:28,687 - Scheduler - INFO - Registrado con exito: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 4) (ID: 2602080043)
+2026-02-13 10:26:28,688 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 1) [13.02.2026 12:58 - 13.02.2026 13:12]
+2026-02-13 10:26:35,154 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:35,155 - Scheduler - INFO - Registrado con exito: DIFERENCIA 06/02 T03 (Bloque 1) (ID: 2602090109)
+2026-02-13 10:26:35,156 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 2) [13.02.2026 13:12 - 13.02.2026 13:25]
+2026-02-13 10:26:41,737 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:41,738 - Scheduler - INFO - Registrado con exito: DIFERENCIA 06/02 T03 (Bloque 2) (ID: 2602090109)
+2026-02-13 10:26:41,739 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 3) [13.02.2026 13:25 - 13.02.2026 13:38]
+2026-02-13 10:26:48,426 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:48,427 - Scheduler - INFO - Registrado con exito: DIFERENCIA 06/02 T03 (Bloque 3) (ID: 2602090109)
+2026-02-13 10:26:48,428 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 4) [13.02.2026 13:38 - 13.02.2026 13:51]
+2026-02-13 10:26:54,990 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:26:54,990 - Scheduler - INFO - Registrado con exito: DIFERENCIA 06/02 T03 (Bloque 4) (ID: 2602090109)
+2026-02-13 10:26:54,990 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 1) [13.02.2026 13:51 - 13.02.2026 14:05]
+2026-02-13 10:27:01,057 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:27:01,059 - Scheduler - INFO - Registrado con exito: Re: Asociar código externo (Bloque 1) (ID: 2602100237)
+2026-02-13 10:27:01,060 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 2) [13.02.2026 14:05 - 13.02.2026 14:18]
+2026-02-13 10:27:07,230 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:27:07,231 - Scheduler - INFO - Registrado con exito: Re: Asociar código externo (Bloque 2) (ID: 2602100237)
+2026-02-13 10:27:07,232 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 3) [13.02.2026 14:18 - 13.02.2026 14:31]
+2026-02-13 10:27:13,476 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 10:27:13,477 - Scheduler - INFO - Registrado con exito: Re: Asociar código externo (Bloque 3) (ID: 2602100237)
+2026-02-13 10:27:13,477 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 4) [13.02.2026 14:31 - 13.02.2026 14:44]
+2026-02-13 10:27:17,156 - WebBot - INFO - Cerrando navegador...
+2026-02-13 10:27:19,313 - Main - INFO - Service stopped by user.
+2026-02-13 10:27:19,401 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-1372' coro=<Page.click() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:854> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-02-13 10:27:19,402 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-1373' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-13 11:20:41,310 - Main - INFO - Iniciando servicio con config.json...
+2026-02-13 11:20:41,311 - Main - INFO - Modo manual activado: Se ejecutarán todas las tareas inmediatamente.
+2026-02-13 11:20:41,314 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-13 11:20:41,314 - Scheduler - INFO - FORZANDO SINCRONIZACIÓN DE BACKLOG SEMANAL...
+2026-02-13 11:20:41,315 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-13 11:20:41,478 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-13 11:20:41,479 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-13 11:20:41,485 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-13 11:20:42,065 - Scheduler - INFO - Sincronizacion: Se recuperaron 7 tickets de la semana. Total pendiente: 7
+2026-02-13 11:20:43,160 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-13 11:20:43,645 - Scheduler - INFO - Tickets encontrados ya estaban en cola o procesados.
+2026-02-13 11:20:43,646 - Scheduler - INFO - FORZANDO EJECUCIÓN INMEDIATA (Argumento --now detectado)
+2026-02-13 11:20:43,646 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-13 11:20:43,648 - Scheduler - INFO - Se detectaron tickets para 6 dias diferentes.
+2026-02-13 11:20:44,578 - WebBot - INFO - Iniciando navegador...
+2026-02-13 11:20:46,411 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-13 11:20:52,573 - WebBot - INFO - Login exitoso.
+2026-02-13 11:20:52,573 - Scheduler - INFO - Procesando dia 2026-02-06 (1 tickets)...
+2026-02-13 11:20:52,616 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 1 tickets = 480 min base (+0 residual)
+2026-02-13 11:20:52,616 - TimeManager - INFO - Rango Configurado: 06.02.2026 07:30 -> Fin (según carga) | Almuerzo: 06.02.2026 11:30-06.02.2026 12:30
+2026-02-13 11:20:52,617 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 06.02.2026 16:30
+2026-02-13 11:20:52,618 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 1) [06.02.2026 07:30 - 06.02.2026 09:30]
+2026-02-13 11:21:01,176 - WebBot - ERROR - Error de validación en Xtiming: Desconocido
+2026-02-13 11:21:01,601 - WebBot - INFO - Screenshot del error guardada en: error_validation_1770996061.png
+2026-02-13 11:21:01,601 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602050250 en fecha 2026-02-06
+2026-02-13 11:21:01,602 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 2) [06.02.2026 09:30 - 06.02.2026 11:30]
+2026-02-13 11:21:10,835 - WebBot - ERROR - Error de validación en Xtiming: Desconocido
+2026-02-13 11:21:10,961 - WebBot - INFO - Screenshot del error guardada en: error_validation_1770996070.png
+2026-02-13 11:21:10,961 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602050250 en fecha 2026-02-06
+2026-02-13 11:21:10,962 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 3) [06.02.2026 12:30 - 06.02.2026 14:30]
+2026-02-13 11:21:20,155 - WebBot - ERROR - Error de validación en Xtiming: Desconocido
+2026-02-13 11:21:20,226 - WebBot - INFO - Screenshot del error guardada en: error_validation_1770996080.png
+2026-02-13 11:21:20,226 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602050250 en fecha 2026-02-06
+2026-02-13 11:21:20,227 - WebBot - INFO - Registrando: Urgente: TRANSACCIONES ATRAPADAS día 05/02/2026, T04 (Bloque 4) [06.02.2026 14:30 - 06.02.2026 16:30]
+2026-02-13 11:21:28,479 - WebBot - ERROR - Error de validación en Xtiming: Desconocido
+2026-02-13 11:21:28,537 - WebBot - INFO - Screenshot del error guardada en: error_validation_1770996088.png
+2026-02-13 11:21:28,538 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602050250 en fecha 2026-02-06
+2026-02-13 11:21:28,538 - Scheduler - INFO - Completado dia 2026-02-06: 0/1 exitosos.
+2026-02-13 11:21:28,538 - Scheduler - INFO - Procesando dia 2026-02-09 (2 tickets)...
+2026-02-13 11:21:28,539 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 2 tickets = 240 min base (+0 residual)
+2026-02-13 11:21:28,539 - TimeManager - INFO - Rango Configurado: 09.02.2026 07:30 -> Fin (según carga) | Almuerzo: 09.02.2026 11:30-09.02.2026 12:30
+2026-02-13 11:21:28,540 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 09.02.2026 16:30
+2026-02-13 11:21:28,540 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 1) [09.02.2026 07:30 - 09.02.2026 08:30]
+2026-02-13 11:21:34,223 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:21:34,226 - Scheduler - INFO - Registrado con exito [2026-02-09]: Datos de acreencias (Bloque 1) (ID: 2602060145)
+2026-02-13 11:21:34,226 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 2) [09.02.2026 08:30 - 09.02.2026 09:30]
+2026-02-13 11:21:39,915 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:21:39,916 - Scheduler - INFO - Registrado con exito [2026-02-09]: Datos de acreencias (Bloque 2) (ID: 2602060145)
+2026-02-13 11:21:39,916 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 3) [09.02.2026 09:30 - 09.02.2026 10:30]
+2026-02-13 11:21:45,587 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:21:45,588 - Scheduler - INFO - Registrado con exito [2026-02-09]: Datos de acreencias (Bloque 3) (ID: 2602060145)
+2026-02-13 11:21:45,588 - WebBot - INFO - Registrando: Datos de acreencias (Bloque 4) [09.02.2026 10:30 - 09.02.2026 11:30]
+2026-02-13 11:21:51,225 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:21:51,225 - Scheduler - INFO - Registrado con exito [2026-02-09]: Datos de acreencias (Bloque 4) (ID: 2602060145)
+2026-02-13 11:21:51,226 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 1) [09.02.2026 12:30 - 09.02.2026 13:30]
+2026-02-13 11:21:56,908 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:21:56,910 - Scheduler - INFO - Registrado con exito [2026-02-09]: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 1) (ID: 2602080043)
+2026-02-13 11:21:56,910 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2) [09.02.2026 13:30 - 09.02.2026 14:30]
+2026-02-13 11:22:03,234 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:03,235 - Scheduler - INFO - Registrado con exito [2026-02-09]: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 2) (ID: 2602080043)
+2026-02-13 11:22:03,236 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 3) [09.02.2026 14:30 - 09.02.2026 15:30]
+2026-02-13 11:22:09,516 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:09,516 - Scheduler - INFO - Registrado con exito [2026-02-09]: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 3) (ID: 2602080043)
+2026-02-13 11:22:09,517 - WebBot - INFO - Registrando: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 4) [09.02.2026 15:30 - 09.02.2026 16:30]
+2026-02-13 11:22:15,233 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:15,234 - Scheduler - INFO - Registrado con exito [2026-02-09]: URGENTE: Transacciones atrapadas T2 FEBRERO-08 (Bloque 4) (ID: 2602080043)
+2026-02-13 11:22:15,234 - Scheduler - INFO - Completado dia 2026-02-09: 8/2 exitosos.
+2026-02-13 11:22:15,234 - Scheduler - INFO - Procesando dia 2026-02-10 (1 tickets)...
+2026-02-13 11:22:15,235 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 1 tickets = 480 min base (+0 residual)
+2026-02-13 11:22:15,236 - TimeManager - INFO - Rango Configurado: 10.02.2026 07:30 -> Fin (según carga) | Almuerzo: 10.02.2026 11:30-10.02.2026 12:30
+2026-02-13 11:22:15,237 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 10.02.2026 16:30
+2026-02-13 11:22:15,237 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 1) [10.02.2026 07:30 - 10.02.2026 09:30]
+2026-02-13 11:22:21,027 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:21,029 - Scheduler - INFO - Registrado con exito [2026-02-10]: DIFERENCIA 06/02 T03 (Bloque 1) (ID: 2602090109)
+2026-02-13 11:22:21,030 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 2) [10.02.2026 09:30 - 10.02.2026 11:30]
+2026-02-13 11:22:26,682 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:26,683 - Scheduler - INFO - Registrado con exito [2026-02-10]: DIFERENCIA 06/02 T03 (Bloque 2) (ID: 2602090109)
+2026-02-13 11:22:26,683 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 3) [10.02.2026 12:30 - 10.02.2026 14:30]
+2026-02-13 11:22:32,424 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:32,425 - Scheduler - INFO - Registrado con exito [2026-02-10]: DIFERENCIA 06/02 T03 (Bloque 3) (ID: 2602090109)
+2026-02-13 11:22:32,425 - WebBot - INFO - Registrando: DIFERENCIA 06/02 T03 (Bloque 4) [10.02.2026 14:30 - 10.02.2026 16:30]
+2026-02-13 11:22:38,066 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:38,067 - Scheduler - INFO - Registrado con exito [2026-02-10]: DIFERENCIA 06/02 T03 (Bloque 4) (ID: 2602090109)
+2026-02-13 11:22:38,067 - Scheduler - INFO - Completado dia 2026-02-10: 4/1 exitosos.
+2026-02-13 11:22:38,067 - Scheduler - INFO - Procesando dia 2026-02-11 (1 tickets)...
+2026-02-13 11:22:38,068 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 1 tickets = 480 min base (+0 residual)
+2026-02-13 11:22:38,069 - TimeManager - INFO - Rango Configurado: 11.02.2026 07:30 -> Fin (según carga) | Almuerzo: 11.02.2026 11:30-11.02.2026 12:30
+2026-02-13 11:22:38,069 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 11.02.2026 16:30
+2026-02-13 11:22:38,069 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 1) [11.02.2026 07:30 - 11.02.2026 09:30]
+2026-02-13 11:22:43,718 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:43,720 - Scheduler - INFO - Registrado con exito [2026-02-11]: Re: Asociar código externo (Bloque 1) (ID: 2602100237)
+2026-02-13 11:22:43,721 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 2) [11.02.2026 09:30 - 11.02.2026 11:30]
+2026-02-13 11:22:49,412 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:49,412 - Scheduler - INFO - Registrado con exito [2026-02-11]: Re: Asociar código externo (Bloque 2) (ID: 2602100237)
+2026-02-13 11:22:49,413 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 3) [11.02.2026 12:30 - 11.02.2026 14:30]
+2026-02-13 11:22:55,166 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:22:55,166 - Scheduler - INFO - Registrado con exito [2026-02-11]: Re: Asociar código externo (Bloque 3) (ID: 2602100237)
+2026-02-13 11:22:55,167 - WebBot - INFO - Registrando: Re: Asociar código externo (Bloque 4) [11.02.2026 14:30 - 11.02.2026 16:30]
+2026-02-13 11:23:00,781 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:00,782 - Scheduler - INFO - Registrado con exito [2026-02-11]: Re: Asociar código externo (Bloque 4) (ID: 2602100237)
+2026-02-13 11:23:00,782 - Scheduler - INFO - Completado dia 2026-02-11: 4/1 exitosos.
+2026-02-13 11:23:00,783 - Scheduler - INFO - Procesando dia 2026-02-12 (1 tickets)...
+2026-02-13 11:23:00,783 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 1 tickets = 480 min base (+0 residual)
+2026-02-13 11:23:00,784 - TimeManager - INFO - Rango Configurado: 12.02.2026 07:30 -> Fin (según carga) | Almuerzo: 12.02.2026 11:30-12.02.2026 12:30
+2026-02-13 11:23:00,784 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 12.02.2026 16:30
+2026-02-13 11:23:00,785 - WebBot - INFO - Registrando: RECUPERACION DE TRAMA (Bloque 1) [12.02.2026 07:30 - 12.02.2026 09:30]
+2026-02-13 11:23:06,414 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:06,416 - Scheduler - INFO - Registrado con exito [2026-02-12]: RECUPERACION DE TRAMA (Bloque 1) (ID: 2602100287)
+2026-02-13 11:23:06,417 - WebBot - INFO - Registrando: RECUPERACION DE TRAMA (Bloque 2) [12.02.2026 09:30 - 12.02.2026 11:30]
+2026-02-13 11:23:12,089 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:12,090 - Scheduler - INFO - Registrado con exito [2026-02-12]: RECUPERACION DE TRAMA (Bloque 2) (ID: 2602100287)
+2026-02-13 11:23:12,090 - WebBot - INFO - Registrando: RECUPERACION DE TRAMA (Bloque 3) [12.02.2026 12:30 - 12.02.2026 14:30]
+2026-02-13 11:23:17,805 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:17,807 - Scheduler - INFO - Registrado con exito [2026-02-12]: RECUPERACION DE TRAMA (Bloque 3) (ID: 2602100287)
+2026-02-13 11:23:17,807 - WebBot - INFO - Registrando: RECUPERACION DE TRAMA (Bloque 4) [12.02.2026 14:30 - 12.02.2026 16:30]
+2026-02-13 11:23:23,479 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:23,480 - Scheduler - INFO - Registrado con exito [2026-02-12]: RECUPERACION DE TRAMA (Bloque 4) (ID: 2602100287)
+2026-02-13 11:23:23,481 - Scheduler - INFO - Completado dia 2026-02-12: 4/1 exitosos.
+2026-02-13 11:23:23,481 - Scheduler - INFO - Procesando dia 2026-02-13 (1 tickets)...
+2026-02-13 11:23:23,482 - TimeManager - INFO - PLANIFICANDO JORNADA: 480 min / 1 tickets = 480 min base (+0 residual)
+2026-02-13 11:23:23,482 - TimeManager - INFO - Rango Configurado: 13.02.2026 07:30 -> Fin (según carga) | Almuerzo: 13.02.2026 11:30-13.02.2026 12:30
+2026-02-13 11:23:23,483 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 13.02.2026 16:30
+2026-02-13 11:23:23,483 - WebBot - INFO - Registrando: Cajas no estan replicando códigos de liquidación (Bloque 1) [13.02.2026 07:30 - 13.02.2026 09:30]
+2026-02-13 11:23:29,106 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:29,107 - Scheduler - INFO - Registrado con exito [2026-02-13]: Cajas no estan replicando códigos de liquidación (Bloque 1) (ID: 2602120091)
+2026-02-13 11:23:29,108 - WebBot - INFO - Registrando: Cajas no estan replicando códigos de liquidación (Bloque 2) [13.02.2026 09:30 - 13.02.2026 11:30]
+2026-02-13 11:23:34,821 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:34,822 - Scheduler - INFO - Registrado con exito [2026-02-13]: Cajas no estan replicando códigos de liquidación (Bloque 2) (ID: 2602120091)
+2026-02-13 11:23:34,823 - WebBot - INFO - Registrando: Cajas no estan replicando códigos de liquidación (Bloque 3) [13.02.2026 12:30 - 13.02.2026 14:30]
+2026-02-13 11:23:40,630 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:40,631 - Scheduler - INFO - Registrado con exito [2026-02-13]: Cajas no estan replicando códigos de liquidación (Bloque 3) (ID: 2602120091)
+2026-02-13 11:23:40,631 - WebBot - INFO - Registrando: Cajas no estan replicando códigos de liquidación (Bloque 4) [13.02.2026 14:30 - 13.02.2026 16:30]
+2026-02-13 11:23:46,294 - WebBot - INFO - Entrada registrada con éxito.
+2026-02-13 11:23:46,294 - Scheduler - INFO - Registrado con exito [2026-02-13]: Cajas no estan replicando códigos de liquidación (Bloque 4) (ID: 2602120091)
+2026-02-13 11:23:46,295 - Scheduler - INFO - Completado dia 2026-02-13: 4/1 exitosos.
+2026-02-13 11:23:47,299 - WebBot - INFO - Cerrando navegador...
+2026-02-13 11:23:47,497 - Scheduler - WARNING - Quedaron 1 tickets pendientes.
+2026-02-13 11:28:30,868 - Main - INFO - Service stopped by user.

@@ -76,7 +76,6 @@ run_remote ssh ${REMOTE_USER}@${REMOTE_HOST} << EOF
         --restart unless-stopped \\
         -v \$(pwd)/.env:/app/.env \\
         -v \$DATA_DIR:/app/data \\
-        -v /etc/timezone:/etc/timezone:ro \\
         -v /etc/localtime:/etc/localtime:ro \\
         $PROJECT_NAME
     

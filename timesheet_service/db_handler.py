@@ -17,6 +17,49 @@ class DBHandler:
     def get_connection(self):
         return mysql.connector.connect(**self.config)
 
+    def fetch_closed_tickets_range(self, days=7):
+        # Obtener el correo del tecnico desde variables de entorno
+        user_email = os.getenv("GLPI_USER_EMAIL")
+        if not user_email:
+            print("ADVERTENCIA: GLPI_USER_EMAIL no configurado.")
+
+        query = """
+        SELECT 
+            gt.id AS ticket_id,
+            gt.name AS ticket_title,
+            gt.solvedate,
+            gt.entities_id,
+            ge.name AS entity_name,
+            ge.completename AS entity_fullname,
+            CONCAT(gu.realname, ' ', gu.firstname) AS technician_name,
+            gu.id AS technician_id
+        FROM glpi_tickets gt
+        LEFT JOIN glpi_entities ge ON gt.entities_id = ge.id
+        INNER JOIN glpi_tickets_users gtu ON gt.id = gtu.tickets_id AND gtu.type = 2
+        INNER JOIN glpi_users gu ON gtu.users_id = gu.id
+        INNER JOIN glpi_useremails gue ON gu.id = gue.users_id
+        WHERE gt.is_deleted = 0
+            AND gt.status > 4 
+            AND gt.solvedate >= DATE_SUB(CURRENT_DATE(), INTERVAL %s DAY)
+            AND gue.email = %s
+        ORDER BY gt.solvedate ASC;
+        """
+        
+        results = []
+        conn = None
+        cursor = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(query, (days, user_email))
+            return cursor.fetchall()
+        except Exception as e:
+            print(f"Error fetching tickets range: {e}")
+            return []
+        finally:
+            if cursor: cursor.close()
+            if conn: conn.close()
+
     def fetch_closed_tickets_today(self):
         # Obtener el correo del tecnico desde variables de entorno
         user_email = os.getenv("GLPI_USER_EMAIL")

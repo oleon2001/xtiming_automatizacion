@@ -203,12 +203,22 @@ class WebAutomator:
                 page.click(self.SELECTORS["ts_save_footer"])
             
             page.wait_for_load_state('networkidle')
-            
+            page.wait_for_timeout(2000) # Esperar un poco a posibles validaciones async
+
             # Validación de éxito
-            if "create" in page.url:
-                logger.error("No se redireccionó tras guardar. Posible error de validación.")
+            if "create" in page.url or page.locator(".alert-danger, .has-error").is_visible():
+                error_msg = "Desconocido"
+                try:
+                    # Intentar extraer el mensaje de error de la UI
+                    error_msg = page.locator(".alert-danger, .help-block.error, .invalid-feedback").first.inner_text(timeout=3000)
+                except:
+                    pass
+                
+                logger.error(f"Error de validación en Xtiming: {error_msg}")
                 if self.headless:
-                    page.screenshot(path=f"error_validation_{int(time.time())}.png")
+                    screenshot_path = f"error_validation_{int(time.time())}.png"
+                    page.screenshot(path=screenshot_path)
+                    logger.info(f"Screenshot del error guardada en: {screenshot_path}")
                 return False
 
             logger.info("Entrada registrada con éxito.")
