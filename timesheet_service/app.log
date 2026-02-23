@@ -556,3 +556,175 @@ task: <Task pending name='Task-1373' coro=<Page.close() running at C:\Users\acer
 2026-02-13 11:23:47,299 - WebBot - INFO - Cerrando navegador...
 2026-02-13 11:23:47,497 - Scheduler - WARNING - Quedaron 1 tickets pendientes.
 2026-02-13 11:28:30,868 - Main - INFO - Service stopped by user.
+2026-02-23 13:19:38,751 - Main - INFO - Iniciando servicio con config.json...
+2026-02-23 13:19:38,823 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-02-23 13:19:38,825 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-23 13:19:38,826 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-23 13:19:39,022 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-23 13:19:39,023 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-23 13:19:39,026 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-23 13:19:39,572 - TelegramBot - INFO - Bot de Telegram iniciado con persistencia.
+2026-02-23 13:19:40,182 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getMe "HTTP/1.1 200 OK"
+2026-02-23 13:19:40,354 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/deleteWebhook "HTTP/1.1 200 OK"
+2026-02-23 13:19:40,358 - telegram.ext.Application - INFO - Application started
+2026-02-23 13:19:45,045 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-23 13:19:45,049 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-23 13:19:50,867 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-23 13:19:50,869 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-23 13:19:52,334 - Scheduler - INFO - No hay tickets nuevos en GLPI.
+2026-02-23 13:19:58,017 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-23 13:19:58,020 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-23 13:20:01,239 - Main - INFO - Service stopped by user.

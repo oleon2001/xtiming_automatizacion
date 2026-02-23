@@ -1,10 +1,30 @@
-from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext, Playwright
+from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext, Playwright, TimeoutError as PlaywrightTimeout
 import os
 import time
 import logging
+import functools
 from typing import Dict, Any, Union, Optional, List
 
 logger = logging.getLogger("WebBot")
+
+def retry_action(max_retries=3, delay=1):
+    """Decorador para reintentar acciones de Playwright."""
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exception = None
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except (PlaywrightTimeout, Exception) as e:
+                    last_exception = e
+                    logger.warning(f"Intento {attempt + 1}/{max_retries} fallido en {func.__name__}: {str(e)}")
+                    time.sleep(delay * (attempt + 1)) # Backoff lineal
+            
+            logger.error(f"Acción {func.__name__} falló después de {max_retries} intentos.")
+            raise last_exception
+        return wrapper
+    return decorator
 
 class WebAutomator:
     # Centralized Selectors for easier maintenance
@@ -12,7 +32,7 @@ class WebAutomator:
         "login_user": "input[name='_username']",
         "login_pass": "input[name='_password']",
         "login_btn": "button[type='submit']",
-        "user_menu": ".user-menu",
+        "user_menu": ".user-menu, .dropdown-user", 
         
         "ts_start_time": "#timesheet_edit_form_begin",
         "ts_end_time": "#timesheet_edit_form_end",
@@ -24,12 +44,15 @@ class WebAutomator:
         "ts_tags": "#timesheet_edit_form_tags",
         
         "ts_ticket_glpi": "#timesheet_edit_form_metaFields_ticket_glpi_value",
-        "ts_save_modal": "#form_modal_save",
-        "ts_save_footer": ".box-footer .btn-primary",
+        "ts_save_btn": "button[type='submit']",
         
-        "select2_search": ".select2-container--open .select2-search__field",
-        "select2_highlighted": ".select2-results__option--highlighted",
-        "select2_open_container": ".select2-container--open"
+        "select2_container": ".select2-container",
+        "select2_search": ".select2-search__field",
+        "select2_results": ".select2-results__options",
+        "select2_option": ".select2-results__option",
+        
+        "alert_success": ".alert-success, .flash-success",
+        "alert_error": ".alert-danger, .has-error, .flash-error"
     }
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -38,26 +61,21 @@ class WebAutomator:
         self.password = os.getenv("XTIMING_PASSWORD")
         self.base_url = "https://xtiming.intelix.biz/index.php/es"
         
-        # Configuración de navegador
         self.headless = self.config.get("app", {}).get("headless_browser", False)
 
-        # Defaults (por si no vienen en entry_data)
         defaults = self.config.get("defaults", {})
         self.default_client = defaults.get("client_fallback", "Intelix")
         self.default_project = defaults.get("project_fallback", "Gestión - Intelix")
         self.default_activity = defaults.get("activity", "Soporte")
         self.default_tag = defaults.get("tag", "Soporte")
 
-        # Estado del navegador persistente
         self.playwright: Optional[Playwright] = None
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
         self.page: Optional[Page] = None
 
     def start_browser(self):
-        """Inicia una sesión de navegador persistente."""
-        if self.page:
-            return # Ya iniciado
+        if self.page: return
 
         logger.info("Iniciando navegador...")
         self.playwright = sync_playwright().start()
@@ -66,13 +84,13 @@ class WebAutomator:
         self.page = self.context.new_page()
         
         try:
-            self.login(self.page)
+            self.login()
         except Exception as e:
+            logger.error(f"Error crítico iniciando navegador: {e}")
             self.close_browser()
             raise e
 
     def close_browser(self):
-        """Cierra la sesión del navegador y libera recursos."""
         logger.info("Cerrando navegador...")
         if self.page: self.page.close()
         if self.context: self.context.close()
@@ -84,166 +102,141 @@ class WebAutomator:
         self.browser = None
         self.playwright = None
 
-    def login(self, page: Page) -> bool:
+    @retry_action(max_retries=3, delay=2)
+    def login(self):
+        page = self.page
         logger.info(f"Iniciando sesión para usuario {self.user}...")
+        page.goto(f"{self.base_url}/login")
+        
+        if page.locator(self.SELECTORS["user_menu"]).is_visible():
+            logger.info("Sesión recuperada.")
+            return True
+
+        page.fill(self.SELECTORS["login_user"], self.user)
+        page.fill(self.SELECTORS["login_pass"], self.password)
+        page.click(self.SELECTORS["login_btn"])
+        
         try:
-            page.goto(f"{self.base_url}/login")
-            page.fill(self.SELECTORS["login_user"], self.user)
-            page.fill(self.SELECTORS["login_pass"], self.password)
-            page.click(self.SELECTORS["login_btn"])
-            page.wait_for_load_state('networkidle')
-            
-            # Validación mejorada
-            if page.locator(self.SELECTORS["user_menu"]).is_visible() or "login" not in page.url:
-                logger.info("Login exitoso.")
-                return True
-            else:
-                logger.error("Fallo en login: Seguimos en la página de login.")
+            page.wait_for_selector(self.SELECTORS["user_menu"], timeout=15000)
+            logger.info("Login exitoso.")
+            return True
+        except PlaywrightTimeout:
+            if "login" in page.url:
                 raise Exception("Credenciales inválidas o error de carga.")
-                
-        except Exception as e:
-            logger.error(f"Excepción durante login: {e}")
-            raise
+            # Si cambió la URL pero no vimos el menú, asumimos éxito parcial
+            return True
 
-    def _select_select2(self, page: Page, select_id: str, label_text: str):
+    def _select_select2(self, selector_id: str, label_text: str):
+        """Manejo robusto de Select2."""
         if not label_text: return
+        page = self.page
 
         try:
-            logger.debug(f"Seleccionando '{label_text}' en {select_id}")
-            clean_id = select_id.lstrip('#')
+            # 1. Click para abrir (puede ser el select oculto o el container generado)
+            # Intentamos clickear el container de Select2 asociado
+            clean_id = selector_id.replace("#", "")
+            
+            # Select2 suele poner un span con aria-labelledby apuntando al select original
             container_selector = f"#select2-{clean_id}-container"
             
-            # 1. Abrir dropdown
             if page.is_visible(container_selector):
                 page.click(container_selector)
             else:
-                # Fallback por si el container tiene otro ID dinámico, clickeamos el sibling visual
-                page.click(f"#{clean_id} + .select2 .select2-selection")
+                # Fallback: clickear el hermano siguiente (estructura clásica)
+                page.click(f"{selector_id} + .select2 .select2-selection")
 
             # 2. Esperar input de búsqueda
-            search_input = self.SELECTORS["select2_search"]
-            page.wait_for_selector(search_input, state="visible", timeout=5000)
+            page.wait_for_selector(self.SELECTORS["select2_search"], state="visible", timeout=3000)
             
-            # 3. Escribir y esperar resultados
-            page.fill(search_input, label_text)
+            # 3. Escribir
+            page.fill(self.SELECTORS["select2_search"], label_text)
             
-            # Esperar a que aparezca al menos una opción resaltada
-            option_selector = self.SELECTORS["select2_highlighted"]
-            page.wait_for_selector(option_selector, state="visible", timeout=5000)
+            # 4. Esperar resultados
+            page.wait_for_selector(self.SELECTORS["select2_results"], state="visible", timeout=3000)
             
-            # 4. Click en la opción
-            page.click(option_selector)
-            
-            # 5. Esperar a que el dropdown se cierre
-            page.wait_for_selector(self.SELECTORS["select2_open_container"], state="hidden", timeout=2000)
+            # 5. Seleccionar opción (click en la primera coincidencia o resaltada)
+            # Primero buscamos coincidencia exacta de texto
+            option = page.locator(f".select2-results__option:text-is('{label_text}')")
+            if option.count() > 0:
+                option.first.click()
+            else:
+                # Si no, la primera opción visible (que debería ser la filtrada)
+                page.locator(self.SELECTORS["select2_option"]).first.click()
 
         except Exception as e:
-            logger.warning(f"Error select2 '{label_text}': {e}. Intentando fallback nativo.")
-            try:
-                # Fallback extremo: intentar forzar el valor en el select oculto
-                # Esto es arriesgado en SPAs reactivas, pero funciona en jQuery apps viejas
-                page.evaluate(f"document.querySelector('{select_id}').value = '{label_text}'")
-            except:
-                pass
+            logger.warning(f"Fallo select2 en {selector_id} para '{label_text}': {e}")
+            # Intento de cierre de emergencia (ESC)
+            page.keyboard.press("Escape")
 
     def fill_timesheet_entry(self, entry_data: Dict[str, Any]) -> bool:
-        # Auto-start si no está iniciado
-        if not self.page:
-            self.start_browser()
-        
+        if not self.page: self.start_browser()
         page = self.page
 
         try:
             logger.info(f"Registrando: {entry_data['title']} [{entry_data['start_time']} - {entry_data['end_time']}]")
+            
             page.goto(f"{self.base_url}/timesheet/create")
-            page.wait_for_load_state('networkidle')
+            page.wait_for_load_state('domcontentloaded')
 
-            # 1. Fechas y Horas
+            # --- Llenado ---
             page.fill(self.SELECTORS["ts_start_time"], entry_data['start_time'])
-            page.press(self.SELECTORS["ts_start_time"], "Tab")
+            page.evaluate(f"document.querySelector('{self.SELECTORS['ts_start_time']}').blur()")
             
             page.fill(self.SELECTORS["ts_end_time"], entry_data['end_time'])
-            page.press(self.SELECTORS["ts_end_time"], "Tab")
+            page.evaluate(f"document.querySelector('{self.SELECTORS['ts_end_time']}').blur()")
 
-            # Valores
-            target_client = entry_data.get('client', self.default_client)
-            target_project = entry_data.get('project', self.default_project)
-            target_activity = entry_data.get('activity', self.default_activity)
-            target_tags = entry_data.get('tags', self.default_tag)
-
-            # Selectores Robustos con Select2
-            self._select_select2(page, self.SELECTORS["ts_customer"], target_client)
-            page.wait_for_timeout(500) # Yield al UI
-            
-            self._select_select2(page, self.SELECTORS["ts_project"], target_project)
-            page.wait_for_timeout(500)
-            
-            self._select_select2(page, self.SELECTORS["ts_activity"], target_activity)
+            # Selects
+            self._select_select2(self.SELECTORS["ts_customer"], entry_data.get('client', self.default_client))
+            time.sleep(0.5) 
+            self._select_select2(self.SELECTORS["ts_project"], entry_data.get('project', self.default_project))
+            time.sleep(0.5)
+            self._select_select2(self.SELECTORS["ts_activity"], entry_data.get('activity', self.default_activity))
 
             page.fill(self.SELECTORS["ts_description"], entry_data['title'])
 
+            target_tags = entry_data.get('tags', self.default_tag)
             if isinstance(target_tags, list):
                 for tag in target_tags:
-                    self._select_select2(page, self.SELECTORS["ts_tags"], tag)
+                    self._select_select2(self.SELECTORS["ts_tags"], tag)
             else:
-                self._select_select2(page, self.SELECTORS["ts_tags"], target_tags)
+                self._select_select2(self.SELECTORS["ts_tags"], target_tags)
             
-            # Cerrar dropdown de tags si quedó abierto (click afuera en descripción)
-            page.click(self.SELECTORS["ts_description"]) 
+            # Cerrar dropdown de tags clickeando afuera
+            page.click("body", force=True, position={"x": 0, "y": 0})
 
-            # Ticket GLPI
-            if 'ticket_id' in entry_data and entry_data['ticket_id']:
-                if page.is_visible(self.SELECTORS["ts_ticket_glpi"]):
-                    page.fill(self.SELECTORS["ts_ticket_glpi"], str(entry_data['ticket_id']))
+            # ID Ticket (si es numérico)
+            ticket_id = entry_data.get('ticket_id')
+            # Check if ticket_id is a valid integer string (excludes "TEL-1234")
+            if ticket_id and str(ticket_id).isdigit():
+                 if page.locator(self.SELECTORS["ts_ticket_glpi"]).is_visible():
+                    page.fill(self.SELECTORS["ts_ticket_glpi"], str(ticket_id))
 
-            # Guardar
-            if page.is_visible(self.SELECTORS["ts_save_modal"]):
-                page.click(self.SELECTORS["ts_save_modal"])
-            else:
-                page.click(self.SELECTORS["ts_save_footer"])
+            # --- Guardado ---
+            # Esperar navegación tras click
+            with page.expect_navigation(timeout=10000): 
+                 page.click(self.SELECTORS["ts_save_btn"])
             
-            page.wait_for_load_state('networkidle')
-            page.wait_for_timeout(2000) # Esperar un poco a posibles validaciones async
+            # Validación post-navegación
+            if "create" not in page.url: 
+                logger.info("Redirección detectada. Registro exitoso.")
+                return True
+            
+            if page.locator(self.SELECTORS["alert_error"]).is_visible():
+                error_text = page.locator(self.SELECTORS["alert_error"]).first.inner_text()
+                raise Exception(f"Error de validación: {error_text}")
 
-            # Validación de éxito
-            if "create" in page.url or page.locator(".alert-danger, .has-error").is_visible():
-                error_msg = "Desconocido"
-                try:
-                    # Intentar extraer el mensaje de error de la UI
-                    error_msg = page.locator(".alert-danger, .help-block.error, .invalid-feedback").first.inner_text(timeout=3000)
-                except:
-                    pass
-                
-                logger.error(f"Error de validación en Xtiming: {error_msg}")
-                if self.headless:
-                    screenshot_path = f"error_validation_{int(time.time())}.png"
-                    page.screenshot(path=screenshot_path)
-                    logger.info(f"Screenshot del error guardada en: {screenshot_path}")
-                return False
-
-            logger.info("Entrada registrada con éxito.")
             return True
 
         except Exception as e:
-            logger.error(f"Error en automatización web: {e}")
+            logger.error(f"Error registrando ticket: {e}")
+            timestamp = int(time.time())
+            screenshot_path = os.path.abspath(f"error_validation_{timestamp}.png")
+            try:
+                page.screenshot(path=screenshot_path)
+                logger.info(f"Screenshot guardada: {screenshot_path}")
+            except:
+                pass
             return False
 
 if __name__ == "__main__":
-    import dotenv
-    dotenv.load_dotenv()
-    bot = WebAutomator()
-    bot.start_browser()
-    test_entry = {
-        "title": "Prueba de entrada automática",
-        "start_time": "2024-06-01 09:00",
-        "end_time": "2024-06-01 09:30",
-        "client": "Intelix",
-        "project": "Gestión - Intelix",
-        "activity": "Soporte",
-        "tags": "Soporte",
-        "ticket_id": 1234
-    }
-    success = bot.fill_timesheet_entry(test_entry)
-    print(f"Entrada de prueba registrada: {'Éxito' if success else 'Fallo'}")
-    bot.close_browser()
-    
+    pass

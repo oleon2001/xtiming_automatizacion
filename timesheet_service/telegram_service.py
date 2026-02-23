@@ -10,8 +10,10 @@ from telegram.ext import (
     CallbackQueryHandler,
     ConversationHandler,
     ContextTypes,
-    filters
+    filters,
+    PicklePersistence
 )
+import local_db
 
 logger = logging.getLogger("TelegramBot")
 
@@ -31,9 +33,11 @@ class TelegramService:
         
         # Configuración del directorio de datos
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.data_dir = os.path.abspath(os.path.join(base_dir, "..", "timesheet_data"))
+        self.data_dir = os.path.join(base_dir, "data")
         os.makedirs(self.data_dir, exist_ok=True)
-        self.pending_file = os.path.join(self.data_dir, "pending_tickets.json")
+        
+        self.local_db = local_db.LocalDB()
+        self.persistence_path = os.path.join(self.data_dir, "bot_persistence.pickle")
 
     def _is_authorized(self, update: Update) -> bool:
         try:
@@ -42,26 +46,85 @@ class TelegramService:
             return False
 
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if not self._is_authorized(update):
-            return
+        if not self._is_authorized(update): return
         
         await update.message.reply_text(
-            "Hola, perro descarado.\n"
-            "escribe /registrar para registrar una actividad y contentar a esa gente."
+            "Hola, perro descarado.\n\n"
+            "Comandos disponibles:\n"
+            "/registrar - Registrar actividad manual\n"
+            "/status - Ver estado del sistema\n"
+            "/pendientes - Ver tickets en cola\n"
+            "/borrar <ID> - Eliminar un ticket pendiente"
         )
 
-    async def iniciar_registro(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if not self._is_authorized(update):
+    # --- COMANDOS INFORMATIVOS ---
+
+    async def status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if not self._is_authorized(update): return
+        
+        pending = self.local_db.get_pending_tickets()
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        
+        # Conteo básico
+        pending_count = len(pending)
+        today_pending = sum(1 for t in pending if t.get('target_date', '') == today_str or t.get('solvedate', '').startswith(today_str))
+        
+        msg = (
+            f"📊 *Estado del Sistema*\n"
+            f"Tickets Pendientes Totales: `{pending_count}`\n"
+            f"Pendientes para HOY: `{today_pending}`\n"
+        )
+        await update.message.reply_text(msg, parse_mode='Markdown')
+
+    async def list_pending(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if not self._is_authorized(update): return
+        
+        pending = self.local_db.get_pending_tickets()
+        if not pending:
+            await update.message.reply_text("No hay nada pendiente, todo limpio.")
             return
+
+        msg = "📋 *Cola de Pendientes:*\n\n"
+        for t in pending[:10]: # Limitar a 10 para no spammear
+            tid = t.get('ticket_id')
+            title = t.get('ticket_title', 'Sin titulo')[:30]
+            date = t.get('target_date') or t.get('solvedate', '')[:10]
+            source = t.get('source', 'glpi')
+            
+            msg += f"🆔 `{tid}` ({source})\n📅 {date} | {title}...\n\n"
+        
+        if len(pending) > 10:
+            msg += f"... y {len(pending)-10} más."
+            
+        await update.message.reply_text(msg, parse_mode='Markdown')
+
+    async def delete_pending(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if not self._is_authorized(update): return
+        
+        try:
+            if not context.args:
+                await update.message.reply_text("Dime cual borro. Usa: /borrar <TICKET_ID>")
+                return
+            
+            ticket_id = context.args[0]
+            if self.local_db.remove_pending_ticket(ticket_id):
+                await update.message.reply_text(f"✅ Ticket `{ticket_id}` eliminado de la cola.", parse_mode='Markdown')
+            else:
+                await update.message.reply_text(f"⚠️ No encontré el ticket `{ticket_id}` o ya se procesó.", parse_mode='Markdown')
+        except Exception as e:
+            await update.message.reply_text(f"Error borrando: {e}")
+
+    # --- FLUJO DE REGISTRO MANUAL ---
+
+    async def iniciar_registro(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if not self._is_authorized(update): return
         
         await update.message.reply_text("Habla claro y dime que hiciste:")
         return AWAITING_DESCRIPTION
-    
 
     async def recibir_descripcion(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['desc'] = update.message.text
         
-        # Crear botones basados en entity_map
         keyboard = []
         entity_map = self.config.get("entity_map", {})
         for eid, suffix in entity_map.items():
@@ -131,8 +194,23 @@ class TelegramService:
             dates_to_register.append((today, half))
             dates_to_register.append((today + timedelta(days=1), half))
 
-        # Guardar en la cola de pendientes
-        self._add_to_pending(desc, client, project, dates_to_register)
+        # Generar IDs únicos y guardar
+        for i, (dt, hours) in enumerate(dates_to_register):
+            # Timestamp + index para evitar colisiones en split
+            ts_id = int(datetime.now().timestamp() * 1000) + i
+            new_entry = {
+                "source": "telegram",
+                "ticket_id": f"TEL-{ts_id}",
+                "ticket_title": desc,
+                "client": client,
+                "project": project,
+                "activity": self.config.get("defaults", {}).get("activity", "Soporte"),
+                "tags": self.config.get("defaults", {}).get("tag", "Soporte"),
+                "manual_hours": hours,
+                "target_date": dt.strftime("%Y-%m-%d"),
+                "status": "pending"
+            }
+            self.local_db.add_pending_ticket(new_entry)
 
         msg = (
             "Ya se encolo la mamada que dijiste\n"
@@ -144,42 +222,14 @@ class TelegramService:
         await query.edit_message_text(msg)
         return ConversationHandler.END
 
-    def _add_to_pending(self, desc, client, project, date_hour_tuples):
-        """Añade las tareas al archivo pending_tickets.json para que el Scheduler las vea."""
-        try:
-            tickets = []
-            if os.path.exists(self.pending_file) and os.path.getsize(self.pending_file) > 0:
-                with open(self.pending_file, "r", encoding='utf-8') as f:
-                    tickets = json.load(f)
-            
-            for dt, hours in date_hour_tuples:
-                new_entry = {
-                    "source": "telegram",
-                    "ticket_id": f"TEL-{int(datetime.now().timestamp())}",
-                    "ticket_title": desc,
-                    "client": client,
-                    "project": project,
-                    "activity": self.config.get("defaults", {}).get("activity", "Soporte"),
-                    "tags": self.config.get("defaults", {}).get("tag", "Soporte"),
-                    "manual_hours": hours,
-                    "target_date": dt.strftime("%Y-%m-%d"),
-                    "status": "pending"
-                }
-                tickets.append(new_entry)
-
-            with open(self.pending_file, "w", encoding='utf-8') as f:
-                json.dump(tickets, f, indent=4, ensure_ascii=False)
-                
-        except Exception as e:
-            logger.error(f"Error guardando tarea manual: {e}")
-
     async def cancel(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Registro cancelado.")
         return ConversationHandler.END
 
     def run_bot(self):
-        """Inicia el bot (bloqueante, debe ir en un hilo)."""
-        application = Application.builder().token(self.token).build()
+        """Inicia el bot con persistencia."""
+        persistence = PicklePersistence(filepath=self.persistence_path)
+        application = Application.builder().token(self.token).persistence(persistence).build()
 
         conv_handler = ConversationHandler(
             entry_points=[CommandHandler("registrar", self.iniciar_registro)],
@@ -190,13 +240,18 @@ class TelegramService:
                 AWAITING_DISTRIBUTION: [CallbackQueryHandler(self.finalizar_registro, pattern="^dist_")],
             },
             fallbacks=[CommandHandler("cancel", self.cancel)],
-            per_message=False # Silencia el warning de PTB
+            name="registro_manual_conversation",
+            persistent=True
         )
 
         application.add_handler(CommandHandler("start", self.start))
+        application.add_handler(CommandHandler("status", self.status_command))
+        application.add_handler(CommandHandler("pendientes", self.list_pending))
+        application.add_handler(CommandHandler("borrar", self.delete_pending))
+        
         application.add_handler(conv_handler)
 
-        logger.info("Bot de Telegram iniciado.")
+        logger.info("Bot de Telegram iniciado con persistencia.")
         
         # IMPORTANTE: stop_signals=None permite ejecutarlo en un hilo secundario
         application.run_polling(stop_signals=None)

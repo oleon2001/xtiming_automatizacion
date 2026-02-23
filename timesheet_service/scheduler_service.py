@@ -8,6 +8,7 @@ from datetime import datetime
 import db_handler
 import time_manager
 import web_automator
+import local_db
 
 logger = logging.getLogger("Scheduler")
 
@@ -16,18 +17,30 @@ class SchedulerService:
         self._validate_config(config)
         self.config = config
         self.db = db_handler.DBHandler()
-        self.timer = time_manager.TimeManager(config)
+        self.local_db = local_db.LocalDB()
+        self.timer = time_manager.TimeManager(config, self.local_db)
         self.bot = web_automator.WebAutomator(config)
         
         self.entity_map = config.get("entity_map", {})
         self.defaults = config.get("defaults", {})
         
-        # Configuración del directorio de datos (Carpeta hermana en despliegue)
+        # Cargar mapeos de negocio
+        self.mappings = self._load_mappings()
+        
+        # Configuración del directorio de datos (Carpeta interna gestionada por Docker)
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.data_dir = os.path.abspath(os.path.join(base_dir, "..", "timesheet_data"))
+        self.data_dir = os.path.join(base_dir, "data")
         os.makedirs(self.data_dir, exist_ok=True)
         
-        self.pending_file = os.path.join(self.data_dir, "pending_tickets.json")
+    def _load_mappings(self):
+        """Carga el archivo de mapeos de negocio."""
+        mappings_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mappings.json')
+        try:
+            with open(mappings_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"No se pudo cargar mappings.json: {e}")
+            return {"entity_rules": {}, "heuristics": []}
 
     def _validate_config(self, config):
         """Validación básica de estructura de configuración."""
@@ -38,23 +51,6 @@ class SchedulerService:
         
         if not isinstance(config["schedule"].get("target_hours"), (int, float)):
              logger.warning("Config 'target_hours' debería ser numérico. Se usará default.")
-
-    def _load_pending_tickets(self):
-        if not os.path.exists(self.pending_file) or os.path.getsize(self.pending_file) == 0:
-            return []
-        try:
-            with open(self.pending_file, "r", encoding='utf-8') as f:
-                return json.load(f)
-        except Exception as e:
-            logger.error(f"Error cargando tickets pendientes: {e}")
-            return []
-
-    def _save_pending_tickets(self, tickets):
-        try:
-            with open(self.pending_file, "w", encoding='utf-8') as f:
-                json.dump(tickets, f, default=str, ensure_ascii=False, indent=4)
-        except Exception as e:
-            logger.error(f"Error guardando tickets pendientes: {e}")
 
     def send_telegram(self, msg):
         token = os.getenv("TG_BOT_TOKEN")
@@ -68,53 +64,55 @@ class SchedulerService:
 
     def _determine_ticket_metadata(self, ticket_data):
         """
-        Determina cliente/proyecto usando configuración externa.
+        Determina cliente/proyecto usando reglas externas de mappings.json.
         """
-        title_lower = ticket_data.get('ticket_title', '').lower()
+        title = ticket_data.get('ticket_title', '')
         entity_id = str(ticket_data.get('entities_id', ''))
-        fullname_upper = ticket_data.get('entity_fullname', '').upper()
+        fullname = ticket_data.get('entity_fullname', '')
         
+        # Valores base por defecto
         meta = {
             "activity": self.defaults.get("activity", "Soporte"),
-            "tags": self.defaults.get("tag", "Soporte")
+            "tags": self.defaults.get("tag", "Soporte"),
+            "client": self.defaults.get("client_fallback", "Intelix"),
+            "project": self.defaults.get("project_fallback", "Gestión - Intelix")
         }
 
-        # 1. Búsqueda directa por ID en config
-        if entity_id in self.entity_map:
-            suffix = self.entity_map[entity_id]
-            meta["client"] = f"EPA {suffix}"
-            meta["project"] = f"Continuidad de Aplicaciones - EPA {suffix}"
-            meta["activity"] = "Caja Registradora" 
+        # 1. Búsqueda directa por ID de Entidad
+        entity_rules = self.mappings.get("entity_rules", {})
+        if entity_id in entity_rules:
+            meta.update(entity_rules[entity_id])
             return meta
 
-        # 2. Heurística usando Complete Name
-        if "EPA" in fullname_upper:
-            if "EPAVE" in fullname_upper or "EPA VE" in fullname_upper: suffix = "VE"
-            elif "EPAGT" in fullname_upper or "EPA GT" in fullname_upper: suffix = "GT"
-            elif "EPACR" in fullname_upper or "EPA CR" in fullname_upper: suffix = "CR"
-            elif "EPASV" in fullname_upper or "EPA SV" in fullname_upper: suffix = "SV"
-            else: suffix = None
-
-            if suffix:
-                meta["client"] = f"EPA {suffix}"
-                meta["project"] = f"Continuidad de Aplicaciones - EPA {suffix}"
-                meta["activity"] = "Caja Registradora"
-                return meta
+        # 2. Heurísticas basadas en texto (Contenido de nombre o título)
+        heuristics = self.mappings.get("heuristics", [])
+        for rule in heuristics:
+            field_value = ""
+            if rule["field"] == "entity_fullname":
+                field_value = fullname.upper()
+            elif rule["field"] == "ticket_title":
+                field_value = title.lower()
             
-            meta["client"] = self.defaults.get("client_fallback", "Comercializadoras EPA")
-            meta["project"] = self.defaults.get("project_fallback")
-            return meta
-
-        # 3. Heurística Bamerica
-        if "bamerica" in title_lower:
-            meta["client"] = "Bamerica"
-            meta["project"] = "Gestión - Bamerica"
-            return meta
+            # Verificar si alguna de las palabras clave coincide
+            match = False
+            patterns = rule["contains"]
+            if isinstance(patterns, str): patterns = [patterns]
+            
+            for p in patterns:
+                p_check = p.upper() if rule["field"] == "entity_fullname" else p.lower()
+                if p_check in field_value:
+                    match = True
+                    break
+            
+            if match:
+                meta.update(rule["result"])
+                # Si la regla no especificó proyecto pero sí cliente, intentamos heredar el proyecto del fallback
+                if "client" in rule["result"] and "project" not in rule["result"]:
+                    # Lógica especial para EPA si solo se detectó el cliente base
+                    if "EPA" in rule["result"]["client"] and not meta.get("project"):
+                         meta["project"] = self.defaults.get("project_fallback")
+                return meta
        
-        # 4. Fallback final
-        meta["client"] = self.defaults.get("client_fallback", "Intelix")
-        meta["project"] = self.defaults.get("project_fallback", "Gestión - Intelix")
-        
         return meta
 
     def routine_sync_backlog(self, days=7):
@@ -126,23 +124,22 @@ class SchedulerService:
                 logger.info("No se encontraron tickets en el periodo especificado.")
                 return
 
-            # 2. Cargar pendientes actuales y verificar procesados
-            pending = self._load_pending_tickets()
-            pending_ids = {str(t['ticket_id']) for t in pending}
+            # 2. Cargar pendientes actuales
+            pending_list = self.local_db.get_pending_tickets()
+            pending_ids = {str(t['ticket_id']) for t in pending_list}
             
             # 3. Filtrar: Solo los que no estan en procesados ni en la cola actual
             added_count = 0
             for ticket in backlog_tickets:
                 tid = str(ticket['ticket_id'])
-                if tid not in self.timer.processed_ids and tid not in pending_ids:
-                    pending.append(ticket)
+                if not self.local_db.is_processed(tid) and tid not in pending_ids:
+                    self.local_db.add_pending_ticket(ticket)
                     pending_ids.add(tid)
                     added_count += 1
             
-            # 4. Guardar cola actualizada
+            # 4. Notificar
             if added_count > 0:
-                self._save_pending_tickets(pending)
-                msg = f"Sincronizacion: Se recuperaron {added_count} tickets de la semana. Total pendiente: {len(pending)}"
+                msg = f"Sincronizacion: Se recuperaron {added_count} tickets de la semana. Total pendiente: {len(pending_ids)}"
                 logger.info(msg)
                 self.send_telegram(msg)
             else:
@@ -161,22 +158,21 @@ class SchedulerService:
                 return
 
             # 2. Cargar pendientes actuales
-            pending = self._load_pending_tickets()
-            pending_ids = {str(t['ticket_id']) for t in pending}
+            pending_list = self.local_db.get_pending_tickets()
+            pending_ids = {str(t['ticket_id']) for t in pending_list}
             
             # 3. Filtrar: No procesados HOY y No en cola pendiente
             added_count = 0
             for ticket in new_tickets:
                 tid = str(ticket['ticket_id'])
-                if tid not in self.timer.processed_ids and tid not in pending_ids:
-                    pending.append(ticket)
+                if not self.local_db.is_processed(tid) and tid not in pending_ids:
+                    self.local_db.add_pending_ticket(ticket)
                     pending_ids.add(tid)
                     added_count += 1
             
-            # 4. Guardar cola
+            # 4. Notificar
             if added_count > 0:
-                self._save_pending_tickets(pending)
-                msg = f"Se encolaron {added_count} tickets nuevos. Total pendiente: {len(pending)}"
+                msg = f"Se encolaron {added_count} tickets nuevos. Total pendiente: {len(pending_ids)}"
                 logger.info(msg)
                 self.send_telegram(msg)
             else:
@@ -190,7 +186,7 @@ class SchedulerService:
         successful_ids = set()
         
         try:
-            pending_tickets = self._load_pending_tickets()
+            pending_tickets = self.local_db.get_pending_tickets()
             if not pending_tickets:
                 logger.info("No hay tickets pendientes para procesar.")
                 self.send_telegram("Fin de jornada: No hubo tickets para registrar.")
@@ -250,6 +246,8 @@ class SchedulerService:
                             if self.bot.fill_timesheet_entry(item):
                                 self.timer.mark_as_processed(ticket_id)
                                 successful_ids.add(str(ticket_id))
+                                # Remover de pendientes inmediatamente si fue exitoso
+                                self.local_db.remove_pending_ticket(ticket_id)
                                 success_count += 1
                                 logger.info(f"Registrado con exito [{date_str}]: {item['title']} (ID: {ticket_id})")
                             else:
@@ -266,13 +264,11 @@ class SchedulerService:
             finally:
                 self.bot.close_browser()
                 
-                # Solo remover de pendientes los que REALMENTE se procesaron
-                remaining_tickets = [t for t in pending_tickets if str(t['ticket_id']) not in successful_ids]
-                self._save_pending_tickets(remaining_tickets)
-                
-                if remaining_tickets:
-                    logger.warning(f"Quedaron {len(remaining_tickets)} tickets pendientes.")
-                    self.send_telegram(f"Quedaron {len(remaining_tickets)} tickets sin registrar. Ver log.")
+                # Verificar remanentes
+                pending_after = self.local_db.get_pending_tickets()
+                if pending_after:
+                    logger.warning(f"Quedaron {len(pending_after)} tickets pendientes.")
+                    self.send_telegram(f"Quedaron {len(pending_after)} tickets sin registrar. Ver log.")
 
         except Exception as e:
             logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)

@@ -1,0 +1,77 @@
+{
+    "entity_rules": {
+        "150": {
+            "client": "EPA SV",
+            "project": "Continuidad de Aplicaciones - EPA SV",
+            "activity": "Caja Registradora"
+        },
+        "155": {
+            "client": "EPA GT",
+            "project": "Continuidad de Aplicaciones - EPA GT",
+            "activity": "Caja Registradora"
+        },
+        "123": {
+            "client": "EPA VE",
+            "project": "Continuidad de Aplicaciones - EPA VE",
+            "activity": "Caja Registradora"
+        },
+        "142": {
+            "client": "EPA CR",
+            "project": "Continuidad de Aplicaciones - EPA CR",
+            "activity": "Caja Registradora"
+        }
+    },
+    "heuristics": [
+        {
+            "field": "entity_fullname",
+            "contains": ["EPAVE", "EPA VE"],
+            "result": {
+                "client": "EPA VE",
+                "project": "Continuidad de Aplicaciones - EPA VE",
+                "activity": "Caja Registradora"
+            }
+        },
+        {
+            "field": "entity_fullname",
+            "contains": ["EPAGT", "EPA GT"],
+            "result": {
+                "client": "EPA GT",
+                "project": "Continuidad de Aplicaciones - EPA GT",
+                "activity": "Caja Registradora"
+            }
+        },
+        {
+            "field": "entity_fullname",
+            "contains": ["EPACR", "EPA CR"],
+            "result": {
+                "client": "EPA CR",
+                "project": "Continuidad de Aplicaciones - EPA CR",
+                "activity": "Caja Registradora"
+            }
+        },
+        {
+            "field": "entity_fullname",
+            "contains": ["EPASV", "EPA SV"],
+            "result": {
+                "client": "EPA SV",
+                "project": "Continuidad de Aplicaciones - EPA SV",
+                "activity": "Caja Registradora"
+            }
+        },
+        {
+            "field": "entity_fullname",
+            "contains": ["EPA"],
+            "result": {
+                "client": "Comercializadoras EPA"
+            }
+        },
+        {
+            "field": "ticket_title",
+            "contains": ["bamerica"],
+            "result": {
+                "client": "Bamerica",
+                "project": "Gestión - Bamerica"
+            }
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+*.log
+timesheet_data/
+.processed_tickets.idx.un~
+scheduler_state.pkl
+processed_tickets.idx
+error_validation_*.png
