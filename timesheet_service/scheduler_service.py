@@ -115,6 +115,31 @@ class SchedulerService:
        
         return meta
 
+    def routine_backlog_sweep(self, days=7):
+        """
+        Realiza un barrido completo: Sincroniza el backlog y procesa inmediatamente
+        los tickets que falten, sin interrumpir la jornada actual.
+        """
+        logger.info(f"INICIANDO BARRIDO DE BACKLOG ({days} días)...")
+        self.send_telegram(f"Iniciando barrido automático de tickets pendientes de los últimos {days} días...")
+        
+        # 1. Sincronizar (Traer tickets de GLPI a la cola local)
+        self.routine_sync_backlog(days=days)
+        
+        # 2. Procesar silenciosamente
+        pending_after_sync = self.local_db.get_pending_tickets()
+        if not pending_after_sync:
+            logger.info("Barrido finalizado: No hay tickets pendientes por registrar.")
+            self.send_telegram("Barrido completado: Todo está al día.")
+            return
+
+        # Filtrar solo tickets que pertenezcan al pasado (evitar procesar lo de HOY si se prefiere separar)
+        # En este caso procesaremos TODO lo que esté en cola.
+        logger.info(f"Barrido: Procesando {len(pending_after_sync)} tickets detectados.")
+        self.routine_b() # Reutilizamos la lógica de procesamiento batch
+        
+        logger.info("BARRIDO DE BACKLOG COMPLETADO.")
+
     def routine_sync_backlog(self, days=7):
         logger.info(f"Ejecutando Sincronizacion de Backlog ({days} dias)...")
         try:
@@ -181,6 +206,39 @@ class SchedulerService:
         except Exception as e:
             logger.error(f"Error en Rutina A: {e}", exc_info=True)
 
+    def _is_ticket_locked(self, ticket_date_str):
+        """
+        Bloquea tickets de semanas anteriores a partir del miércoles.
+        Semana arranca el lunes. Miércoles es el día 3 (ISO isoweekday() == 3).
+        Por regla, todo ticket de la semana (W-1) o menor está bloqueado si hoy es >= miércoles (3).
+        """
+        if not ticket_date_str:
+            return False
+            
+        try:
+            # Parsear fecha del ticket
+            if len(ticket_date_str) >= 19:
+                ticket_dt = datetime.strptime(ticket_date_str[:19], "%Y-%m-%d %H:%M:%S")
+            else:
+                ticket_dt = datetime.strptime(ticket_date_str[:10], "%Y-%m-%d")
+        except Exception as e:
+            logger.warning(f"Error parseando fecha para bloqueo '{ticket_date_str}': {e}")
+            return False # En caso de duda, no bloquear
+
+        now_dt = datetime.now()
+        
+        ticket_year, ticket_week, _ = ticket_dt.isocalendar()
+        now_year, now_week, now_day = now_dt.isocalendar()
+
+        # Si el ticket es de este año, pero de una semana estrictamente menor
+        # O si el ticket es del año pasado
+        is_past_week = (ticket_year < now_year) or (ticket_year == now_year and ticket_week < now_week)
+
+        # today_is_wednesday_or_later. isoformat: 1=Mon, 2=Tue, 3=Wed, 4=Thu...
+        is_locked_day = now_day >= 3
+
+        return is_past_week and is_locked_day
+
     def routine_b(self):
         logger.info("Ejecutando Rutina B (Procesamiento Batch)...")
         successful_ids = set()
@@ -192,26 +250,48 @@ class SchedulerService:
                 self.send_telegram("Fin de jornada: No hubo tickets para registrar.")
                 return
 
-            # 1. Agrupar tickets por fecha (YYYY-MM-DD)
+            # 1. Agrupar tickets por fecha (YYYY-MM-DD) y Filtrar Bloqueados
             tickets_by_date = {}
+            locked_count = 0
+            
             for t in pending_tickets:
                 try:
                     # Soporte para tickets de Telegram (target_date) o GLPI (solvedate)
                     if t.get('source') == 'telegram':
-                        date_str = t.get('target_date', datetime.now().strftime("%Y-%m-%d"))
+                        raw_date = t.get('target_date', datetime.now().strftime("%Y-%m-%d"))
                     else:
                         sdate = t.get('solvedate')
-                        if not sdate:
-                             date_str = datetime.now().strftime("%Y-%m-%d")
-                        else:
-                             date_str = sdate[:10] if isinstance(sdate, str) else sdate.strftime("%Y-%m-%d")
+                        raw_date = sdate if sdate else datetime.now().strftime("%Y-%m-%d")
+                        
+                    date_str = raw_date[:10] if isinstance(raw_date, str) else raw_date.strftime("%Y-%m-%d")
                 except Exception as e:
                     logger.warning(f"Error parseando fecha de ticket: {e}. Usando HOY.")
                     date_str = datetime.now().strftime("%Y-%m-%d")
+                    raw_date = date_str
+                
+                # --- REGLA DE NEGOCIO: FECHA LÍMITE ---
+                ticket_id = t.get('ticket_id')
+                if self._is_ticket_locked(raw_date):
+                    logger.warning(f"TICKET BLOQUEADO: El ticket {ticket_id} ({date_str}) pertenece a una semana ya cerrada.")
+                    self.send_telegram(f"Bloqueado: Ticket {ticket_id} ({date_str}) es de la semana pasada y el sistema ya cerró (Miércoles o posterior).")
+                    
+                    # Lo marcamos procesado para que no vuelva a ser pendiente nunca más
+                    self.timer.mark_as_processed(ticket_id)
+                    self.local_db.remove_pending_ticket(ticket_id)
+                    locked_count += 1
+                    continue
                 
                 if date_str not in tickets_by_date:
                     tickets_by_date[date_str] = []
                 tickets_by_date[date_str].append(t)
+
+            if locked_count > 0:
+                 logger.info(f"Se descartaron {locked_count} tickets por reglas de semana cerrada.")
+
+            if not tickets_by_date:
+                logger.info("Tras el filtrado de bloqueo, no quedaron tickets viables para procesar.")
+                self.send_telegram("Sin tickets procesables (Los pendientes estaban bloqueados por fecha).")
+                return
 
             logger.info(f"Se detectaron tickets para {len(tickets_by_date)} dias diferentes.")
             self.send_telegram(f"Iniciando carga masiva. Dias a procesar: {', '.join(tickets_by_date.keys())}")
@@ -225,40 +305,81 @@ class SchedulerService:
                     # 2. Calcular distribucion para ESTE dia especifico
                     schedule_plan = self.timer.calculate_distributed_slots(daily_tickets)
                     
+                    day_successful_ids = set()
+                    skipped_ids = set()  # Tickets que superaron el máximo de reintentos
+                    failure_counter = {}  # {ticket_id: int} — contador de fallos por ticket
+                    MAX_FAILURES_PER_TICKET = 3
                     success_count = 0
+                    
                     for item in schedule_plan:
                         ticket_id = item.get('ticket_id')
+                        tid_str = str(ticket_id)
+                        
+                        # --- SKIP si este ticket ya fue marcado como irrecuperable ---
+                        if tid_str in skipped_ids:
+                            logger.info(f"Saltando slot de ticket {tid_str} (ya marcado como irrecuperable).")
+                            continue
+                        
                         try:
                             # Enriquecer metadata
                             raw_data = item.get('raw_ticket', {})
                             
                             if raw_data.get('source') == 'telegram':
-                                # Usar datos ya provistos por el usuario en Telegram
-                                item['client'] = raw_data.get('client')
-                                item['project'] = raw_data.get('project')
-                                item['activity'] = raw_data.get('activity')
-                                item['tags'] = raw_data.get('tags')
+                                item['client'] = raw_data.get('client') or self.defaults.get('client_fallback', 'Intelix')
+                                item['project'] = raw_data.get('project') or self.defaults.get('project_fallback', 'Gestión - Intelix')
+                                item['activity'] = raw_data.get('activity') or self.defaults.get('activity', 'Soporte')
+                                item['tags'] = raw_data.get('tags') or self.defaults.get('tag', 'Soporte')
+                                logger.info(f"Procesando ticket manual de Telegram: {ticket_id}")
                             else:
-                                # Enriquecer con heurísticas para GLPI
                                 item.update(self._determine_ticket_metadata(raw_data))
                             
                             # Enviar a la web
                             if self.bot.fill_timesheet_entry(item):
-                                self.timer.mark_as_processed(ticket_id)
-                                successful_ids.add(str(ticket_id))
-                                # Remover de pendientes inmediatamente si fue exitoso
-                                self.local_db.remove_pending_ticket(ticket_id)
+                                day_successful_ids.add(tid_str)
                                 success_count += 1
+                                failure_counter.pop(tid_str, None)
                                 logger.info(f"Registrado con exito [{date_str}]: {item['title']} (ID: {ticket_id})")
                             else:
-                                logger.error(f"Fallo al registrar Ticket ID {ticket_id} en fecha {date_str}")
+                                failure_counter[tid_str] = failure_counter.get(tid_str, 0) + 1
+                                logger.error(f"Fallo al registrar Ticket ID {ticket_id} en fecha {date_str} (intento {failure_counter[tid_str]}/{MAX_FAILURES_PER_TICKET})")
                                 
+                                if failure_counter[tid_str] >= MAX_FAILURES_PER_TICKET:
+                                    logger.warning(f"TICKET IRRECUPERABLE: {ticket_id} falló {MAX_FAILURES_PER_TICKET} veces. Saltando todos sus slots restantes.")
+                                    self.send_telegram(f"Ticket {ticket_id} falló {MAX_FAILURES_PER_TICKET} veces seguidas. Se omitió para continuar con los demás.")
+                                    skipped_ids.add(tid_str)
+
                         except Exception as e:
                             logger.error(f"Error critico procesando Ticket ID {ticket_id}: {str(e)}")
+                            failure_counter[tid_str] = failure_counter.get(tid_str, 0) + 1
+                            
+                            if failure_counter[tid_str] >= MAX_FAILURES_PER_TICKET:
+                                logger.warning(f"TICKET IRRECUPERABLE (excepción): {ticket_id} falló {MAX_FAILURES_PER_TICKET} veces. Saltando.")
+                                self.send_telegram(f"Ticket {ticket_id} falló {MAX_FAILURES_PER_TICKET} veces (error crítico). Omitido.")
+                                skipped_ids.add(tid_str)
+                            
+                            # Intentar recuperar el navegador para que el siguiente ticket no falle en cascada
+                            try:
+                                logger.info("Intentando recuperar navegador tras excepción...")
+                                self.bot.close_browser()
+                                import time as _time
+                                _time.sleep(2)
+                                self.bot.start_browser()
+                                logger.info("Navegador recuperado exitosamente.")
+                            except Exception as recovery_err:
+                                logger.error(f"No se pudo recuperar el navegador: {recovery_err}")
+                                # Si no se puede recuperar, abortamos el día completo
+                                self.send_telegram(f"Navegador no recuperable. Abortando procesamiento del día {date_str}.")
+                                break
+                            
                             continue
                     
-                    logger.info(f"Completado dia {date_str}: {success_count}/{len(daily_tickets)} exitosos.")
+                    # Marcar como procesados y eliminar de pendientes SOLO al final del bloque diario
+                    for sid in day_successful_ids:
+                        self.timer.mark_as_processed(sid)
+                        self.local_db.remove_pending_ticket(sid)
+                        successful_ids.add(sid)
 
+                    logger.info(f"Completado dia {date_str}: {success_count} bloques registrados para {len(day_successful_ids)} tickets.")
                 self.send_telegram(f"Proceso finalizado. Total IDs procesados: {len(successful_ids)}")
 
             finally:
@@ -274,10 +395,6 @@ class SchedulerService:
             logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
             self.send_telegram(f"Error critico en cierre de jornada: {e}")
 
-        except Exception as e:
-            logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
-            self.send_telegram(f"Error crítico en cierre de jornada: {e}")
-
     def run(self, force_now=False, force_sync=False):
         # Programar tareas regulares
         schedule.every(2).hours.do(self.routine_a)
@@ -292,12 +409,19 @@ class SchedulerService:
         if force_sync:
             logger.info("FORZANDO SINCRONIZACIÓN DE BACKLOG SEMANAL...")
             self.routine_sync_backlog()
+            # Si solo era sync, terminamos
+            if not force_now:
+                logger.info("Sincronización finalizada. Saliendo de modo single-shot.")
+                return
 
         self.routine_a()
 
         if force_now:
-            logger.info("FORZANDO EJECUCIÓN INMEDIATA (Argumento --now detectado)")
+            logger.info("FORZANDO EJECUCIÓN INMEDIATA (Argumento detectado)")
             self.routine_b()
+            # Si estabamos en modo sweep directo, terminamos
+            logger.info("Ejecución manual finalizada. Saliendo de modo single-shot.")
+            return
         
         while True:
             schedule.run_pending()

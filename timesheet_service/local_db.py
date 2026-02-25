@@ -53,6 +53,38 @@ class LocalDB:
             """)
             
             conn.commit()
+        
+        # Intentar migración de archivo antiguo .idx si existe
+        self._migrate_from_old_idx()
+
+    def _migrate_from_old_idx(self):
+        """Migra IDs de tickets desde archivos legacy (.idx o sin extensión) a SQLite."""
+        data_dir = os.path.dirname(self.db_path)
+        # Buscar posibles nombres de archivos legacy
+        legacy_files = ["processed_tickets.idx", "processed_tickets"]
+        
+        for filename in legacy_files:
+            old_idx_path = os.path.join(data_dir, filename)
+            if not os.path.exists(old_idx_path):
+                continue
+
+            logger.info(f"Detectado historial legacy: {old_idx_path}. Iniciando migración...")
+            try:
+                with open(old_idx_path, 'r') as f:
+                    # Leemos IDs, limpiamos espacios y descartamos líneas vacías
+                    ids = [line.strip() for line in f.readlines() if line.strip()]
+                
+                if ids:
+                    with self._get_conn() as conn:
+                        for tid in ids:
+                            conn.execute("INSERT OR IGNORE INTO processed_tickets (ticket_id) VALUES (?)", (tid,))
+                        conn.commit()
+                    logger.info(f"Migración de {filename} completada: {len(ids)} tickets importados.")
+                
+                # Renombrar para no repetir migración en el próximo arranque
+                os.rename(old_idx_path, old_idx_path + ".migrated")
+            except Exception as e:
+                logger.error(f"Error durante la migración de {filename}: {e}")
 
     def add_pending_ticket(self, ticket_data):
         ticket_id = str(ticket_data.get('ticket_id'))

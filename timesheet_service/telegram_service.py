@@ -91,7 +91,7 @@ class TelegramService:
             date = t.get('target_date') or t.get('solvedate', '')[:10]
             source = t.get('source', 'glpi')
             
-            msg += f" `{tid}` ({source})\n📅 {date} | {title}...\n\n"
+            msg += f" `{tid}` ({source})\n {date} | {title}...\n\n"
         
         if len(pending) > 10:
             msg += f"... y {len(pending)-10} más."

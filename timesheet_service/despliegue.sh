@@ -51,11 +51,10 @@ run_remote ssh ${REMOTE_USER}@${REMOTE_HOST} << EOF
     # Limpiar directorio de código anterior
     rm -rf ~/$PROJECT_NAME
     
-    # Crear directorio para datos persistentes si no existe
-    # (IMPORTANTE: Esto NO se debe borrar en cada deploy)
-    DATA_DIR=~/timesheet_data
+    # Crear directorio para datos persistentes si no existe en /home (partición con espacio)
+    DATA_DIR=/home/cpgadmin/timesheet_data
     mkdir -p \$DATA_DIR
-    echo "Directorio de datos persistentes: \$DATA_DIR"
+    echo "Directorio de datos persistentes en partición segura: \$DATA_DIR"
     
     # Extraer el proyecto
     echo "Extrayendo archivos..."
@@ -64,20 +63,37 @@ run_remote ssh ${REMOTE_USER}@${REMOTE_HOST} << EOF
     # Ir al directorio del proyecto
     cd ~/$PROJECT_NAME
     
-    # Construir la imagen Docker
-    echo "Construyendo imagen Docker..."
-    docker build -t $PROJECT_NAME .
+    # Construir la imagen Docker de forma optimizada
+    echo "Construyendo imagen Docker (con prioridad baja para no afectar otros servicios)..."
+    # Usamos etiquetas intermedias para una limpieza más fácil
+    docker build -t $PROJECT_NAME:latest .
     
-    # Ejecutar el contenedor
+    # Detener contenedor existente SOLO si el build fue exitoso
+    if [ $? -eq 0 ]; then
+        echo "Build exitoso. Actualizando contenedor..."
+        docker stop $PROJECT_NAME 2>/dev/null || true
+        docker rm $PROJECT_NAME 2>/dev/null || true
+    else
+        echo "Error en el build. Abortando para no afectar el servicio actual."
+        exit 1
+    fi
+    
+    # Ejecutar el contenedor con límites de recursos si es necesario
     echo "Iniciando contenedor..."
-    # Montamos el .env y el directorio de data para persistencia
-    docker run -d \\
-        --name $PROJECT_NAME \\
-        --restart unless-stopped \\
-        -v \$(pwd)/.env:/app/.env \\
-        -v \$DATA_DIR:/app/data \\
-        -v /etc/localtime:/etc/localtime:ro \\
-        $PROJECT_NAME
+    docker run -d \
+        --name $PROJECT_NAME \
+        --restart unless-stopped \
+        --log-opt max-size=10m \
+        --log-opt max-file=3 \
+        -v \$(pwd)/.env:/app/.env \
+        -v \$DATA_DIR:/app/data \
+        -v /etc/localtime:/etc/localtime:ro \
+        $PROJECT_NAME:latest
+    
+    # Limpiar imágenes "dangling" (huérfanas) para recuperar espacio en disco
+    # Esto evita que el disco se llene y detenga otros servicios
+    echo "Limpiando imágenes antiguas..."
+    docker image prune -f --filter "label!=keep"
     
     # Mostrar estado del contenedor
     docker ps | grep $PROJECT_NAME

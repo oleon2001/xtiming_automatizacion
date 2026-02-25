@@ -41,6 +41,7 @@ def main():
     parser = argparse.ArgumentParser(description="Xtiming Automation Service")
     parser.add_argument("--now", action="store_true", help="Fuerza la ejecución inmediata de todas las rutinas (incluyendo el llenado de horas) al iniciar.")
     parser.add_argument("--sync-week", action="store_true", help="Busca y encola tickets no registrados de los últimos 7 días.")
+    parser.add_argument("--sweep", action="store_true", help="Realiza un barrido completo (Sincroniza y Registra) de los últimos 7 días inmediatamente.")
     args = parser.parse_args()
 
     # Load environment variables
@@ -70,16 +71,23 @@ def main():
     # Pasar la configuración al servicio
     service = SchedulerService(config)
 
-    # Iniciar Bot de Telegram en un hilo separado
-    try:
-        tg_service = TelegramService(config)
-        tg_thread = threading.Thread(target=tg_service.run_bot, daemon=True)
-        tg_thread.start()
-        logger.info("Bot de Telegram lanzado en hilo secundario.")
-    except Exception as e:
-        logger.error(f"No se pudo iniciar el bot de Telegram: {e}")
+    # Iniciar Bot de Telegram en un hilo separado solo si NO estamos en modo de una sola ejecución (sweep/sync)
+    if not (args.sweep or args.sync_week):
+        try:
+            tg_service = TelegramService(config)
+            tg_thread = threading.Thread(target=tg_service.run_bot, daemon=True)
+            tg_thread.start()
+            logger.info("Bot de Telegram lanzado en hilo secundario.")
+        except Exception as e:
+            logger.error(f"No se pudo iniciar el bot de Telegram: {e}")
+    else:
+        logger.info("Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.")
 
     try:
+        if args.sweep:
+            logger.info("MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...")
+            service.routine_backlog_sweep(days=7)
+            
         service.run(force_now=args.now, force_sync=args.sync_week)
     except KeyboardInterrupt:
         logger.info("Service stopped by user.")
