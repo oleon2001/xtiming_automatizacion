@@ -782,3 +782,1448 @@ task: <Task pending name='Task-22' coro=<Page.close() running at C:\Users\acer\A
 task: <Task pending name='Task-7' coro=<Page.goto() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:545> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
 2026-02-25 12:57:24,151 - asyncio - ERROR - Task was destroyed but it is pending!
 task: <Task pending name='Task-8' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-25 15:18:09,223 - Main - INFO - Iniciando servicio con config.json...
+2026-02-25 15:18:09,232 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-25 07:30:00, Logueado: 0m
+2026-02-25 15:18:09,233 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-25 15:18:09,234 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-25 15:18:09,234 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-25 15:18:10,360 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-25 15:18:10,551 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-25 15:18:10,552 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-25 15:18:10,558 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-25 15:18:11,791 - Scheduler - INFO - Sincronizacion: Se recuperaron 1 tickets de la semana. Total pendiente: 4
+2026-02-25 15:18:12,771 - Scheduler - INFO - Barrido: Procesando 4 tickets detectados.
+2026-02-25 15:18:12,771 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-25 15:18:12,821 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-25 15:18:13,914 - WebBot - INFO - Iniciando navegador...
+2026-02-25 15:18:34,459 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-25 15:18:36,611 - WebBot - INFO - Login exitoso.
+2026-02-25 15:18:36,612 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-25 15:18:36,613 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-25 15:18:36,613 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-25 15:18:36,614 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-25 15:18:36,614 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-25 15:19:07,182 - WebBot - WARNING - Fallo select2 en #timesheet_edit_form_customer para 'EPA VE': Page.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#timesheet_edit_form_customer + .select2 .select2-selection")
+    - locator resolved to <span tabindex="0" role="combobox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" class="select2-selection select2-selection--single" aria-labelledby="select2-timesheet_edit_form_customer-container">…</span>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-02-25 15:19:21,980 - WebBot - WARNING - Fallo select2 en #timesheet_edit_form_project para 'Continuidad de Aplicaciones - EPA VE': Page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("#timesheet_edit_form_project + .select2 .select2-selection")
+    - locator resolved to <span tabindex="0" role="combobox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" class="select2-selection select2-selection--single" aria-labelledby="select2-timesheet_edit_form_project-container">…</span>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    26 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-02-25 15:19:21,988 - WebBot - ERROR - Error registrando ticket: Keyboard.press: Target page, context or browser has been closed
+2026-02-25 15:19:22,110 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 1/3)
+2026-02-25 15:19:22,110 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (2) [23.02.2026 09:30 - 23.02.2026 11:30]
+2026-02-25 15:19:22,114 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 15:19:22,120 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 2/3)
+2026-02-25 15:19:22,120 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (3) [23.02.2026 12:30 - 23.02.2026 14:30]
+2026-02-25 15:19:22,123 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 15:19:22,127 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 3/3)
+2026-02-25 15:19:22,128 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220006 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 15:19:23,116 - Scheduler - INFO - Saltando slot de ticket 2602220006 (ya marcado como irrecuperable).
+2026-02-25 15:19:23,117 - Scheduler - INFO - Completado dia 2026-02-23: 0 bloques registrados para 0 tickets.
+2026-02-25 15:19:23,117 - Scheduler - INFO - Procesando dia 2026-02-24 (1 tickets)...
+2026-02-25 15:19:23,118 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-24): 480 min totales.
+2026-02-25 15:19:23,118 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-25 15:19:23,119 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 24.02.2026 16:30
+2026-02-25 15:19:23,119 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (1) [24.02.2026 07:30 - 24.02.2026 09:30]
+2026-02-25 15:19:23,122 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 15:19:23,127 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 1/3)
+2026-02-25 15:19:23,128 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (2) [24.02.2026 09:30 - 24.02.2026 11:30]
+2026-02-25 15:19:23,134 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 15:19:23,140 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 2/3)
+2026-02-25 15:19:23,142 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (3) [24.02.2026 12:30 - 24.02.2026 14:30]
+2026-02-25 15:19:23,149 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 15:19:23,156 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 3/3)
+2026-02-25 15:19:23,157 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220020 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 15:19:24,062 - WebBot - INFO - Cerrando navegador...
+2026-02-25 15:19:24,119 - Scheduler - ERROR - Error fatal en Rutina B: BrowserContext.close: Target page, context or browser has been closed
+Traceback (most recent call last):
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\scheduler_service.py", line 386, in routine_b
+    self.bot.close_browser()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\web_automator.py", line 96, in close_browser
+    if self.context: self.context.close()
+                     ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\sync_api\_generated.py", line 13548, in close
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.close(reason=reason)))
+                                   ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_browser_context.py", line 616, in close
+    await self._channel.send("close", None, {"reason": reason})
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: BrowserContext.close: Target page, context or browser has been closed
+2026-02-25 15:19:25,820 - Scheduler - INFO - BARRIDO DE BACKLOG COMPLETADO.
+2026-02-25 15:19:25,821 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-25 15:19:25,822 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-25 15:19:26,056 - Main - INFO - Service stopped by user.
+2026-02-25 16:04:24,001 - Main - INFO - Iniciando servicio con config.json...
+2026-02-25 16:04:24,001 - Main - INFO - Modo manual activado: Se ejecutarán todas las tareas inmediatamente.
+2026-02-25 16:04:24,010 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-25 07:30:00, Logueado: 0m
+2026-02-25 16:04:24,015 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-02-25 16:04:24,016 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-25 16:04:24,016 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-25 16:04:24,295 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-25 16:04:24,298 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-25 16:04:24,300 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-25 16:04:24,855 - TelegramBot - INFO - Bot de Telegram iniciado con persistencia.
+2026-02-25 16:04:25,591 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getMe "HTTP/1.1 200 OK"
+2026-02-25 16:04:25,777 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/deleteWebhook "HTTP/1.1 200 OK"
+2026-02-25 16:04:25,781 - telegram.ext.Application - INFO - Application started
+2026-02-25 16:04:28,199 - Scheduler - INFO - Tickets encontrados ya estaban en cola o procesados.
+2026-02-25 16:04:28,200 - Scheduler - INFO - FORZANDO EJECUCIÓN INMEDIATA (Argumento detectado)
+2026-02-25 16:04:28,200 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-25 16:04:28,223 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-25 16:04:29,238 - WebBot - INFO - Iniciando navegador...
+2026-02-25 16:04:30,904 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-25 16:04:31,958 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:04:31,963 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:04:34,095 - WebBot - INFO - Login exitoso.
+2026-02-25 16:04:34,096 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-25 16:04:34,096 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-25 16:04:34,097 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-25 16:04:34,097 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-25 16:04:34,098 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-25 16:04:37,979 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:04:37,982 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:04:45,054 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:04:45,056 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:04:51,036 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:04:51,038 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:05:00,051 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:05:00,054 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:05:04,495 - WebBot - WARNING - Fallo select2 en #timesheet_edit_form_customer para 'EPA VE': Page.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#timesheet_edit_form_customer + .select2 .select2-selection")
+    - locator resolved to <span tabindex="0" role="combobox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" class="select2-selection select2-selection--single" aria-labelledby="select2-timesheet_edit_form_customer-container">…</span>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-02-25 16:05:13,661 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:05:13,666 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:05:32,110 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 200 OK"
+2026-02-25 16:05:33,773 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:05:33,778 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:05:35,062 - WebBot - WARNING - Fallo select2 en #timesheet_edit_form_project para 'Continuidad de Aplicaciones - EPA VE': Page.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#timesheet_edit_form_project + .select2 .select2-selection")
+    - locator resolved to <span tabindex="0" role="combobox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" class="select2-selection select2-selection--single" aria-labelledby="select2-timesheet_edit_form_project-container">…</span>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <td class="available" data-title="r1c0">2</td> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-02-25 16:05:36,880 - WebBot - INFO - Cerrando navegador...
+2026-02-25 16:05:38,485 - Main - INFO - Service stopped by user.
+2026-02-25 16:05:38,550 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-59' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-25 16:05:38,554 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-58' coro=<Page.click() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:854> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-02-25 16:14:09,338 - Main - INFO - Iniciando servicio con config.json...
+2026-02-25 16:14:09,339 - Main - INFO - Modo manual activado: Se ejecutarán todas las tareas inmediatamente.
+2026-02-25 16:14:09,341 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-25 07:30:00, Logueado: 0m
+2026-02-25 16:14:09,344 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-02-25 16:14:09,345 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-25 16:14:09,345 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-25 16:14:09,533 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-25 16:14:09,533 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-25 16:14:09,537 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-25 16:14:10,075 - TelegramBot - INFO - Bot de Telegram iniciado con persistencia.
+2026-02-25 16:14:10,650 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getMe "HTTP/1.1 200 OK"
+2026-02-25 16:14:10,722 - Scheduler - INFO - Tickets encontrados ya estaban en cola o procesados.
+2026-02-25 16:14:10,723 - Scheduler - INFO - FORZANDO EJECUCIÓN INMEDIATA (Argumento detectado)
+2026-02-25 16:14:10,723 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-25 16:14:10,737 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-25 16:14:10,812 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/deleteWebhook "HTTP/1.1 200 OK"
+2026-02-25 16:14:10,819 - telegram.ext.Application - INFO - Application started
+2026-02-25 16:14:11,726 - WebBot - INFO - Iniciando navegador...
+2026-02-25 16:14:13,276 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-25 16:14:15,100 - WebBot - INFO - Login exitoso.
+2026-02-25 16:14:15,100 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-25 16:14:15,100 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-25 16:14:15,101 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-25 16:14:15,101 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-25 16:14:15,101 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-25 16:14:15,440 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:15,442 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:21,230 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:21,234 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:28,281 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:28,285 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:34,221 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:34,225 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:43,228 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:43,232 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:56,090 - WebBot - ERROR - Error registrando ticket: Page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("button[type='submit']")
+    - locator resolved to 2 elements. Proceeding with the first one: <button type="submit" data-type="submit" name="performSearch" value="performSearch" class="btn btn-primary pull-left">Buscar</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    10 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+  - element was detached from the DOM, retrying
+
+2026-02-25 16:14:56,217 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 1/3)
+2026-02-25 16:14:56,217 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (2) [23.02.2026 09:30 - 23.02.2026 11:30]
+2026-02-25 16:14:56,220 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:56,222 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 2/3)
+2026-02-25 16:14:56,222 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (3) [23.02.2026 12:30 - 23.02.2026 14:30]
+2026-02-25 16:14:56,224 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:56,227 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 3/3)
+2026-02-25 16:14:56,227 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220006 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 16:14:56,846 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:14:56,849 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:14:57,371 - Scheduler - INFO - Saltando slot de ticket 2602220006 (ya marcado como irrecuperable).
+2026-02-25 16:14:57,371 - Scheduler - INFO - Completado dia 2026-02-23: 0 bloques registrados para 0 tickets.
+2026-02-25 16:14:57,372 - Scheduler - INFO - Procesando dia 2026-02-24 (1 tickets)...
+2026-02-25 16:14:57,373 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-24): 480 min totales.
+2026-02-25 16:14:57,373 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-25 16:14:57,374 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 24.02.2026 16:30
+2026-02-25 16:14:57,375 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (1) [24.02.2026 07:30 - 24.02.2026 09:30]
+2026-02-25 16:14:57,379 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:57,383 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 1/3)
+2026-02-25 16:14:57,383 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (2) [24.02.2026 09:30 - 24.02.2026 11:30]
+2026-02-25 16:14:57,389 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:57,392 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 2/3)
+2026-02-25 16:14:57,393 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (3) [24.02.2026 12:30 - 24.02.2026 14:30]
+2026-02-25 16:14:57,395 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:57,397 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 3/3)
+2026-02-25 16:14:57,398 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220020 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 16:14:58,289 - Scheduler - INFO - Saltando slot de ticket 2602220020 (ya marcado como irrecuperable).
+2026-02-25 16:14:58,289 - Scheduler - INFO - Completado dia 2026-02-24: 0 bloques registrados para 0 tickets.
+2026-02-25 16:14:58,290 - Scheduler - INFO - Procesando dia 2026-02-25 (2 tickets)...
+2026-02-25 16:14:58,290 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-25): 480 min totales.
+2026-02-25 16:14:58,291 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 2 tickets.
+2026-02-25 16:14:58,291 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 25.02.2026 16:30
+2026-02-25 16:14:58,292 - WebBot - INFO - Registrando: SOPORTE TRANSACCION DUPLICADA T02 21/02/2026 (1) [25.02.2026 07:30 - 25.02.2026 08:30]
+2026-02-25 16:14:58,295 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:58,300 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602230270 en fecha 2026-02-25 (intento 1/3)
+2026-02-25 16:14:58,301 - WebBot - INFO - Registrando: SOPORTE TRANSACCION DUPLICADA T02 21/02/2026 (2) [25.02.2026 08:30 - 25.02.2026 09:30]
+2026-02-25 16:14:58,305 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:58,313 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602230270 en fecha 2026-02-25 (intento 2/3)
+2026-02-25 16:14:58,314 - WebBot - INFO - Registrando: SOPORTE TRANSACCION DUPLICADA T02 21/02/2026 (3) [25.02.2026 09:30 - 25.02.2026 10:30]
+2026-02-25 16:14:58,320 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:58,326 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602230270 en fecha 2026-02-25 (intento 3/3)
+2026-02-25 16:14:58,327 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602230270 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 16:14:59,250 - Scheduler - INFO - Saltando slot de ticket 2602230270 (ya marcado como irrecuperable).
+2026-02-25 16:14:59,251 - WebBot - INFO - Registrando: DIFERENCIA T02 21/02 (1) [25.02.2026 12:30 - 25.02.2026 13:30]
+2026-02-25 16:14:59,254 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:59,257 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602240291 en fecha 2026-02-25 (intento 1/3)
+2026-02-25 16:14:59,258 - WebBot - INFO - Registrando: DIFERENCIA T02 21/02 (2) [25.02.2026 13:30 - 25.02.2026 14:30]
+2026-02-25 16:14:59,262 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:59,266 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602240291 en fecha 2026-02-25 (intento 2/3)
+2026-02-25 16:14:59,267 - WebBot - INFO - Registrando: DIFERENCIA T02 21/02 (3) [25.02.2026 14:30 - 25.02.2026 15:30]
+2026-02-25 16:14:59,269 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-25 16:14:59,274 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602240291 en fecha 2026-02-25 (intento 3/3)
+2026-02-25 16:14:59,274 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602240291 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-25 16:15:00,211 - Scheduler - INFO - Saltando slot de ticket 2602240291 (ya marcado como irrecuperable).
+2026-02-25 16:15:00,211 - Scheduler - INFO - Completado dia 2026-02-25: 0 bloques registrados para 0 tickets.
+2026-02-25 16:15:00,393 - WebBot - INFO - Cerrando navegador...
+2026-02-25 16:15:00,731 - Scheduler - WARNING - Quedaron 4 tickets pendientes.
+2026-02-25 16:15:01,639 - Main - INFO - Service stopped by user.
+2026-02-25 16:25:47,010 - Main - INFO - Iniciando servicio con config.json...
+2026-02-25 16:25:47,026 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-25 07:30:00, Logueado: 0m
+2026-02-25 16:25:47,032 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-02-25 16:25:47,034 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-02-25 16:25:47,035 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-02-25 16:25:47,269 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-25 16:25:47,272 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-25 16:25:47,277 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-25 16:25:48,908 - Scheduler - INFO - Tickets encontrados ya estaban en cola o procesados.
+2026-02-25 16:25:49,302 - TelegramBot - INFO - Bot de Telegram iniciado con persistencia.
+2026-02-25 16:25:50,159 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getMe "HTTP/1.1 200 OK"
+2026-02-25 16:25:50,355 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/deleteWebhook "HTTP/1.1 200 OK"
+2026-02-25 16:25:50,364 - telegram.ext.Application - INFO - Application started
+2026-02-25 16:25:55,003 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:25:55,008 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:26:00,798 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8101304195:AAGVkMB3EaJqymvt_g21zSI6hJBTz6NSNNE/getUpdates "HTTP/1.1 409 Conflict"
+2026-02-25 16:26:00,801 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-02-25 16:26:02,238 - Main - INFO - Service stopped by user.
+2026-02-26 11:07:53,050 - Main - INFO - Iniciando servicio con config.json...
+2026-02-26 11:07:53,062 - TimeManager - INFO - Estado guardado es de un día anterior. Reseteando cursor.
+2026-02-26 11:07:53,098 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-26 11:07:53,099 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-26 11:07:53,100 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-26 11:07:54,194 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-26 11:08:15,318 - Scheduler - INFO - No se encontraron tickets en el periodo especificado.
+2026-02-26 11:08:15,323 - Scheduler - INFO - Barrido: Procesando 4 tickets detectados.
+2026-02-26 11:08:15,324 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-26 11:08:15,362 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-26 11:08:16,280 - WebBot - INFO - Iniciando navegador...
+2026-02-26 11:08:33,050 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-26 11:08:35,384 - WebBot - INFO - Login exitoso.
+2026-02-26 11:08:35,385 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-26 11:08:35,386 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-26 11:08:35,386 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-26 11:08:35,387 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-26 11:08:35,387 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-26 11:08:52,369 - WebBot - INFO - Cerrando navegador...
+2026-02-26 11:08:54,002 - Main - INFO - Service stopped by user.
+2026-02-26 11:08:54,028 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Page.click() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:854> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-02-26 11:08:54,069 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-26 11:14:41,705 - Main - INFO - Iniciando servicio con config.json...
+2026-02-26 11:14:41,709 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-26 07:30:00, Logueado: 0m
+2026-02-26 11:14:41,710 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-26 11:14:41,710 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-26 11:14:41,710 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-26 11:14:42,730 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-26 11:15:03,869 - Scheduler - INFO - No se encontraron tickets en el periodo especificado.
+2026-02-26 11:15:03,872 - Scheduler - INFO - Barrido: Procesando 4 tickets detectados.
+2026-02-26 11:15:03,872 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-26 11:15:03,889 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-26 11:15:04,798 - WebBot - INFO - Iniciando navegador...
+2026-02-26 11:15:05,869 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-26 11:15:08,763 - WebBot - INFO - Login exitoso.
+2026-02-26 11:15:08,764 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-26 11:15:08,764 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-26 11:15:08,765 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-26 11:15:08,765 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-26 11:15:08,766 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-26 11:15:24,896 - WebBot - WARNING - Fallo select2 en #timesheet_edit_form_customer para 'EPA VE': Page.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("#timesheet_edit_form_customer + .select2 .select2-selection")
+    - locator resolved to <span tabindex="0" role="combobox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" class="select2-selection select2-selection--single" aria-labelledby="select2-timesheet_edit_form_customer-container">…</span>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    29 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <th>lun.</th> from <div class="daterangepicker ltr single opensright show-calendar">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-02-26 11:15:24,905 - WebBot - ERROR - Error registrando ticket: Keyboard.press: Target page, context or browser has been closed
+2026-02-26 11:15:25,023 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 1/3)
+2026-02-26 11:15:25,024 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (2) [23.02.2026 09:30 - 23.02.2026 11:30]
+2026-02-26 11:15:25,027 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-26 11:15:25,031 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 2/3)
+2026-02-26 11:15:25,032 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (3) [23.02.2026 12:30 - 23.02.2026 14:30]
+2026-02-26 11:15:25,035 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-26 11:15:25,041 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 3/3)
+2026-02-26 11:15:25,042 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220006 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-26 11:15:25,961 - Scheduler - INFO - Saltando slot de ticket 2602220006 (ya marcado como irrecuperable).
+2026-02-26 11:15:25,962 - Scheduler - INFO - Completado dia 2026-02-23: 0 bloques registrados para 0 tickets.
+2026-02-26 11:15:25,963 - Scheduler - INFO - Procesando dia 2026-02-24 (1 tickets)...
+2026-02-26 11:15:25,964 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-24): 480 min totales.
+2026-02-26 11:15:25,964 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-26 11:15:25,965 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 24.02.2026 16:30
+2026-02-26 11:15:25,966 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (1) [24.02.2026 07:30 - 24.02.2026 09:30]
+2026-02-26 11:15:25,972 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-26 11:15:25,975 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 1/3)
+2026-02-26 11:15:25,976 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (2) [24.02.2026 09:30 - 24.02.2026 11:30]
+2026-02-26 11:15:25,978 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-26 11:15:25,982 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 2/3)
+2026-02-26 11:15:25,983 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (3) [24.02.2026 12:30 - 24.02.2026 14:30]
+2026-02-26 11:15:25,986 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-26 11:15:25,990 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 3/3)
+2026-02-26 11:15:25,990 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220020 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-26 11:15:26,436 - WebBot - INFO - Cerrando navegador...
+2026-02-26 11:15:26,746 - Scheduler - WARNING - Quedaron 4 tickets pendientes.
+2026-02-26 11:15:27,627 - Main - INFO - Service stopped by user.
+2026-02-27 13:43:03,531 - Main - INFO - Iniciando servicio con config.json...
+2026-02-27 13:43:03,540 - TimeManager - INFO - Estado guardado es de un día anterior. Reseteando cursor.
+2026-02-27 13:43:03,552 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-27 13:43:03,552 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-27 13:43:03,553 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-27 13:43:04,628 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-27 13:43:04,814 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-27 13:43:04,815 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-27 13:43:04,818 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-27 13:43:05,845 - Scheduler - INFO - No se encontraron tickets faltantes en el periodo.
+2026-02-27 13:43:05,847 - Scheduler - INFO - Barrido: Procesando 4 tickets detectados.
+2026-02-27 13:43:05,848 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-27 13:43:05,895 - Scheduler - INFO - Se detectaron tickets para 3 dias diferentes.
+2026-02-27 13:43:06,811 - WebBot - INFO - Iniciando navegador...
+2026-02-27 13:43:24,412 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-27 13:43:26,441 - WebBot - INFO - Login exitoso.
+2026-02-27 13:43:26,441 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-27 13:43:26,442 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-27 13:43:26,442 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-27 13:43:26,443 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-27 13:43:26,443 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-27 13:43:36,891 - WebBot - INFO - Cerrando navegador...
+2026-02-27 13:43:38,868 - Main - INFO - Service stopped by user.
+2026-02-27 13:43:38,895 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-23' coro=<Page.click() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:840> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-02-27 13:43:38,916 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-24' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-27 13:46:27,288 - Main - INFO - Iniciando servicio con config.json...
+2026-02-27 13:46:27,290 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-27 07:30:00, Logueado: 0m
+2026-02-27 13:46:27,291 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-27 13:46:27,291 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-27 13:46:27,291 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-27 13:46:28,304 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-27 13:46:28,480 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-27 13:46:28,481 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-27 13:46:28,484 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-27 13:46:31,831 - Scheduler - INFO - Sincronizacion: Se recuperaron 1 tickets de la semana. Total pendiente: 5
+2026-02-27 13:46:32,782 - Scheduler - INFO - Barrido: Procesando 5 tickets detectados.
+2026-02-27 13:46:32,783 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-27 13:46:32,797 - Scheduler - INFO - Se detectaron tickets para 4 dias diferentes.
+2026-02-27 13:46:33,665 - WebBot - INFO - Iniciando navegador...
+2026-02-27 13:46:34,856 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-27 13:46:36,815 - WebBot - INFO - Login exitoso.
+2026-02-27 13:46:36,815 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-27 13:46:36,816 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-27 13:46:36,816 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-27 13:46:36,817 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-27 13:46:36,817 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-27 13:46:37,074 - WebBot - DEBUG - Start time seteado via JS: 23.02.2026 07:30
+2026-02-27 13:46:37,080 - WebBot - DEBUG - End time seteado via JS: 23.02.2026 09:30
+2026-02-27 13:46:37,594 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-02-27 13:46:37,595 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-02-27 13:46:37,621 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-02-27 13:46:38,044 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:46:38,057 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-02-27 13:46:38,600 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:46:38,636 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-02-27 13:46:38,700 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-02-27 13:46:39,201 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-02-27 13:46:39,261 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-02-27 13:46:39,711 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:46:39,725 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-02-27 13:46:40,257 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:46:40,290 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-02-27 13:46:40,344 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-02-27 13:46:40,846 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-02-27 13:46:40,870 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-02-27 13:46:41,298 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:46:41,315 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-02-27 13:46:41,846 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:46:41,874 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-02-27 13:46:41,925 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-02-27 13:46:41,944 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-02-27 13:46:41,952 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-02-27 13:46:42,681 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:46:42,715 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-02-27 13:46:43,248 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:46:43,277 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-02-27 13:46:43,392 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-02-27 13:47:13,480 - WebBot - ERROR - Error registrando ticket: Page.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button[type='submit']")
+
+2026-02-27 13:47:13,906 - WebBot - INFO - Screenshot guardada: C:\Users\acer\Desktop\proyectos_intelix\xtiming_automatizacion\timesheet_service\error_validation_1772214433.png
+2026-02-27 13:47:13,908 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 1/3)
+2026-02-27 13:47:13,909 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (2) [23.02.2026 09:30 - 23.02.2026 11:30]
+2026-02-27 13:47:14,256 - WebBot - DEBUG - Start time seteado via JS: 23.02.2026 09:30
+2026-02-27 13:47:14,273 - WebBot - DEBUG - End time seteado via JS: 23.02.2026 11:30
+2026-02-27 13:47:14,810 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-02-27 13:47:14,810 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-02-27 13:47:14,841 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-02-27 13:47:15,270 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:47:15,293 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-02-27 13:47:15,859 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:47:15,882 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-02-27 13:47:15,956 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-02-27 13:47:16,458 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-02-27 13:47:16,466 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-02-27 13:47:16,909 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:47:16,931 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-02-27 13:47:17,466 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:47:17,493 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-02-27 13:47:17,574 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-02-27 13:47:18,075 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-02-27 13:47:18,084 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-02-27 13:47:18,525 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:47:18,544 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-02-27 13:47:19,078 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:47:19,107 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-02-27 13:47:19,183 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-02-27 13:47:19,207 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-02-27 13:47:19,214 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-02-27 13:47:19,635 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:47:19,656 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-02-27 13:47:20,185 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:47:20,199 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-02-27 13:47:20,241 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-02-27 13:47:24,072 - WebBot - INFO - Cerrando navegador...
+2026-02-27 13:47:26,289 - Main - INFO - Service stopped by user.
+2026-02-27 13:47:26,330 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-105' coro=<Waiter.reject_on_timeout.<locals>.reject() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_waiter.py:85> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+2026-02-27 13:47:26,331 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-106' coro=<Frame.expect_navigation.<locals>.continuation() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_frame.py:238> wait_for=<Future cancelled> cb=[EventInfo.__init__.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:50]>
+2026-02-27 13:47:26,331 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-107' coro=<Page.click() done, defined at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:840> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111, ProtocolCallback.__init__.<locals>.cb() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_connection.py:230]>
+2026-02-27 13:47:26,341 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-108' coro=<Page.close() running at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_page.py:826> cb=[SyncBase._sync.<locals>.<lambda>() at C:\Users\acer\AppData\Roaming\Python\Python314\site-packages\playwright\_impl\_sync_base.py:111]>
+2026-02-27 13:50:00,429 - Main - INFO - Iniciando servicio con config.json...
+2026-02-27 13:50:00,432 - TimeManager - INFO - Estado restaurado. Cursor: 2026-02-27 07:30:00, Logueado: 0m
+2026-02-27 13:50:00,433 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-02-27 13:50:00,434 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-02-27 13:50:00,434 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-02-27 13:50:01,442 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-02-27 13:50:01,627 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-02-27 13:50:01,628 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-02-27 13:50:01,630 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-02-27 13:50:02,827 - Scheduler - INFO - No se encontraron tickets faltantes en el periodo.
+2026-02-27 13:50:02,829 - Scheduler - INFO - Barrido: Procesando 5 tickets detectados.
+2026-02-27 13:50:02,830 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-02-27 13:50:02,849 - Scheduler - INFO - Se detectaron tickets para 4 dias diferentes.
+2026-02-27 13:50:03,763 - WebBot - INFO - Iniciando navegador...
+2026-02-27 13:50:04,921 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-02-27 13:50:06,790 - WebBot - INFO - Login exitoso.
+2026-02-27 13:50:06,791 - Scheduler - INFO - Procesando dia 2026-02-23 (1 tickets)...
+2026-02-27 13:50:06,792 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-23): 480 min totales.
+2026-02-27 13:50:06,792 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-27 13:50:06,793 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 23.02.2026 16:30
+2026-02-27 13:50:06,793 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (1) [23.02.2026 07:30 - 23.02.2026 09:30]
+2026-02-27 13:50:07,154 - WebBot - DEBUG - Start time seteado via JS: 23.02.2026 07:30
+2026-02-27 13:50:07,159 - WebBot - DEBUG - End time seteado via JS: 23.02.2026 09:30
+2026-02-27 13:50:07,675 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-02-27 13:50:07,676 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-02-27 13:50:07,714 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-02-27 13:50:08,138 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:50:08,160 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-02-27 13:50:08,707 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:50:08,730 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-02-27 13:50:08,776 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-02-27 13:50:09,277 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-02-27 13:50:09,301 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-02-27 13:50:09,756 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:50:09,769 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-02-27 13:50:10,293 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:50:10,310 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-02-27 13:50:10,361 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-02-27 13:50:10,863 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-02-27 13:50:10,912 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-02-27 13:50:11,332 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:50:11,354 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-02-27 13:50:11,897 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:50:11,920 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-02-27 13:50:11,991 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-02-27 13:50:12,009 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-02-27 13:50:12,018 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-02-27 13:50:12,428 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:50:12,459 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-02-27 13:50:12,981 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:50:12,999 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-02-27 13:50:13,095 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-02-27 13:50:13,146 - WebBot - INFO - Procediendo a guardar el registro...
+2026-02-27 13:50:13,741 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-02-27 13:50:14,290 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-02-27 13:50:14,291 - Scheduler - INFO - Registrado con exito [2026-02-23]: Diferencia en saldos de conciliación 21-02-2026 (1) (ID: 2602220006)
+2026-02-27 13:50:14,291 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (2) [23.02.2026 09:30 - 23.02.2026 11:30]
+2026-02-27 13:50:14,568 - WebBot - DEBUG - Start time seteado via JS: 23.02.2026 09:30
+2026-02-27 13:50:14,577 - WebBot - DEBUG - End time seteado via JS: 23.02.2026 11:30
+2026-02-27 13:50:15,096 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-02-27 13:50:15,096 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-02-27 13:50:15,126 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-02-27 13:50:15,557 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-02-27 13:50:15,578 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-02-27 13:50:16,132 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-02-27 13:50:16,168 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-02-27 13:50:16,226 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-02-27 13:50:16,727 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-02-27 13:50:16,732 - WebBot - ERROR - Fallo select2 en #timesheet_edit_form_project para 'Continuidad de Aplicaciones - EPA VE': Page.is_visible: Target page, context or browser has been closed
+2026-02-27 13:50:16,795 - WebBot - ERROR - Error registrando ticket: Keyboard.press: Target page, context or browser has been closed
+2026-02-27 13:50:16,799 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 1/3)
+2026-02-27 13:50:16,799 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (3) [23.02.2026 12:30 - 23.02.2026 14:30]
+2026-02-27 13:50:16,803 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-27 13:50:16,808 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 2/3)
+2026-02-27 13:50:16,808 - WebBot - INFO - Registrando: Diferencia en saldos de conciliación 21-02-2026 (4) [23.02.2026 14:30 - 23.02.2026 16:30]
+2026-02-27 13:50:16,811 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-27 13:50:16,814 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220006 en fecha 2026-02-23 (intento 3/3)
+2026-02-27 13:50:16,814 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220006 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-27 13:50:17,690 - Scheduler - INFO - Completado dia 2026-02-23: 1 bloques registrados para 1 tickets.
+2026-02-27 13:50:17,691 - Scheduler - INFO - Procesando dia 2026-02-24 (1 tickets)...
+2026-02-27 13:50:17,692 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-02-24): 480 min totales.
+2026-02-27 13:50:17,692 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-02-27 13:50:17,693 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 24.02.2026 16:30
+2026-02-27 13:50:17,694 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (1) [24.02.2026 07:30 - 24.02.2026 09:30]
+2026-02-27 13:50:17,697 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-27 13:50:17,702 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 1/3)
+2026-02-27 13:50:17,703 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (2) [24.02.2026 09:30 - 24.02.2026 11:30]
+2026-02-27 13:50:17,709 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-27 13:50:17,715 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 2/3)
+2026-02-27 13:50:17,716 - WebBot - INFO - Registrando: Error en Acreencias 21-02-2026 (3) [24.02.2026 12:30 - 24.02.2026 14:30]
+2026-02-27 13:50:17,720 - WebBot - ERROR - Error registrando ticket: Page.goto: Target page, context or browser has been closed
+2026-02-27 13:50:17,724 - Scheduler - ERROR - Fallo al registrar Ticket ID 2602220020 en fecha 2026-02-24 (intento 3/3)
+2026-02-27 13:50:17,725 - Scheduler - WARNING - TICKET IRRECUPERABLE: 2602220020 falló 3 veces. Saltando todos sus slots restantes.
+2026-02-27 13:50:17,906 - WebBot - INFO - Cerrando navegador...
+2026-02-27 13:50:18,336 - Scheduler - WARNING - Quedaron 4 tickets pendientes.
+2026-02-27 13:50:19,051 - Main - INFO - Service stopped by user.
