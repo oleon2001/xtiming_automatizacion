@@ -103,8 +103,22 @@ class TimeManager:
 
     def is_holiday(self, date_obj):
         if not date_obj: return False
+        # Fines de semana (5=Sábado, 6=Domingo)
+        if date_obj.weekday() >= 5:
+            return True
+            
         date_str = date_obj.strftime("%Y-%m-%d")
         return date_str in self.holidays
+
+    def get_working_days_in_range(self, start_date, end_date):
+        """Retorna una lista de objetos datetime que son días laborables entre start y end (inclusive)."""
+        working_days = []
+        curr = start_date
+        while curr <= end_date:
+            if not self.is_holiday(curr):
+                working_days.append(curr)
+            curr += timedelta(days=1)
+        return working_days
 
     def calculate_distributed_slots(self, tickets):
         """
