@@ -4,7 +4,7 @@ import os
 import json
 import logging
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import db_handler
 import time_manager
 import web_automator
@@ -118,7 +118,7 @@ class SchedulerService:
     def routine_backlog_sweep(self, days=7):
         """
         Realiza un barrido completo: Sincroniza el backlog y procesa inmediatamente
-        los tickets que falten, sin interrumpir la jornada actual.
+        los tickets que falten dentro del rango de días especificado.
         """
         logger.info(f"INICIANDO BARRIDO DE BACKLOG ({days} días)...")
         self.send_telegram(f"Iniciando barrido automático de tickets pendientes de los últimos {days} días...")
@@ -126,17 +126,37 @@ class SchedulerService:
         # 1. Sincronizar (Traer tickets de GLPI a la cola local)
         self.routine_sync_backlog(days=days)
         
-        # 2. Procesar silenciosamente
-        pending_after_sync = self.local_db.get_pending_tickets()
-        if not pending_after_sync:
+        # 2. Obtener pendientes y filtrar por rango de días
+        all_pending = self.local_db.get_pending_tickets()
+        if not all_pending:
             logger.info("Barrido finalizado: No hay tickets pendientes por registrar.")
             self.send_telegram("Barrido completado: Todo está al día.")
             return
 
-        # Filtrar solo tickets que pertenezcan al pasado (evitar procesar lo de HOY si se prefiere separar)
-        # En este caso procesaremos TODO lo que esté en cola.
-        logger.info(f"Barrido: Procesando {len(pending_after_sync)} tickets detectados.")
-        self.routine_b() # Reutilizamos la lógica de procesamiento batch
+        limit_date = (datetime.now() - timedelta(days=days)).date()
+        
+        filtered_tickets = []
+        for t in all_pending:
+            try:
+                # Extraer fecha del ticket (solvedate o target_date)
+                date_val = t.get('solvedate') or t.get('target_date') or datetime.now().strftime("%Y-%m-%d")
+                ticket_date = datetime.strptime(str(date_val)[:10], "%Y-%m-%d").date()
+                
+                if ticket_date >= limit_date:
+                    filtered_tickets.append(t)
+            except Exception as e:
+                logger.warning(f"Error filtrando ticket {t.get('ticket_id')} por fecha: {e}")
+                filtered_tickets.append(t) # En caso de duda, incluirlo
+
+        if not filtered_tickets:
+            logger.info(f"Barrido: Se encontraron {len(all_pending)} tickets totales, pero ninguno dentro de los últimos {days} días.")
+            self.send_telegram(f"Barrido completado: No hay tickets pendientes en el rango de {days} días.")
+            return
+
+        logger.info(f"Barrido: Procesando {len(filtered_tickets)} tickets dentro del rango (de {len(all_pending)} totales en cola).")
+        
+        # 3. Procesar solo los filtrados
+        self.routine_b(tickets=filtered_tickets)
         
         logger.info("BARRIDO DE BACKLOG COMPLETADO.")
 
@@ -239,15 +259,18 @@ class SchedulerService:
 
         return is_past_week and is_locked_day
 
-    def routine_b(self):
+    def routine_b(self, tickets=None):
         logger.info("Ejecutando Rutina B (Procesamiento Batch)...")
         successful_ids = set()
         
         try:
-            pending_tickets = self.local_db.get_pending_tickets()
+            # Si no se pasan tickets, cargarlos de la base de datos (comportamiento estándar)
+            pending_tickets = tickets if tickets is not None else self.local_db.get_pending_tickets()
+            
             if not pending_tickets:
                 logger.info("No hay tickets pendientes para procesar.")
-                self.send_telegram("Fin de jornada: No hubo tickets para registrar.")
+                if tickets is None: # Solo notificar si es la ejecución regular
+                    self.send_telegram("Fin de jornada: No hubo tickets para registrar.")
                 return
 
             # 1. Agrupar tickets por fecha (YYYY-MM-DD) y Filtrar Bloqueados

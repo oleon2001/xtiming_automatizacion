@@ -1,0 +1,620 @@
+2026-05-19 09:21:01,515 - Main - INFO - Iniciando servicio con config.json...
+2026-05-19 09:21:01,535 - TimeManager - INFO - Estado guardado es de un día anterior. Reseteando cursor.
+2026-05-19 09:21:01,582 - TimeManager - INFO - Estado restaurado. Cursor: 2026-05-19 07:30:00, Logueado: 0m
+2026-05-19 09:21:01,585 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-05-19 09:21:01,586 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-05-19 09:21:01,586 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-05-19 09:21:01,772 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-05-19 09:21:01,773 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-05-19 09:21:01,779 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-05-19 09:21:02,198 - Scheduler - INFO - No hay tickets nuevos en GLPI.
+2026-05-19 09:21:02,609 - Main - INFO - Service stopped by user.
+2026-05-19 09:21:14,157 - Main - INFO - Iniciando servicio con config.json...
+2026-05-19 09:21:14,160 - TimeManager - INFO - Estado restaurado. Cursor: 2026-05-19 07:30:00, Logueado: 0m
+2026-05-19 09:21:14,160 - Main - INFO - Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.
+2026-05-19 09:21:14,160 - Main - INFO - MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...
+2026-05-19 09:21:14,161 - Scheduler - INFO - INICIANDO BARRIDO DE BACKLOG (7 días)...
+2026-05-19 09:21:15,268 - Scheduler - INFO - Ejecutando Sincronizacion de Backlog (7 dias)...
+2026-05-19 09:21:15,416 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-05-19 09:21:15,417 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-05-19 09:21:15,419 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-05-19 09:21:15,840 - Scheduler - INFO - Sincronizacion: Se recuperaron 4 tickets de la semana. Total pendiente: 20
+2026-05-19 09:21:16,739 - Scheduler - INFO - Barrido: Procesando 4 tickets dentro del rango (de 20 totales en cola).
+2026-05-19 09:21:16,739 - Scheduler - INFO - Ejecutando Rutina B (Procesamiento Batch)...
+2026-05-19 09:21:16,741 - Scheduler - INFO - Se detectaron tickets para 2 dias diferentes.
+2026-05-19 09:21:17,684 - WebBot - INFO - Iniciando navegador (headless=True)...
+2026-05-19 09:21:29,945 - WebBot - INFO - Iniciando sesión para usuario oleon@intelix.biz...
+2026-05-19 09:21:36,149 - WebBot - INFO - Login exitoso.
+2026-05-19 09:21:36,150 - Scheduler - INFO - Procesando dia 2026-05-12 (1 tickets)...
+2026-05-19 09:21:36,151 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-05-12): 480 min totales.
+2026-05-19 09:21:36,152 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 1 tickets.
+2026-05-19 09:21:36,154 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 12.05.2026 16:30
+2026-05-19 09:21:36,154 - WebBot - INFO - Registrando: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (1) [12.05.2026 07:30 - 12.05.2026 09:30]
+2026-05-19 09:21:36,666 - WebBot - DEBUG - Start time seteado via JS: 12.05.2026 07:30
+2026-05-19 09:21:36,672 - WebBot - DEBUG - End time seteado via JS: 12.05.2026 09:30
+2026-05-19 09:21:37,232 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:21:37,233 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA GT' en #timesheet_edit_form_customer
+2026-05-19 09:21:37,257 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:21:37,706 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:37,719 - WebBot - DEBUG - Select2: Escribiendo 'EPA GT' en búsqueda
+2026-05-19 09:21:38,266 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:38,292 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA GT', clickeando
+2026-05-19 09:21:38,368 - WebBot - INFO - Select2: 'EPA GT' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:21:38,870 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA GT' en #timesheet_edit_form_project
+2026-05-19 09:21:38,876 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:21:39,277 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:39,286 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA GT' en búsqueda
+2026-05-19 09:21:39,825 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:39,841 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA GT', clickeando
+2026-05-19 09:21:39,891 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA GT' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:21:40,392 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:21:40,399 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:21:40,766 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:40,771 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:21:41,289 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:41,298 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:21:41,364 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:21:41,371 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:21:41,376 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:21:41,739 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:41,752 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:21:42,271 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:42,280 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:21:42,317 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:21:42,335 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:21:42,882 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:21:43,439 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:21:43,440 - Scheduler - INFO - Registrado con exito [2026-05-12]: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (1) (ID: 2605100032)
+2026-05-19 09:21:43,440 - WebBot - INFO - Registrando: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (2) [12.05.2026 09:30 - 12.05.2026 11:30]
+2026-05-19 09:21:43,673 - WebBot - DEBUG - Start time seteado via JS: 12.05.2026 09:30
+2026-05-19 09:21:43,679 - WebBot - DEBUG - End time seteado via JS: 12.05.2026 11:30
+2026-05-19 09:21:44,194 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:21:44,194 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA GT' en #timesheet_edit_form_customer
+2026-05-19 09:21:44,208 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:21:44,589 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:44,598 - WebBot - DEBUG - Select2: Escribiendo 'EPA GT' en búsqueda
+2026-05-19 09:21:45,126 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:45,138 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA GT', clickeando
+2026-05-19 09:21:45,175 - WebBot - INFO - Select2: 'EPA GT' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:21:45,676 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA GT' en #timesheet_edit_form_project
+2026-05-19 09:21:45,681 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:21:46,062 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:46,070 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA GT' en búsqueda
+2026-05-19 09:21:46,586 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:46,602 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA GT', clickeando
+2026-05-19 09:21:46,640 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA GT' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:21:47,142 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:21:47,147 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:21:47,565 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:47,573 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:21:48,097 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:48,105 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:21:48,175 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:21:48,189 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:21:48,199 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:21:48,570 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:48,575 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:21:49,086 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:49,096 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:21:49,149 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:21:49,175 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:21:49,715 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:21:50,254 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:21:50,255 - Scheduler - INFO - Registrado con exito [2026-05-12]: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (2) (ID: 2605100032)
+2026-05-19 09:21:50,255 - WebBot - INFO - Registrando: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (3) [12.05.2026 12:30 - 12.05.2026 14:30]
+2026-05-19 09:21:50,479 - WebBot - DEBUG - Start time seteado via JS: 12.05.2026 12:30
+2026-05-19 09:21:50,484 - WebBot - DEBUG - End time seteado via JS: 12.05.2026 14:30
+2026-05-19 09:21:50,993 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:21:50,994 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA GT' en #timesheet_edit_form_customer
+2026-05-19 09:21:51,015 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:21:51,392 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:51,402 - WebBot - DEBUG - Select2: Escribiendo 'EPA GT' en búsqueda
+2026-05-19 09:21:51,926 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:51,935 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA GT', clickeando
+2026-05-19 09:21:51,981 - WebBot - INFO - Select2: 'EPA GT' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:21:52,482 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA GT' en #timesheet_edit_form_project
+2026-05-19 09:21:52,485 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:21:52,843 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:52,854 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA GT' en búsqueda
+2026-05-19 09:21:53,376 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:53,402 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA GT', clickeando
+2026-05-19 09:21:53,471 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA GT' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:21:53,972 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:21:53,980 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:21:54,407 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:54,423 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:21:54,949 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:54,966 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:21:55,030 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:21:55,044 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:21:55,053 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:21:55,446 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:55,454 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:21:55,969 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:55,994 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:21:56,073 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:21:56,136 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:21:56,701 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:21:57,367 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:21:57,368 - Scheduler - INFO - Registrado con exito [2026-05-12]: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (3) (ID: 2605100032)
+2026-05-19 09:21:57,368 - WebBot - INFO - Registrando: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (4) [12.05.2026 14:30 - 12.05.2026 16:30]
+2026-05-19 09:21:57,625 - WebBot - DEBUG - Start time seteado via JS: 12.05.2026 14:30
+2026-05-19 09:21:57,633 - WebBot - DEBUG - End time seteado via JS: 12.05.2026 16:30
+2026-05-19 09:21:58,150 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:21:58,151 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA GT' en #timesheet_edit_form_customer
+2026-05-19 09:21:58,175 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:21:58,589 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:21:58,602 - WebBot - DEBUG - Select2: Escribiendo 'EPA GT' en búsqueda
+2026-05-19 09:21:59,140 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:21:59,158 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA GT', clickeando
+2026-05-19 09:21:59,213 - WebBot - INFO - Select2: 'EPA GT' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:21:59,714 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA GT' en #timesheet_edit_form_project
+2026-05-19 09:21:59,722 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:00,104 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:00,114 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA GT' en búsqueda
+2026-05-19 09:22:00,635 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:00,652 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA GT', clickeando
+2026-05-19 09:22:00,702 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA GT' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:01,203 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:01,211 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:01,615 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:01,625 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:02,148 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:02,167 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:02,264 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:02,283 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:02,288 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:02,698 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:02,707 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:03,233 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:03,266 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:03,323 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:03,357 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:03,917 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:04,523 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:04,524 - Scheduler - INFO - Registrado con exito [2026-05-12]: ERROR EN FORMA DE PAGO (WEB PROMOCION BANCO) (4) (ID: 2605100032)
+2026-05-19 09:22:04,556 - Scheduler - INFO - Completado dia 2026-05-12: 4 bloques registrados para 1 tickets.
+2026-05-19 09:22:04,557 - Scheduler - INFO - Procesando dia 2026-05-15 (3 tickets)...
+2026-05-19 09:22:04,557 - TimeManager - INFO - PLANIFICANDO JORNADA (2026-05-15): 480 min totales.
+2026-05-19 09:22:04,557 - TimeManager - INFO - Fijos (Manuales): 0 min. A distribuir: 480 min entre 3 tickets.
+2026-05-19 09:22:04,558 - TimeManager - INFO - Planificación finalizada. Jornada termina a las: 15.05.2026 16:30
+2026-05-19 09:22:04,559 - WebBot - INFO - Registrando: Error en Acreencias 12/05/2026 (1) [15.05.2026 07:30 - 15.05.2026 08:10]
+2026-05-19 09:22:04,787 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 07:30
+2026-05-19 09:22:04,792 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 08:10
+2026-05-19 09:22:05,314 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:05,315 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:05,340 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:05,772 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:05,790 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:06,354 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:06,381 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:06,439 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:06,943 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:06,950 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:07,325 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:07,335 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:07,857 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:07,873 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:07,910 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:08,412 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:08,421 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:08,810 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:08,828 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:09,346 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:09,365 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:09,413 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:09,428 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:09,434 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:09,813 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:09,826 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:10,348 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:10,366 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:10,397 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:10,428 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:10,982 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:11,665 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:11,665 - Scheduler - INFO - Registrado con exito [2026-05-15]: Error en Acreencias 12/05/2026 (1) (ID: 2605130034)
+2026-05-19 09:22:11,666 - WebBot - INFO - Registrando: Error en Acreencias 12/05/2026 (2) [15.05.2026 08:10 - 15.05.2026 08:50]
+2026-05-19 09:22:11,950 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 08:10
+2026-05-19 09:22:11,954 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 08:50
+2026-05-19 09:22:12,466 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:12,467 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:12,500 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:12,913 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:12,933 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:13,474 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:13,496 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:13,560 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:14,061 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:14,068 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:14,464 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:14,477 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:15,004 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:15,018 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:15,064 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:15,565 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:15,571 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:15,947 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:15,962 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:16,488 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:16,508 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:16,551 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:16,565 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:16,573 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:16,946 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:16,956 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:17,476 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:17,500 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:17,567 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:17,610 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:18,187 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:18,796 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:18,797 - Scheduler - INFO - Registrado con exito [2026-05-15]: Error en Acreencias 12/05/2026 (2) (ID: 2605130034)
+2026-05-19 09:22:18,797 - WebBot - INFO - Registrando: Error en Acreencias 12/05/2026 (3) [15.05.2026 08:50 - 15.05.2026 09:30]
+2026-05-19 09:22:19,052 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 08:50
+2026-05-19 09:22:19,056 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 09:30
+2026-05-19 09:22:19,567 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:19,568 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:19,590 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:20,008 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:20,035 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:20,586 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:20,610 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:20,672 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:21,173 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:21,180 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:21,576 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:21,588 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:22,118 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:22,145 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:22,215 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:22,716 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:22,723 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:23,110 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:23,120 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:23,643 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:23,663 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:23,730 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:23,747 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:23,752 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:24,156 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:24,170 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:24,691 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:24,707 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:24,748 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:24,773 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:25,333 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:25,922 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:25,923 - Scheduler - INFO - Registrado con exito [2026-05-15]: Error en Acreencias 12/05/2026 (3) (ID: 2605130034)
+2026-05-19 09:22:25,924 - WebBot - INFO - Registrando: Error en Acreencias 12/05/2026 (4) [15.05.2026 09:30 - 15.05.2026 10:10]
+2026-05-19 09:22:26,207 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 09:30
+2026-05-19 09:22:26,213 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 10:10
+2026-05-19 09:22:26,726 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:26,727 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:26,748 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:27,150 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:27,161 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:27,703 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:27,724 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:27,833 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:28,335 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:28,338 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:28,697 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:28,707 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:29,234 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:29,244 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:29,278 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:29,781 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:29,784 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:30,192 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:30,212 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:30,751 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:30,788 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:30,840 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:30,870 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:30,875 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:31,287 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:31,304 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:31,828 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:31,847 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:31,878 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:31,904 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:32,446 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:33,052 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:33,053 - Scheduler - INFO - Registrado con exito [2026-05-15]: Error en Acreencias 12/05/2026 (4) (ID: 2605130034)
+2026-05-19 09:22:33,053 - WebBot - INFO - Registrando: Ventas atrapadas 03-05-2026 (1) [15.05.2026 10:10 - 15.05.2026 10:50]
+2026-05-19 09:22:33,308 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 10:10
+2026-05-19 09:22:33,314 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 10:50
+2026-05-19 09:22:33,826 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:33,826 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:33,845 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:34,227 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:34,237 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:34,770 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:34,786 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:34,832 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:35,333 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:35,339 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:35,721 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:35,732 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:36,261 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:36,273 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:36,306 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:36,808 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:36,815 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:37,191 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:37,206 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:37,728 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:37,742 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:37,779 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:37,795 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:37,801 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:38,173 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:38,185 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:38,703 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:38,723 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:38,765 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:38,796 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:39,347 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:39,961 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:39,962 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas 03-05-2026 (1) (ID: 2605040182)
+2026-05-19 09:22:39,962 - WebBot - INFO - Registrando: Ventas atrapadas 03-05-2026 (2) [15.05.2026 10:50 - 15.05.2026 11:30]
+2026-05-19 09:22:40,145 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 10:50
+2026-05-19 09:22:40,149 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 11:30
+2026-05-19 09:22:40,656 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:40,657 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:40,672 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:41,087 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:41,105 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:41,656 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:41,666 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:41,711 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:42,212 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:42,215 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:42,556 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:42,565 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:43,086 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:43,099 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:43,142 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:43,643 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:43,647 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:43,991 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:44,004 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:44,521 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:44,533 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:44,572 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:44,584 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:44,588 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:44,952 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:44,961 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:45,475 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:45,486 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:45,525 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:45,551 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:46,115 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:46,696 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:46,696 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas 03-05-2026 (2) (ID: 2605040182)
+2026-05-19 09:22:46,696 - WebBot - INFO - Registrando: Ventas atrapadas 03-05-2026 (3) [15.05.2026 12:30 - 15.05.2026 13:10]
+2026-05-19 09:22:46,971 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 12:30
+2026-05-19 09:22:46,979 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 13:10
+2026-05-19 09:22:47,489 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:47,489 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:47,515 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:47,952 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:47,967 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:48,512 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:48,534 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:48,601 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:49,102 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:49,108 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:49,491 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:49,502 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:50,025 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:50,037 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:50,073 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:50,574 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:50,583 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:50,984 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:51,002 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:51,527 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:51,544 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:51,577 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:51,589 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:51,596 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:51,978 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:51,990 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:52,512 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:52,528 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:52,587 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:22:52,631 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:22:53,180 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:22:53,794 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:22:53,794 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas 03-05-2026 (3) (ID: 2605040182)
+2026-05-19 09:22:53,795 - WebBot - INFO - Registrando: Ventas atrapadas 03-05-2026 (4) [15.05.2026 13:10 - 15.05.2026 13:50]
+2026-05-19 09:22:54,082 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 13:10
+2026-05-19 09:22:54,086 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 13:50
+2026-05-19 09:22:54,601 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:22:54,601 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:22:54,621 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:22:55,024 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:55,040 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:22:55,579 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:55,599 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:22:55,654 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:22:56,155 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:22:56,161 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:22:56,557 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:56,567 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:22:57,089 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:57,110 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:22:57,148 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:22:57,649 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:22:57,659 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:22:58,106 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:58,132 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:22:58,676 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:58,698 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:22:58,751 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:22:58,769 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:22:58,780 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:22:59,231 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:22:59,305 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:22:59,883 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:22:59,907 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:22:59,969 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:23:00,009 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:23:00,581 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:23:01,448 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:23:01,449 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas 03-05-2026 (4) (ID: 2605040182)
+2026-05-19 09:23:01,449 - WebBot - INFO - Registrando: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (1) [15.05.2026 13:50 - 15.05.2026 14:30]
+2026-05-19 09:23:01,730 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 13:50
+2026-05-19 09:23:01,737 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 14:30
+2026-05-19 09:23:02,252 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:23:02,253 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:23:02,280 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:23:02,677 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:02,695 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:23:03,248 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:03,266 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:23:03,312 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:23:03,812 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:23:03,821 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:23:04,199 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:04,210 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:23:04,725 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:04,765 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:23:04,817 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:23:05,319 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:23:05,328 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:23:05,740 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:05,752 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:23:06,275 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:06,289 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:23:06,330 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:23:06,345 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:23:06,350 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:23:06,767 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:06,794 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:23:07,324 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:07,352 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:23:07,400 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:23:07,434 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:23:08,001 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:23:08,563 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:23:08,564 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (1) (ID: 2605060198)
+2026-05-19 09:23:08,564 - WebBot - INFO - Registrando: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (2) [15.05.2026 14:30 - 15.05.2026 15:10]
+2026-05-19 09:23:08,774 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 14:30
+2026-05-19 09:23:08,781 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 15:10
+2026-05-19 09:23:09,289 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:23:09,290 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:23:09,317 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:23:09,760 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:09,777 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:23:10,321 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:10,343 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:23:10,404 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:23:10,906 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:23:10,912 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:23:11,289 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:11,304 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:23:11,825 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:11,840 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:23:11,878 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:23:12,379 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:23:12,383 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:23:12,768 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:12,782 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:23:13,306 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:13,324 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:23:13,357 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:23:13,370 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:23:13,375 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:23:13,767 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:13,785 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:23:14,313 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:14,340 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:23:14,399 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:23:14,468 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:23:15,031 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:23:15,688 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:23:15,688 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (2) (ID: 2605060198)
+2026-05-19 09:23:15,688 - WebBot - INFO - Registrando: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (3) [15.05.2026 15:10 - 15.05.2026 15:50]
+2026-05-19 09:23:15,899 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 15:10
+2026-05-19 09:23:15,906 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 15:50
+2026-05-19 09:23:16,422 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:23:16,423 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:23:16,443 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:23:16,844 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:16,857 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:23:17,389 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:17,407 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:23:17,445 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:23:17,946 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:23:17,956 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:23:18,338 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:18,350 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:23:18,872 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:18,887 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:23:18,927 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:23:19,428 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:23:19,434 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:23:19,827 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:19,845 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:23:20,375 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:20,395 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:23:20,441 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:23:20,455 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:23:20,461 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:23:20,849 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:20,860 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:23:21,384 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:21,467 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:23:21,617 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:23:21,764 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:23:22,437 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:23:23,688 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:23:23,689 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (3) (ID: 2605060198)
+2026-05-19 09:23:23,690 - WebBot - INFO - Registrando: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (4) [15.05.2026 15:50 - 15.05.2026 16:30]
+2026-05-19 09:23:24,219 - WebBot - DEBUG - Start time seteado via JS: 15.05.2026 15:50
+2026-05-19 09:23:24,250 - WebBot - DEBUG - End time seteado via JS: 15.05.2026 16:30
+2026-05-19 09:23:24,798 - WebBot - DEBUG - Datepickers cerrados, procediendo con selects.
+2026-05-19 09:23:24,800 - WebBot - DEBUG - Select2: Intentando seleccionar 'EPA VE' en #timesheet_edit_form_customer
+2026-05-19 09:23:24,887 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_customer + .select2 .select2-selection
+2026-05-19 09:23:25,547 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:25,606 - WebBot - DEBUG - Select2: Escribiendo 'EPA VE' en búsqueda
+2026-05-19 09:23:26,247 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:26,323 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'EPA VE', clickeando
+2026-05-19 09:23:26,512 - WebBot - INFO - Select2: 'EPA VE' seleccionado exitosamente en #timesheet_edit_form_customer
+2026-05-19 09:23:27,017 - WebBot - DEBUG - Select2: Intentando seleccionar 'Continuidad de Aplicaciones - EPA VE' en #timesheet_edit_form_project
+2026-05-19 09:23:27,022 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_project + .select2 .select2-selection
+2026-05-19 09:23:27,562 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:27,624 - WebBot - DEBUG - Select2: Escribiendo 'Continuidad de Aplicaciones - EPA VE' en búsqueda
+2026-05-19 09:23:28,206 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:28,271 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Continuidad de Aplicaciones - EPA VE', clickeando
+2026-05-19 09:23:28,425 - WebBot - INFO - Select2: 'Continuidad de Aplicaciones - EPA VE' seleccionado exitosamente en #timesheet_edit_form_project
+2026-05-19 09:23:28,929 - WebBot - DEBUG - Select2: Intentando seleccionar 'Caja Registradora' en #timesheet_edit_form_activity
+2026-05-19 09:23:28,944 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_activity + .select2 .select2-selection
+2026-05-19 09:23:29,383 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:29,401 - WebBot - DEBUG - Select2: Escribiendo 'Caja Registradora' en búsqueda
+2026-05-19 09:23:29,923 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:29,939 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Caja Registradora', clickeando
+2026-05-19 09:23:29,972 - WebBot - INFO - Select2: 'Caja Registradora' seleccionado exitosamente en #timesheet_edit_form_activity
+2026-05-19 09:23:29,985 - WebBot - DEBUG - Select2: Intentando seleccionar 'Soporte' en #timesheet_edit_form_tags
+2026-05-19 09:23:29,990 - WebBot - DEBUG - Select2: container no visible, usando fallback: #timesheet_edit_form_tags + .select2 .select2-selection
+2026-05-19 09:23:30,499 - WebBot - DEBUG - Select2: Esperando campo de búsqueda...
+2026-05-19 09:23:30,555 - WebBot - DEBUG - Select2: Escribiendo 'Soporte' en búsqueda
+2026-05-19 09:23:31,155 - WebBot - DEBUG - Select2: Esperando resultados...
+2026-05-19 09:23:31,236 - WebBot - DEBUG - Select2: Coincidencia exacta encontrada para 'Soporte', clickeando
+2026-05-19 09:23:31,404 - WebBot - INFO - Select2: 'Soporte' seleccionado exitosamente en #timesheet_edit_form_tags
+2026-05-19 09:23:31,562 - WebBot - INFO - Procediendo a guardar el registro...
+2026-05-19 09:23:32,162 - WebBot - DEBUG - Botón Guardar visible, haciendo click...
+2026-05-19 09:23:32,851 - WebBot - INFO - Redirección detectada. Registro exitoso.
+2026-05-19 09:23:32,851 - Scheduler - INFO - Registrado con exito [2026-05-15]: Ventas atrapadas, conciliación de Z del diario 05/05/2026 (4) (ID: 2605060198)
+2026-05-19 09:23:32,942 - Scheduler - INFO - Completado dia 2026-05-15: 12 bloques registrados para 3 tickets.
+2026-05-19 09:23:34,177 - WebBot - INFO - Cerrando navegador...
+2026-05-19 09:23:34,472 - Scheduler - WARNING - Quedaron 16 tickets pendientes.
+2026-05-19 09:23:35,622 - Scheduler - INFO - BARRIDO DE BACKLOG COMPLETADO.
+2026-05-19 09:23:35,623 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-05-19 09:23:35,624 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-05-19 09:23:36,081 - Scheduler - INFO - No hay tickets nuevos en GLPI.
+2026-05-19 09:32:55,424 - Main - INFO - Service stopped by user.

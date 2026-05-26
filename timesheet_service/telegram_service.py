@@ -23,7 +23,6 @@ logger = logging.getLogger("TelegramBot")
     AWAITING_CLIENT,
     AWAITING_HOURS,
     AWAITING_DISTRIBUTION,
-    # Estados para Batch
     AWAITING_BATCH_ACTIVITIES,
     AWAITING_BATCH_RANGE,
     AWAITING_BATCH_CLIENT
