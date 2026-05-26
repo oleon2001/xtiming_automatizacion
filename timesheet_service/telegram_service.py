@@ -23,12 +23,11 @@ logger = logging.getLogger("TelegramBot")
     AWAITING_CLIENT,
     AWAITING_HOURS,
     AWAITING_DISTRIBUTION,
-    # Nuevos estados para Batch
+    # Estados para Batch
     AWAITING_BATCH_ACTIVITIES,
     AWAITING_BATCH_RANGE,
-    AWAITING_BATCH_CLIENT,
-    AWAITING_BATCH_HOURS
-) = range(9)
+    AWAITING_BATCH_CLIENT
+) = range(7)
 
 class TelegramService:
     def __init__(self, config):
@@ -386,7 +385,6 @@ class TelegramService:
                 AWAITING_BATCH_ACTIVITIES: [MessageHandler(filters.TEXT & ~filters.COMMAND, self.recibir_batch_actividades)],
                 AWAITING_BATCH_RANGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, self.recibir_batch_range)],
                 AWAITING_BATCH_CLIENT: [CallbackQueryHandler(self.recibir_batch_cliente, pattern="^bclient_")],
-                AWAITING_BATCH_HOURS: [MessageHandler(filters.TEXT & ~filters.COMMAND, self.finalizar_batch)],
             },
             fallbacks=[CommandHandler("cancel", self.cancel)],
             name="registro_manual_conversation",

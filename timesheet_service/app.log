@@ -2227,3 +2227,14 @@ task: <Task pending name='Task-108' coro=<Page.close() running at C:\Users\acer\
 2026-02-27 13:50:17,906 - WebBot - INFO - Cerrando navegador...
 2026-02-27 13:50:18,336 - Scheduler - WARNING - Quedaron 4 tickets pendientes.
 2026-02-27 13:50:19,051 - Main - INFO - Service stopped by user.
+2026-03-04 15:24:10,879 - Main - INFO - Iniciando servicio con config.json...
+2026-03-04 15:24:10,891 - TimeManager - INFO - Estado guardado es de un día anterior. Reseteando cursor.
+2026-03-04 15:24:10,917 - TimeManager - INFO - Estado restaurado. Cursor: 2026-03-04 07:30:00, Logueado: 0m
+2026-03-04 15:24:10,920 - Main - INFO - Bot de Telegram lanzado en hilo secundario.
+2026-03-04 15:24:10,921 - Scheduler - INFO - Scheduler iniciado. Esperando tareas...
+2026-03-04 15:24:10,922 - Scheduler - INFO - Ejecutando Rutina A (Recoleccion de Tickets)...
+2026-03-04 15:24:11,134 - mysql.connector - INFO - package: mysql.connector.plugins
+2026-03-04 15:24:11,134 - mysql.connector - INFO - plugin_name: mysql_native_password
+2026-03-04 15:24:11,137 - mysql.connector - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2026-03-04 15:24:11,577 - Scheduler - INFO - Se encolaron 2 tickets nuevos. Total pendiente: 6
+2026-03-04 15:24:38,087 - Main - INFO - Service stopped by user.
