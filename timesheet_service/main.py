@@ -42,6 +42,7 @@ def main():
     parser.add_argument("--now", action="store_true", help="Fuerza la ejecución inmediata de todas las rutinas (incluyendo el llenado de horas) al iniciar.")
     parser.add_argument("--sync-week", action="store_true", help="Busca y encola tickets no registrados de los últimos 7 días.")
     parser.add_argument("--sweep", action="store_true", help="Realiza un barrido completo (Sincroniza y Registra) de los últimos 7 días inmediatamente.")
+    parser.add_argument("--fill-remaining", action="store_true", help="Lee las horas ya registradas en la web y completa cada día laborable de los últimos 7 días hasta target_hours, repartiendo la diferencia en bloques dentro de la jornada (07:30-16:30).")
     args = parser.parse_args()
 
     # Load environment variables
@@ -71,8 +72,8 @@ def main():
     # Pasar la configuración al servicio
     service = SchedulerService(config)
 
-    # Iniciar Bot de Telegram en un hilo separado solo si NO estamos en modo de una sola ejecución (sweep/sync)
-    if not (args.sweep or args.sync_week):
+    # Iniciar Bot de Telegram en un hilo separado solo si NO estamos en modo de una sola ejecución (sweep/sync/fill)
+    if not (args.sweep or args.sync_week or args.fill_remaining):
         try:
             tg_service = TelegramService(config)
             tg_thread = threading.Thread(target=tg_service.run_bot, daemon=True)
@@ -81,9 +82,15 @@ def main():
         except Exception as e:
             logger.error(f"No se pudo iniciar el bot de Telegram: {e}")
     else:
-        logger.info("Modo de ejecución única (--sweep o --sync-week). Omitiendo inicio del bot de Telegram para evitar conflictos.")
+        logger.info("Modo de ejecución única (--sweep, --sync-week o --fill-remaining). Omitiendo inicio del bot de Telegram para evitar conflictos.")
 
     try:
+        if args.fill_remaining:
+            logger.info("MODO RELLENO DE JORNADA ACTIVADO: Acomodando horas de los últimos 7 días...")
+            service.routine_fill_remaining(days=7)
+            logger.info("Relleno de jornada finalizado. Saliendo de modo single-shot.")
+            return
+
         if args.sweep:
             logger.info("MODO BARRIDO ACTIVADO: Sincronizando y procesando backlog...")
             service.routine_backlog_sweep(days=7)

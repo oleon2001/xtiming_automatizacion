@@ -34,6 +34,7 @@ class TimeManager:
         """Actualiza work_start, lunch_start y lunch_end a la fecha especificada o HOY."""
         dt = target_date if target_date else datetime.now()
         self.work_start = self._parse_time(self.schedule_config.get("work_start", "07:30"), dt)
+        self.work_end = self._parse_time(self.schedule_config.get("work_end", "16:30"), dt)
         self.lunch_start = self._parse_time(self.schedule_config.get("lunch_start", "11:30"), dt)
         self.lunch_end = self._parse_time(self.schedule_config.get("lunch_end", "12:30"), dt)
         self.target_hours = self.schedule_config.get("target_hours", 8)
@@ -272,5 +273,131 @@ class TimeManager:
         if schedule_list:
             last_entry = schedule_list[-1]
             logger.info(f"Planificación finalizada. Jornada termina a las: {last_entry['end_time']}")
+
+        return schedule_list
+
+    def _free_intervals(self, occupied, base_date):
+        """
+        Devuelve los huecos libres de la jornada (work_start..work_end),
+        descontando el almuerzo y los intervalos ya ocupados/registrados.
+        `occupied` es una lista de tuplas (datetime, datetime).
+        """
+        ws, we = self.work_start, self.work_end
+
+        # Segmentos base de la jornada, partidos por el almuerzo
+        if ws < self.lunch_start < self.lunch_end < we:
+            segments = [(ws, self.lunch_start), (self.lunch_end, we)]
+        else:
+            segments = [(ws, we)]
+
+        # Fusionar intervalos ocupados que se solapen o toquen
+        merged = []
+        for s, e in sorted(occupied):
+            if merged and s <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], e))
+            else:
+                merged.append((s, e))
+
+        free = []
+        for fs, fe in segments:
+            cursor = fs
+            for s, e in merged:
+                if e <= cursor:
+                    continue
+                if s >= fe:
+                    break
+                if s > cursor:
+                    free.append((cursor, min(s, fe)))
+                cursor = max(cursor, e)
+                if cursor >= fe:
+                    break
+            if cursor < fe:
+                free.append((cursor, fe))
+
+        # Descartar huecos de menos de un minuto
+        return [(s, e) for s, e in free if (e - s).total_seconds() >= 60]
+
+    def calculate_remaining_slots(self, registered_intervals, target_date=None):
+        """
+        Calcula los bloques faltantes para alcanzar target_hours en la fecha dada,
+        repartiéndolos equitativamente (bloques de ~fill_block_minutes) dentro de
+        los huecos libres de la jornada.
+        `registered_intervals`: lista de tuplas ('HH:MM', 'HH:MM') ya registradas en la web.
+        Retorna una lista de entradas listas para fill_timesheet_entry.
+        """
+        dt = target_date or datetime.now()
+
+        if self.is_holiday(dt):
+            logger.warning(f"La fecha {dt.strftime('%Y-%m-%d')} es feriado. No se planificarán horas.")
+            return []
+
+        self._refresh_work_times(target_date=dt)
+        target_minutes = int(self.target_hours * 60)
+
+        occupied = []
+        registered_minutes = 0
+        for start_str, end_str in (registered_intervals or []):
+            try:
+                s = self._parse_time(start_str, dt)
+                e = self._parse_time(end_str, dt)
+                if e <= s:
+                    e += timedelta(days=1)
+                occupied.append((s, e))
+                registered_minutes += int((e - s).total_seconds() // 60)
+            except Exception as ex:
+                logger.warning(f"Intervalo registrado inválido {start_str}-{end_str}: {ex}")
+
+        remaining = target_minutes - registered_minutes
+        logger.info(f"Jornada {dt.strftime('%Y-%m-%d')}: {registered_minutes} min registrados, "
+                    f"faltan {remaining} min para {target_minutes}.")
+
+        if remaining <= 0:
+            return []
+
+        free = self._free_intervals(occupied, dt)
+        total_free = sum(int((e - s).total_seconds() // 60) for s, e in free)
+
+        if total_free < remaining:
+            logger.warning(f"Solo hay {total_free} min libres para los {remaining} min faltantes. "
+                           f"Se registrará lo que quepa.")
+            remaining = total_free
+
+        if remaining <= 0:
+            return []
+
+        block_minutes = max(15, int(self.schedule_config.get("fill_block_minutes", 60)))
+        blocks_count = max(1, math.ceil(remaining / block_minutes))
+        base, rem = divmod(remaining, blocks_count)
+        sizes = [base + (1 if i < rem else 0) for i in range(blocks_count)]
+
+        desc_tpl = self.schedule_config.get("fill_description", "Actividad de jornada")
+
+        schedule_list = []
+        block_no = 0
+        for fs, fe in free:
+            cursor = fs
+            while block_no < blocks_count:
+                size = sizes[block_no]
+                if size <= 0:
+                    block_no += 1
+                    continue
+                room = int((fe - cursor).total_seconds() // 60)
+                if room < size:
+                    break
+                end = cursor + timedelta(minutes=size)
+                block_no += 1
+                schedule_list.append({
+                    "title": f"{desc_tpl} ({block_no})",
+                    "start_time": self._format_time(cursor),
+                    "end_time": self._format_time(end),
+                    "duration_min": size,
+                    "raw_ticket": {}
+                })
+                cursor = end
+            if block_no >= blocks_count:
+                break
+
+        if block_no < blocks_count:
+            logger.warning(f"No se pudieron ubicar {blocks_count - block_no} bloques por falta de espacio.")
 
         return schedule_list

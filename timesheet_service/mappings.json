@@ -18,7 +18,7 @@
         "142": {
             "client": "EPA CR",
             "project": "Continuidad de Aplicaciones - EPA CR",
-            "activity": "Caja Registradora"
+            "activity": "Caja Registradora (Toshiba)"
         }
     },
     "heuristics": [
@@ -46,7 +46,7 @@
             "result": {
                 "client": "EPA CR",
                 "project": "Continuidad de Aplicaciones - EPA CR",
-                "activity": "Caja Registradora"
+                "activity": "Caja Registradora (Toshiba)"
             }
         },
         {

@@ -1,8 +1,10 @@
 from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext, Playwright, TimeoutError as PlaywrightTimeout
 import os
+import re
 import time
 import logging
 import functools
+from datetime import datetime
 from typing import Dict, Any, Union, Optional, List
 
 import logging
@@ -216,6 +218,37 @@ class WebAutomator:
             except:
                 pass
             page.keyboard.press("Escape")
+
+    def get_day_intervals(self, date_str: Optional[str] = None) -> List[tuple]:
+        """
+        Lee el listado de timesheet y devuelve los intervalos ya registrados
+        para la fecha indicada (formato 'DD.MM.YYYY', por defecto HOY).
+        Retorna una lista de tuplas ('HH:MM', 'HH:MM').
+        """
+        if not self.page: self.start_browser()
+        page = self.page
+        date_str = date_str or datetime.now().strftime("%d.%m.%Y")
+        intervals: List[tuple] = []
+
+        try:
+            page.goto(f"{self.base_url}/timesheet/?daterange={date_str}+-+{date_str}")
+            page.wait_for_load_state('domcontentloaded')
+
+            rows = page.locator("table tbody tr[data-href*='/edit']")
+            for i in range(rows.count()):
+                cells = rows.nth(i).locator("td")
+                if cells.count() < 4:
+                    continue
+                start = cells.nth(2).inner_text().strip()
+                end = cells.nth(3).inner_text().strip()
+                if re.match(r"^\d{1,2}:\d{2}$", start) and re.match(r"^\d{1,2}:\d{2}$", end):
+                    intervals.append((start, end))
+
+            logger.info(f"Timesheet {date_str}: {len(intervals)} registros encontrados.")
+        except Exception as e:
+            logger.error(f"Error leyendo registros del timesheet para {date_str}: {e}")
+
+        return intervals
 
     def fill_timesheet_entry(self, entry_data: Dict[str, Any]) -> bool:
         if not self.page: self.start_browser()

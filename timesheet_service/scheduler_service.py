@@ -418,6 +418,130 @@ class SchedulerService:
             logger.error(f"Error fatal en Rutina B: {e}", exc_info=True)
             self.send_telegram(f"Error critico en cierre de jornada: {e}")
 
+    @staticmethod
+    def _intervals_to_minutes(intervals):
+        """Suma los minutos totales de una lista de intervalos ('HH:MM', 'HH:MM')."""
+        total = 0
+        for start_str, end_str in intervals or []:
+            try:
+                sh, sm = map(int, start_str.split(':'))
+                eh, em = map(int, end_str.split(':'))
+                total += (eh * 60 + em) - (sh * 60 + sm)
+            except Exception:
+                continue
+        return total
+
+    def _enrich_fill_item(self, item, raw_ticket):
+        """Asigna cliente/proyecto/actividad/etiquetas y título a un bloque de relleno."""
+        if raw_ticket and raw_ticket.get('source') == 'telegram':
+            item['client'] = raw_ticket.get('client') or self.defaults.get('client_fallback', 'Intelix')
+            item['project'] = raw_ticket.get('project') or self.defaults.get('project_fallback', 'Gestión - Intelix')
+            item['activity'] = raw_ticket.get('activity') or self.defaults.get('activity', 'Soporte')
+            item['tags'] = raw_ticket.get('tags') or self.defaults.get('tag', 'Soporte')
+        else:
+            item.update(self._determine_ticket_metadata(raw_ticket or {}))
+
+        if raw_ticket:
+            item['ticket_id'] = raw_ticket.get('ticket_id')
+            title = raw_ticket.get('ticket_title') or raw_ticket.get('title')
+            if title:
+                item['title'] = title
+        return item
+
+    def routine_fill_remaining(self, days=7):
+        """
+        Rellena los días laborables de los últimos `days` días hasta target_hours:
+          1) Toma bloques (tickets pendientes) de otros días para llenar los días faltantes.
+          2) Acomoda las horas de los días que tienen registros pero no llegan a las 8h
+             (de 07:30 a 16:30, respetando el almuerzo).
+        Nunca modifica ni borra registros existentes: solo agrega bloques en los huecos libres.
+        """
+        logger.info(f"RELLENO DE JORNADA (últimos {days} días)...")
+
+        # Traer/sincronizar pendientes de la semana desde GLPI antes de acomodar (igual que --sweep)
+        self.routine_sync_backlog(days=days)
+
+        target_minutes = int(self.timer.target_hours * 60)
+        today = datetime.now()
+        start_day = today - timedelta(days=days - 1)
+        working_days = self.timer.get_working_days_in_range(start_day, today)
+
+        if not working_days:
+            logger.info("No hay días laborables en el rango.")
+            self.send_telegram("Relleno de jornada: no hay días laborables en el rango.")
+            return
+
+        # Origen 1: cola de pendientes (de cualquier día)
+        pending = self.local_db.get_pending_tickets()
+        pending_pool = list(pending)
+        used_pending_ids = set()
+
+        success_blocks = 0
+        total_blocks = 0
+        summary = []
+
+        try:
+            self.bot.start_browser()
+
+            for day in working_days:
+                date_str = day.strftime("%d.%m.%Y")
+                intervals = self.bot.get_day_intervals(date_str)
+                registered = self._intervals_to_minutes(intervals)
+
+                if registered >= target_minutes:
+                    logger.info(f"{date_str}: {registered/60:.2f}h registradas. Nada que rellenar.")
+                    continue
+
+                slots = self.timer.calculate_remaining_slots(intervals, target_date=day)
+                if not slots:
+                    logger.info(f"{date_str}: sin bloques viables para rellenar.")
+                    continue
+
+                logger.info(f"{date_str}: {registered/60:.2f}h registradas, {len(slots)} bloques a agregar.")
+                day_success = 0
+
+                for slot in slots:
+                    total_blocks += 1
+                    raw_ticket = pending_pool.pop(0) if pending_pool else None
+                    item = dict(slot)
+
+                    try:
+                        self._enrich_fill_item(item, raw_ticket)
+
+                        if self.bot.fill_timesheet_entry(item):
+                            day_success += 1
+                            success_blocks += 1
+                            if raw_ticket:
+                                used_pending_ids.add(str(raw_ticket.get('ticket_id')))
+                            logger.info(f"Rellenado [{date_str}] {item['title']} ({item['start_time']}-{item['end_time']})")
+                        else:
+                            logger.error(f"Fallo rellenando [{date_str}] {item['title']}")
+                            # Devolver el ticket a la cola para no perderlo
+                            if raw_ticket:
+                                pending_pool.insert(0, raw_ticket)
+                    except Exception as e:
+                        logger.error(f"Error en bloque de relleno {item.get('title')}: {e}")
+                        if raw_ticket:
+                            pending_pool.insert(0, raw_ticket)
+
+                summary.append(f"{date_str}: {day_success}/{len(slots)} bloques")
+
+            # Marcar y sacar de la cola los pendientes efectivamente usados
+            for tid in used_pending_ids:
+                self.timer.mark_as_processed(tid)
+                self.local_db.remove_pending_ticket(tid)
+
+            msg = (f"Relleno de jornada finalizado. {success_blocks}/{total_blocks} bloques registrados.\n"
+                   + "\n".join(summary))
+            logger.info(msg)
+            self.send_telegram(msg)
+
+        except Exception as e:
+            logger.error(f"Error en relleno de jornada: {e}", exc_info=True)
+            self.send_telegram(f"Error en relleno de jornada: {e}")
+        finally:
+            self.bot.close_browser()
+
     def run(self, force_now=False, force_sync=False):
         # Programar tareas regulares
         schedule.every(2).hours.do(self.routine_a)
